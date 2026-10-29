@@ -116,12 +116,11 @@ button.success { background: linear-gradient(135deg, #00ff88, #00b359); color: #
 /* Контейнер для ракеты */
 .rocket-container {
   position: absolute; bottom: 40px; left: 50%; 
-  transition: none; /* Управляем через JS */
-  z-index: 2;
+  transition: none; z-index: 2;
   transform-origin: center center;
 }
 .rocket-img {
-  font-size: 55px; display: block; transform: rotate(0deg);
+  font-size: 50px; display: block; transform: rotate(0deg);
   filter: drop-shadow(0 0 10px rgba(255, 200, 0, 0.8));
 }
 /* Анимация взрыва */
@@ -265,7 +264,8 @@ function showUser(u) {
   
   if (u) {
     $("playerName").textContent = u.username;
-    updateUI();
+    updateUI(); // ВОТ ЗДЕСЬ ОБНОВЛЯЮТСЯ КНОПКИ
+    
     if($("gameSlots").classList.contains("hidden") && $("gameCrash").classList.contains("hidden")) {
         switchGame('slots');
     }
@@ -278,11 +278,13 @@ function showUser(u) {
   loadBoard();
 }
 
+// ИСПРАВЛЕННАЯ ФУНКЦИЯ
 function updateUI() {
   if (!user) return;
   $("balance").textContent = Number(user.balance).toLocaleString("ru-RU");
+  
   if(!isSlotsBusy) $("playSlotsBtn").disabled = !user;
-  // Ракета управляется своей логикой
+  if(!isCrashRunning) $("playCrashBtn").disabled = !user; // ТЕПЕРЬ КНОПКА РАКЕТЫ АКТИВИРУЕТСЯ
 }
 
 function account(mode) {
@@ -396,7 +398,6 @@ let isCrashRunning = false;
 let crashMulti = 1.0;
 let crashTimer = null;
 let crashTarget = 1.0; 
-let crashStartTime = 0;
 
 function startCrash() {
   if (!user || isCrashRunning) return;
@@ -407,7 +408,6 @@ function startCrash() {
 
   isCrashRunning = true;
   crashMulti = 1.0;
-  crashStartTime = Date.now();
   
   user.balance -= stake;
   updateUI();
@@ -422,13 +422,12 @@ function startCrash() {
   const rocket = $("rocketContainer");
   const rocketImg = $("rocketImg");
   
-  // Сброс позиции перед полетом
+  // Сброс позиции
   rocket.style.transform = `translate(0px, 0px)`;
   rocketImg.style.transform = `rotate(45deg)`;
   rocket.style.opacity = "1";
   rocket.classList.remove("explode");
   
-  // Логика: 15% шанс на долет до x8
   const isWinRun = Math.random() < 0.15; 
   if (isWinRun) {
     crashTarget = 8.00; 
@@ -445,18 +444,13 @@ function startCrash() {
     crashMulti = 1.0 + (elapsed / 1000) * 0.5; 
 
     if (crashMulti >= crashTarget) {
-      // ВЗРЫВ
       clearInterval(crashTimer);
       rocket.classList.add("explode");
-      
       $("msgCrash").textContent = `💥 Ракета взорвалась на x${crashTarget.toFixed(2)}!`;
       $("msgCrash").className = "result-msg lose";
       $("crashMulti").style.color = "#ff003c";
-      
       if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-      
-      setTimeout(resetCrash, 1500); // Ждем и сбрасываем
-      
+      setTimeout(resetCrash, 1500); 
     } else if (crashMulti >= 8.00) {
       crashMulti = 8.00;
       $("crashMulti").textContent = "x8.00";
@@ -466,14 +460,9 @@ function startCrash() {
       if (crashMulti > 4) $("crashMulti").style.color = "#ffd700";
       else if (crashMulti > 2) $("crashMulti").style.color = "#00ff88";
 
-      // ДВИЖЕНИЕ РАКЕТЫ (Красивая дуга)
-      let progress = (crashMulti - 1) / 7; // от 0 до 1
-      
-      // Ракета летит от центра вверх и вправо
-      let moveX = progress * 100; // Двигаем вправо на 100px
-      let moveY = -(progress * progress) * 180; // Двигаем вверх на 180px (квадратичная дуга)
-      
-      // Наклон (крен) ракеты: от 45 градусов до 20 градусов (выравнивается в полете)
+      let progress = (crashMulti - 1) / 7; 
+      let moveX = progress * 80; // Двигаем вправо поменьше, чтобы не вылетала за экран
+      let moveY = -(progress * progress) * 150; // Вверх по дуге
       let angle = 45 - (progress * 25);
 
       rocket.style.transform = `translate(${moveX}px, ${moveY}px)`;
@@ -501,7 +490,6 @@ function cashout(auto = false) {
   if (auto) {
      $("msgCrash").textContent = `🚀 Ракета долетела до x8.00! Автовыигрыш: +${winAmount} VC`;
   }
-  
   setTimeout(resetCrash, 1500);
 }
 
@@ -511,19 +499,18 @@ function resetCrash() {
   const rocket = $("rocketContainer");
   const rocketImg = $("rocketImg");
   
-  // Возвращаем ракету на старт
   rocket.style.transition = "all 0.5s ease-out";
   rocket.style.transform = `translate(0px, 0px)`;
   rocket.classList.remove("explode");
   rocket.style.opacity = "1";
   rocketImg.style.transform = `rotate(45deg)`;
   
-  // ВОЗВРАЩАЕМ КНОПКИ (исправление бага)
   $("playCrashBtn").classList.remove("hidden");
   $("cashoutBtn").classList.add("hidden");
-  $("playCrashBtn").disabled = false; // <--- ТЕПЕРЬ КНОПКА ВСЕГДА РАБОТАЕТ
   
-  // Убираем плавность для следующего запуска
+  // Возвращаем кнопку в активное состояние
+  $("playCrashBtn").disabled = false; 
+  
   setTimeout(() => { rocket.style.transition = "none"; }, 500);
   
   $("crashMulti").textContent = "x1.00";
