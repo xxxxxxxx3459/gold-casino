@@ -116,15 +116,12 @@ button.success { background: linear-gradient(135deg, #00ff88, #00b359); color: #
 /* Контейнер для ракеты */
 .rocket-container {
   position: absolute; bottom: 40px; left: 50%; 
-  transition: none;
   z-index: 2;
   transform-origin: center center;
-  /* Центрируем контейнер и задаем стартовый наклон */
-  transform: translateX(-50%) translate(0px, 0px);
+  transform: translateX(-50%);
 }
 .rocket-img {
   font-size: 50px; display: block; 
-  /* Изначально ракета смотрит вправо-вверх */
   transform: rotate(45deg);
   filter: drop-shadow(0 0 10px rgba(255, 200, 0, 0.8));
 }
@@ -394,7 +391,7 @@ async function playSlots() {
 }
 
 // ==========================================
-// РАКЕТА (CRASH) - ПОЛНОСТЬЮ ПЕРЕПИСАНА
+// РАКЕТА (CRASH) - ИДЕАЛЬНАЯ ТРАЕКТОРИЯ
 // ==========================================
 let isCrashRunning = false;
 let crashMulti = 1.0;
@@ -424,7 +421,7 @@ function startCrash() {
   const rocket = $("rocketContainer");
   const rocketImg = $("rocketImg");
   
-  // ЖЕСТКИЙ СБРОС ПЕРЕД СТАРТОМ (чтобы ничего не висело)
+  // Сброс перед стартом
   rocket.style.transition = "none";
   rocket.style.transform = `translateX(-50%) translate(0px, 0px)`;
   rocket.classList.remove("explode");
@@ -443,18 +440,16 @@ function startCrash() {
 
   const startTime = Date.now();
   
-  // Используем requestAnimationFrame для идеально плавной анимации без багов
   function animateCrash() {
     if (!isCrashRunning) return;
 
     const elapsed = Date.now() - startTime;
-    // Скорость роста коэффициента (0.5 в секунду)
-    crashMulti = 1.0 + (elapsed / 1000) * 0.5; 
+    crashMulti = 1.0 + (elapsed / 1000) * 0.5; // Скорость полета
 
     if (crashMulti >= crashTarget) {
       // ВЗРЫВ
       isCrashRunning = false;
-      crashMulti = crashTarget; // Фиксируем конечный результат
+      crashMulti = crashTarget; 
       $("crashMulti").textContent = "x" + crashMulti.toFixed(2);
       
       rocket.classList.add("explode");
@@ -463,8 +458,6 @@ function startCrash() {
       $("crashMulti").style.color = "#ff003c";
       
       if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-      
-      // Ждем 1.5 секунды и возвращаем всё в исходное состояние
       setTimeout(resetCrash, 1500); 
       
     } else if (crashMulti >= 8.00) {
@@ -476,24 +469,27 @@ function startCrash() {
       if (crashMulti > 4) $("crashMulti").style.color = "#ffd700";
       else if (crashMulti > 2) $("crashMulti").style.color = "#00ff88";
 
-      // Движение
+      // --- ИДЕАЛЬНАЯ ТРАЕКТОРИЯ ПО ДУГЕ ---
+      // progress: от 0 до 1 (по мере роста коэффициента)
       let progress = (crashMulti - 1) / 7; 
-      // Ограничиваем движение, чтобы ракета не вылетала за экран
-      let moveX = progress * 70; 
-      let moveY = -(progress * progress) * 130; 
       
-      // Плавный наклон от 45 до 25 градусов
-      let angle = 45 - (progress * 20);
+      // Движение вправо (X) - плавно ускоряется
+      let moveX = Math.pow(progress, 1.2) * 120; 
+      
+      // Движение вверх (Y) - сначала взлетает, потом идет по дуге (используем синус)
+      // При progress=0 Y=0, при progress=0.5 Y=-150 (максимум вверх), при progress=1 Y=-100
+      let moveY = -(Math.sin(progress * Math.PI) * 160) - (progress * 30);
+      
+      // Угол наклона: от 45 градусов (взлет) до -10 градусов (пикирование вправо)
+      let angle = 45 - (progress * 55);
 
       rocket.style.transform = `translateX(-50%) translate(${moveX}px, ${moveY}px)`;
       rocketImg.style.transform = `rotate(${angle}deg)`;
       
-      // Продолжаем анимацию
       crashAnimationFrame = requestAnimationFrame(animateCrash);
     }
   }
   
-  // Запускаем
   crashAnimationFrame = requestAnimationFrame(animateCrash);
 }
 
@@ -528,14 +524,13 @@ function resetCrash() {
   const rocket = $("rocketContainer");
   const rocketImg = $("rocketImg");
   
-  // Возвращаем ракету на старт (плавно)
+  // Возвращаем ракету в исходное состояние
   rocket.style.transition = "all 0.5s ease-out";
   rocket.style.transform = `translateX(-50%) translate(0px, 0px)`;
   rocket.classList.remove("explode");
   rocket.style.opacity = "1";
   rocketImg.style.transform = `rotate(45deg)`;
   
-  // Возвращаем кнопки
   $("playCrashBtn").classList.remove("hidden");
   $("cashoutBtn").classList.add("hidden");
   $("playCrashBtn").disabled = false; 
