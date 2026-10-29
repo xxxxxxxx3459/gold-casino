@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09090d">
+<title>GOLD CASINO</title>
+<style>
+:root{--gold:#f5c451;--bg:#09090d;--panel:#171820}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#fff;
+font-family:Arial,sans-serif}
+header{text-align:center;padding:22px;
+background:#111218;border-bottom:1px solid #9d741e}
+.logo{font-size:29px;font-weight:900;color:var(--gold)}
+main{max-width:900px;margin:auto;padding:16px}
+.hero,.card{background:var(--panel);border:1px solid #34343b;
+border-radius:18px;padding:20px;margin-bottom:15px}
+.hero{text-align:center;background:linear-gradient(135deg,#30220c,#171820)}
+h1{font-size:clamp(28px,7vw,44px);color:var(--gold)}
+h2{font-size:20px}
+.gold{color:var(--gold)}
+.muted{color:#a6a6b1;font-size:13px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+input{width:100%;padding:12px;margin:6px 0 12px;
+background:#0b0c10;border:1px solid #444;color:white;
+border-radius:9px;font-size:16px}
+button{padding:12px 15px;border:0;border-radius:10px;
+background:linear-gradient(135deg,#ffe49a,#bc831b);
+font-weight:bold;cursor:pointer}
+button:disabled{opacity:.5}
+.full{width:100%}
+.row{display:flex;gap:8px;align-items:center}
+.row>*{flex:1;min-width:0}
+.balance{font-size:34px;font-weight:900;color:var(--gold)}
+.reels{font-size:clamp(40px,10vw,64px);text-align:center;
+padding:20px 5px;background:#09090b;border:1px solid #66501f;
+border-radius:14px;margin:14px 0}
+.result{color:var(--gold);min-height:25px;margin-top:10px}
+.list{padding:0;list-style:none}
+.list li{padding:10px 0;border-bottom:1px solid #333;
+display:flex;justify-content:space-between;gap:10px}
+.cardFace{padding:20px;border-radius:15px;
+background:linear-gradient(125deg,#30220c,#b08120,#171820)}
+.cardNum{font-size:20px;letter-spacing:2px;margin:30px 0}
+.notice{font-size:12px;color:#d7c9a7;background:#211b10;
+padding:12px;border-radius:9px;line-height:1.5}
+.hidden{display:none}
+footer{text-align:center;color:#777;font-size:12px;padding:20px}
+@media(max-width:620px){.grid{grid-template-columns:1fr}main{padding:10px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">♛ GOLD CASINO ♛</div>
+ <div class="muted">VIRTUAL CASINO · DEMO</div>
+</header>
+<main>
+<section class="hero">
+ <div class="gold">ЗОЛОТОЙ ИГРОВОЙ КЛУБ</div>
+ <h1>ТВОЙ ХОД. ТВОЯ УДАЧА.</h1>
+ <p>Слоты, профили игроков и турнирный рейтинг.</p>
+ <div class="muted">Только виртуальные кредиты. Без денежных ставок и выплат.</div>
+</section>
+
+<div class="grid">
+<section class="card">
+ <h2>👤 Аккаунт игрока</h2>
+ <div id="auth">
+  <label>Никнейм</label>
+  <input id="nick" minlength="3" maxlength="20" placeholder="Твой ник">
+  <label>Пароль</label>
+  <input id="password" type="password" minlength="8" placeholder="От 8 символов">
+  <div class="row">
+   <button class="full" onclick="account('login')">Войти</button>
+   <button class="full" onclick="account('register')">Регистрация</button>
+  </div>
+  <div class="result" id="authMsg"></div>
+ </div>
+ <div id="profile" class="hidden">
+  <h3 id="playerName"></h3>
+  <div class="muted">ТВОЙ БАЛАНС</div>
+  <div class="balance"><span id="balance">10000</span></div>
+  <div class="muted">Виртуальных кредитов</div>
+  <button onclick="logout()" class="full" style="margin-top:12px">Выйти</button>
+ </div>
+</section>
+
+<section class="card">
+ <h2>🎰 GOLD SLOTS</h2>
+ <div class="muted">Вероятность выигрыша: <b class="gold">1%</b></div>
+ <div class="reels" id="reels">🍒 ⭐ 💎</div>
+ <label>Ставка: 10–1000 кредитов</label>
+ <input id="stake" type="number" min="10" max="1000" value="100">
+ <button id="play" class="full" onclick="play()" disabled>КРУТИТЬ БАРАБАНЫ</button>
+ <div class="result" id="gameMsg">Войди, чтобы начать игру.</div>
+ <div class="notice">При выигрыше выплата составляет 50× ставки, включая ставку. Шанс указан заранее; каждый раунд независим.</div>
+</section>
+
+<section class="card">
+ <h2>💳 Демокарта</h2>
+ <div class="cardFace">
+  <b>GOLD CASINO</b><span style="float:right">DEMO</span>
+  <div class="cardNum" id="preview">•••• •••• •••• ••••</div>
+  <div id="previewName">ИМЯ ИГРОКА</div>
+ </div>
+ <label>Тестовый номер карты</label>
+ <input id="card" inputmode="numeric" maxlength="19" placeholder="4242 4242 4242 4242">
+ <label>Имя для макета</label>
+ <input id="cardName" placeholder="IVAN IVANOV">
+ <div class="row">
+  <div><label>Срок MM/YY</label><input id="expiry" maxlength="5" placeholder="12/30"></div>
+  <div><label>Демо-CVV</label><input id="cvv" maxlength="4" inputmode="numeric" placeholder="123"></div>
+ </div>
+ <button class="full" onclick="demoCard()">Проверить демокарту</button>
+ <div class="result" id="cardMsg"></div>
+ <div class="notice">Не вводи настоящую карту. Реквизиты не отправляются и не сохраняются.</div>
+</section>
+
+<section class="card">
+ <h2>🏆 Общий рейтинг</h2>
+ <ul class="list" id="leaderboard">
+  <li>Войди в аккаунт для загрузки рейтинга.</li>
+ </ul>
+ <button class="full" onclick="loadBoard()">Обновить рейтинг</button>
+</section>
+
+<section class="card">
+ <h2>🧾 История игры</h2>
+ <ul class="list" id="history"><li>Последние игровые раунды появятся здесь.</li></ul>
+</section>
+</div>
+<footer>GOLD CASINO · ДЕМО-ВЕРСИЯ · 18+</footer>
+</main>
+<script>
+let user=null, busy=false;
+const $=id=>document.getElementById(id);
+
+async function api(url,method="GET",body){
+ const r=await fetch(url,{
+  method,credentials:"same-origin",
+  headers:{"Content-Type":"application/json"},
+  ...(body===undefined?{}:{body:JSON.stringify(body)})
+ });
+ const d=await r.json();
+ if(!r.ok)throw Error(d.error||"Ошибка запроса");
+ return d;
+}
+function showUser(u){
+ user=u;
+ $("auth").classList.toggle("hidden",!!u);
+ $("profile").classList.toggle("hidden",!u);
+ $("play").disabled=!u||busy;
+ if(u){
+  $("playerName").textContent="♛ "+u.username;
+  $("balance").textContent=Number(u.balance).toLocaleString("ru-RU");
+  $("gameMsg").textContent="Готов к игре!";
+ }else $("gameMsg").textContent="Войди, чтобы начать игру.";
+}
+async function account(mode){
+ $("authMsg").textContent="Подключение…";
+ try{
+  const d=await api("/api/"+mode,"POST",{
+   username:$("nick").value.trim(),
+   password:$("password").value
+  });
+  $("password").value="";
+  showUser(d.user);
+  await loadBoard();
+  await loadHistory();
+ }catch(e){$("authMsg").textContent=e.message}
+}
+async function logout(){
+ try{await api("/api/logout","POST",{});showUser(null)}
+ catch(e){$("gameMsg").textContent=e.message}
+}
+async function play(){
+ if(!user||busy)return;
+ const stake=Number($("stake").value);
+ if(!Number.isInteger(stake)||stake<10||stake>1000){
+  $("gameMsg").textContent="Ставка должна быть от 10 до 1000.";
+  return;
+ }
+ busy=true;$("play").disabled=true;
+ $("gameMsg").textContent="Крутим барабаны…";
+ const symbols=["🍒","🍋","⭐","💎","🔔","7️⃣"];
+ let count=0;
+ const timer=setInterval(()=>{
+  $("reels").textContent=[0,1,2].map(
+   ()=>symbols[Math.floor(Math.random()*symbols.length)]
+  ).join(" ");
+  if(++count===8)clearInterval(timer);
+ },100);
+ try{
+  const d=await api("/api/play","POST",{stake});
+  await new Promise(r=>setTimeout(r,800));
+  $("gameMsg").textContent=d.message;
+  $("reels").textContent=d.won?"💎 7️⃣ 💎":"🍒 ✦ 🍋";
+  showUser(d.user);
+  await loadBoard();await loadHistory();
+ }catch(e){$("gameMsg").textContent=e.message}
+ finally{busy=false;$("play").disabled=!user}
+}
+async function loadBoard(){
+ try{
+  const d=await api("/api/leaderboard");
+  $("leaderboard").innerHTML=d.leaderboard.length?
+   d.leaderboard.map((x,i)=>`<li><span><b class="gold">#${i+1}</b> ${escapeHtml(x.username)}</span><b>${Number(x.netResult).toLocaleString("ru-RU")}</b></li>`).join("")
+   :"<li>Пока нет игроков.</li>";
+ }catch(e){$("leaderboard").innerHTML="<li>Войди или запусти сервер.</li>"}
+}
+async function loadHistory(){
+ if(!user)return;
+ try{
+  const d=await api("/api/history");
+  $("history").innerHTML=d.history.length?
+   d.history.map(x=>`<li><span>${escapeHtml(x.game)}<br><small>Ставка: ${x.stake}</small></span><b>${x.payout}</b></li>`).join("")
+   :"<li>Сыгранных раундов пока нет.</li>";
+ }catch(e){$("history").innerHTML="<li>История пока недоступна.</li>"}
+}
+function escapeHtml(s){
+ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+$("card").addEventListener("input",()=>{
+ const d=$("card").value.replace(/\D/g,"").slice(0,16);
+ $("card").value=d.match(/.{1,4}/g)?.join(" ")||"";
+ $("preview").textContent=d?d.replace(/\d(?=\d{4})/g,"•").replace(/(.{4})/g,"$1 ").trim():"•••• •••• •••• ••••";
+});
+$("cardName").addEventListener("input",()=>{
+ $("previewName").textContent=$("cardName").value.toUpperCase()||"ИМЯ ИГРОКА";
+});
+$("expiry").addEventListener("input",e=>{
+ let d=e.target.value.replace(/\D/g,"").slice(0,4);
+ if(d.length>2)d=d.slice(0,2)+"/"+d.slice(2);
+ e.target.value=d;
+});
+function demoCard(){
+ const d=$("card").value.replace(/\D/g,"");
+ const m=$("expiry").value.match(/^(\d{2})\/(\d{2})$/);
+ const c=$("cvv").value;
+ if(d!=="4242424242424242"){
+  $("cardMsg").textContent="Используй тестовый номер 4242 4242 4242 4242.";
+ }else if(!m||+m[1]<1||+m[1]>12||+m[2]<26||!/^\\d{3,4}$/.test(c)||!$("cardName").value.trim()){
+  $("cardMsg").textContent="Проверь имя, срок действия и демо-CVV.";
+ }else{
+  $("cardMsg").textContent="✅ Тестовая карта проверена локально. Денег не списано.";
+ }
+}
+(async()=>{
+ try{const d=await api("/api/me");showUser(d.user);await loadHistory()}
+ catch(e){showUser(null)}
+ await loadBoard();
+})();
+</script>
+</body>
+</html>
