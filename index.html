@@ -120,7 +120,7 @@ button.success { background: linear-gradient(135deg, #00ff88, #00b359); color: #
   font-variant-numeric: tabular-nums;
 }
 
-/* Контейнер для ракеты */
+/* Контейнер для ракеты (управляет полетом) */
 .rocket-container {
   position: absolute; 
   bottom: 40px; 
@@ -130,49 +130,56 @@ button.success { background: linear-gradient(135deg, #00ff88, #00b359); color: #
   transform: translateX(-50%);
 }
 
+/* Внутренний контейнер ракеты (управляет наклоном) */
+.rocket-inner {
+  position: relative;
+  display: inline-block;
+}
+
 /* Сама ракета */
-.rocket-img {
+.rocket-icon {
   font-size: 55px; 
   display: block; 
-  /* СРАЗУ ПОВОРАЧИВАЕМ ЕЕ НОСОМ ВПРАВО-ВВЕРХ */
-  transform: rotate(45deg);
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
   position: relative;
   z-index: 2;
 }
 
-/* ПЛАМЯ (ОГОНЬ) */
+/* ПЛАМЯ (ОГОНЬ) - позиционируем ровно под соплом ракеты */
 .flame {
   position: absolute;
-  left: -15px; 
-  bottom: 5px;
-  width: 25px;
+  bottom: 12px; /* Чуть ниже центра ракеты */
+  right: 28px;  /* Смещаем к хвосту */
+  width: 35px;
   height: 20px;
-  background: radial-gradient(ellipse at center, #fff 0%, #ffdd00 30%, #ff6a00 70%, transparent 100%);
-  border-radius: 50%;
-  transform: rotate(45deg);
+  background: radial-gradient(ellipse at right, #ffffff 0%, #ffdd00 30%, #ff6a00 70%, transparent 100%);
+  border-radius: 50% 0 0 50%;
+  transform-origin: right center;
+  opacity: 0;
   z-index: 1;
-  opacity: 0; /* Скрыто по умолчанию */
-  transition: opacity 0.2s;
-}
-/* Когда ракета летит, огонь включается и пульсирует */
-.rocket-img.flying .flame {
-  opacity: 1;
-  animation: fire 0.1s infinite alternate;
-}
-@keyframes fire {
-  from { transform: rotate(45deg) scale(1); filter: brightness(1); }
-  to { transform: rotate(45deg) scale(1.5) translate(-2px, 2px); filter: brightness(1.5); }
+  /* Поворачиваем огонь вместе с ракетой */
+  transform: rotate(-45deg); 
 }
 
-/* Анимация взрыва */
+/* Когда ракета летит, огонь включается и пульсирует */
+.rocket-inner.flying .flame {
+  opacity: 1;
+  animation: fire 0.08s infinite alternate;
+}
+
+@keyframes fire {
+  from { transform: rotate(-45deg) scaleX(1); filter: brightness(1); }
+  to { transform: rotate(-45deg) scaleX(1.5); filter: brightness(1.5); }
+}
+
+/* Анимация взрыва (взрывается вся картинка вместе с огнем) */
 .explode {
   animation: explodeAnim 0.6s forwards !important;
 }
 @keyframes explodeAnim {
-  0% { transform: scale(1) rotate(45deg); opacity: 1; }
-  30% { transform: scale(1.5) rotate(20deg); filter: brightness(3); opacity: 1; }
-  100% { transform: scale(4) rotate(0deg); opacity: 0; filter: blur(20px); }
+  0% { transform: scale(1); opacity: 1; }
+  30% { transform: scale(1.5); filter: brightness(3); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; filter: blur(20px); }
 }
 
 /* Вкладки */
@@ -250,11 +257,12 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
   <div class="stars"></div>
   <div class="multiplier-display" id="crashMulti">x1.00</div>
   
-  <!-- Контейнер ракеты -->
+  <!-- Контейнер полета -->
   <div class="rocket-container" id="rocketContainer">
-    <div class="rocket-img" id="rocketImg">
-      🚀
-      <div class="flame"></div> <!-- Пламя -->
+    <!-- Контейнер наклона и огня -->
+    <div class="rocket-inner" id="rocketInner">
+      <div class="rocket-icon">🚀</div>
+      <div class="flame"></div>
     </div>
   </div>
   
@@ -430,7 +438,7 @@ async function playSlots() {
 }
 
 // ==========================================
-// РАКЕТА (CRASH)
+// РАКЕТА (CRASH) - ИСПРАВЛЕНА
 // ==========================================
 let isCrashRunning = false;
 let crashMulti = 1.0;
@@ -457,15 +465,17 @@ function startCrash() {
   $("crashMulti").textContent = "x1.00";
   $("crashMulti").style.color = "#fff";
   
-  const rocket = $("rocketContainer");
-  const rocketImg = $("rocketImg");
+  const rocketContainer = $("rocketContainer");
+  const rocketInner = $("rocketInner");
   
   // Сброс перед стартом
-  rocket.style.transition = "none";
-  rocket.style.transform = `translateX(-50%) translate(0px, 0px)`;
-  rocket.classList.remove("explode");
-  rocketImg.style.opacity = "1";
-  rocketImg.classList.add("flying"); // Включаем огонь
+  rocketContainer.style.transition = "none";
+  rocketContainer.style.transform = `translateX(-50%) translate(0px, 0px)`;
+  rocketInner.classList.remove("explode");
+  rocketInner.classList.add("flying"); // Включаем огонь
+  rocketInner.style.opacity = "1";
+  // Задаем изначальный наклон 45 градусов (в правый верхний угол)
+  rocketInner.style.transform = `rotate(-45deg)`;
   
   // Расчет точки взрыва
   const isWinRun = Math.random() < 0.15; 
@@ -491,8 +501,8 @@ function startCrash() {
       crashMulti = crashTarget; 
       $("crashMulti").textContent = "x" + crashMulti.toFixed(2);
       
-      rocketImg.classList.remove("flying"); // Выключаем огонь
-      rocket.classList.add("explode");
+      rocketInner.classList.remove("flying"); // Выключаем огонь
+      rocketInner.classList.add("explode");
       
       $("msgCrash").textContent = `💥 Ракета взорвалась на x${crashTarget.toFixed(2)}!`;
       $("msgCrash").className = "result-msg lose";
@@ -510,18 +520,18 @@ function startCrash() {
       if (crashMulti > 4) $("crashMulti").style.color = "#ffd700";
       else if (crashMulti > 2) $("crashMulti").style.color = "#00ff88";
 
-      // ТРАЕКТОРИЯ
+      // ТРАЕКТОРИЯ (Идем в правый верхний угол)
       let progress = (crashMulti - 1) / 7; 
       
-      // Движение вправо-вверх по красивой дуге
-      let moveX = Math.pow(progress, 1.2) * 120; 
-      let moveY = -(Math.sin(progress * Math.PI) * 160) - (progress * 30);
+      // Движение: вверх и вправо
+      let moveX = Math.pow(progress, 1.5) * 120; // Вправо
+      let moveY = -(Math.pow(progress, 0.8) * 200); // Вверх (сначала быстро, потом медленнее)
       
-      // Наклон: плавно меняется от 45 (взлет) до 20 (ровный полет)
-      let angle = 45 - (progress * 25);
+      // Наклон: от -45 (вверх-вправо) до -20 (более горизонтально к концу)
+      let angle = -45 + (progress * 25);
 
-      rocket.style.transform = `translateX(-50%) translate(${moveX}px, ${moveY}px)`;
-      rocketImg.style.transform = `rotate(${angle}deg)`;
+      rocketContainer.style.transform = `translateX(-50%) translate(${moveX}px, ${moveY}px)`;
+      rocketInner.style.transform = `rotate(${angle}deg)`;
       
       crashAnimationFrame = requestAnimationFrame(animateCrash);
     }
@@ -558,17 +568,17 @@ function resetCrash() {
   isCrashRunning = false;
   if (crashAnimationFrame) cancelAnimationFrame(crashAnimationFrame);
   
-  const rocket = $("rocketContainer");
-  const rocketImg = $("rocketImg");
+  const rocketContainer = $("rocketContainer");
+  const rocketInner = $("rocketInner");
   
-  rocketImg.classList.remove("flying"); // Выключаем огонь
+  rocketInner.classList.remove("flying"); // Выключаем огонь
   
   // Возврат на исходную
-  rocket.style.transition = "all 0.5s ease-out";
-  rocket.style.transform = `translateX(-50%) translate(0px, 0px)`;
-  rocket.classList.remove("explode");
-  rocketImg.style.opacity = "1";
-  rocketImg.style.transform = `rotate(45deg)`;
+  rocketContainer.style.transition = "all 0.5s ease-out";
+  rocketContainer.style.transform = `translateX(-50%) translate(0px, 0px)`;
+  rocketInner.classList.remove("explode");
+  rocketInner.style.opacity = "1";
+  rocketInner.style.transform = `rotate(-45deg)`; // Стартовый наклон
   
   $("playCrashBtn").classList.remove("hidden");
   $("cashoutBtn").classList.add("hidden");
