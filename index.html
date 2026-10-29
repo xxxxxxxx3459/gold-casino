@@ -116,11 +116,16 @@ button.success { background: linear-gradient(135deg, #00ff88, #00b359); color: #
 /* Контейнер для ракеты */
 .rocket-container {
   position: absolute; bottom: 40px; left: 50%; 
-  transition: none; z-index: 2;
+  transition: none;
+  z-index: 2;
   transform-origin: center center;
+  /* Центрируем контейнер и задаем стартовый наклон */
+  transform: translateX(-50%) translate(0px, 0px);
 }
 .rocket-img {
-  font-size: 50px; display: block; transform: rotate(0deg);
+  font-size: 50px; display: block; 
+  /* Изначально ракета смотрит вправо-вверх */
+  transform: rotate(45deg);
   filter: drop-shadow(0 0 10px rgba(255, 200, 0, 0.8));
 }
 /* Анимация взрыва */
@@ -264,8 +269,7 @@ function showUser(u) {
   
   if (u) {
     $("playerName").textContent = u.username;
-    updateUI(); // ВОТ ЗДЕСЬ ОБНОВЛЯЮТСЯ КНОПКИ
-    
+    updateUI();
     if($("gameSlots").classList.contains("hidden") && $("gameCrash").classList.contains("hidden")) {
         switchGame('slots');
     }
@@ -278,13 +282,12 @@ function showUser(u) {
   loadBoard();
 }
 
-// ИСПРАВЛЕННАЯ ФУНКЦИЯ
 function updateUI() {
   if (!user) return;
   $("balance").textContent = Number(user.balance).toLocaleString("ru-RU");
   
   if(!isSlotsBusy) $("playSlotsBtn").disabled = !user;
-  if(!isCrashRunning) $("playCrashBtn").disabled = !user; // ТЕПЕРЬ КНОПКА РАКЕТЫ АКТИВИРУЕТСЯ
+  if(!isCrashRunning) $("playCrashBtn").disabled = !user;
 }
 
 function account(mode) {
@@ -390,13 +393,12 @@ async function playSlots() {
   }, 80);
 }
 
-
 // ==========================================
-// РАКЕТА (CRASH)
+// РАКЕТА (CRASH) - ПОЛНОСТЬЮ ПЕРЕПИСАНА
 // ==========================================
 let isCrashRunning = false;
 let crashMulti = 1.0;
-let crashTimer = null;
+let crashAnimationFrame = null;
 let crashTarget = 1.0; 
 
 function startCrash() {
@@ -422,12 +424,14 @@ function startCrash() {
   const rocket = $("rocketContainer");
   const rocketImg = $("rocketImg");
   
-  // Сброс позиции
-  rocket.style.transform = `translate(0px, 0px)`;
-  rocketImg.style.transform = `rotate(45deg)`;
-  rocket.style.opacity = "1";
+  // ЖЕСТКИЙ СБРОС ПЕРЕД СТАРТОМ (чтобы ничего не висело)
+  rocket.style.transition = "none";
+  rocket.style.transform = `translateX(-50%) translate(0px, 0px)`;
   rocket.classList.remove("explode");
+  rocket.style.opacity = "1";
+  rocketImg.style.transform = `rotate(45deg)`;
   
+  // Расчет точки взрыва
   const isWinRun = Math.random() < 0.15; 
   if (isWinRun) {
     crashTarget = 8.00; 
@@ -439,18 +443,30 @@ function startCrash() {
 
   const startTime = Date.now();
   
-  crashTimer = setInterval(() => {
+  // Используем requestAnimationFrame для идеально плавной анимации без багов
+  function animateCrash() {
+    if (!isCrashRunning) return;
+
     const elapsed = Date.now() - startTime;
+    // Скорость роста коэффициента (0.5 в секунду)
     crashMulti = 1.0 + (elapsed / 1000) * 0.5; 
 
     if (crashMulti >= crashTarget) {
-      clearInterval(crashTimer);
+      // ВЗРЫВ
+      isCrashRunning = false;
+      crashMulti = crashTarget; // Фиксируем конечный результат
+      $("crashMulti").textContent = "x" + crashMulti.toFixed(2);
+      
       rocket.classList.add("explode");
       $("msgCrash").textContent = `💥 Ракета взорвалась на x${crashTarget.toFixed(2)}!`;
       $("msgCrash").className = "result-msg lose";
       $("crashMulti").style.color = "#ff003c";
+      
       if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+      
+      // Ждем 1.5 секунды и возвращаем всё в исходное состояние
       setTimeout(resetCrash, 1500); 
+      
     } else if (crashMulti >= 8.00) {
       crashMulti = 8.00;
       $("crashMulti").textContent = "x8.00";
@@ -460,20 +476,31 @@ function startCrash() {
       if (crashMulti > 4) $("crashMulti").style.color = "#ffd700";
       else if (crashMulti > 2) $("crashMulti").style.color = "#00ff88";
 
+      // Движение
       let progress = (crashMulti - 1) / 7; 
-      let moveX = progress * 80; // Двигаем вправо поменьше, чтобы не вылетала за экран
-      let moveY = -(progress * progress) * 150; // Вверх по дуге
-      let angle = 45 - (progress * 25);
+      // Ограничиваем движение, чтобы ракета не вылетала за экран
+      let moveX = progress * 70; 
+      let moveY = -(progress * progress) * 130; 
+      
+      // Плавный наклон от 45 до 25 градусов
+      let angle = 45 - (progress * 20);
 
-      rocket.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      rocket.style.transform = `translateX(-50%) translate(${moveX}px, ${moveY}px)`;
       rocketImg.style.transform = `rotate(${angle}deg)`;
+      
+      // Продолжаем анимацию
+      crashAnimationFrame = requestAnimationFrame(animateCrash);
     }
-  }, 30); 
+  }
+  
+  // Запускаем
+  crashAnimationFrame = requestAnimationFrame(animateCrash);
 }
 
 function cashout(auto = false) {
   if (!isCrashRunning) return;
-  clearInterval(crashTimer);
+  isCrashRunning = false;
+  if (crashAnimationFrame) cancelAnimationFrame(crashAnimationFrame);
   
   const stake = Number($("stakeCrash").value);
   const winAmount = Math.floor(stake * crashMulti);
@@ -490,28 +517,28 @@ function cashout(auto = false) {
   if (auto) {
      $("msgCrash").textContent = `🚀 Ракета долетела до x8.00! Автовыигрыш: +${winAmount} VC`;
   }
+  
   setTimeout(resetCrash, 1500);
 }
 
 function resetCrash() {
   isCrashRunning = false;
+  if (crashAnimationFrame) cancelAnimationFrame(crashAnimationFrame);
   
   const rocket = $("rocketContainer");
   const rocketImg = $("rocketImg");
   
+  // Возвращаем ракету на старт (плавно)
   rocket.style.transition = "all 0.5s ease-out";
-  rocket.style.transform = `translate(0px, 0px)`;
+  rocket.style.transform = `translateX(-50%) translate(0px, 0px)`;
   rocket.classList.remove("explode");
   rocket.style.opacity = "1";
   rocketImg.style.transform = `rotate(45deg)`;
   
+  // Возвращаем кнопки
   $("playCrashBtn").classList.remove("hidden");
   $("cashoutBtn").classList.add("hidden");
-  
-  // Возвращаем кнопку в активное состояние
   $("playCrashBtn").disabled = false; 
-  
-  setTimeout(() => { rocket.style.transition = "none"; }, 500);
   
   $("crashMulti").textContent = "x1.00";
   $("crashMulti").style.color = "#fff";
