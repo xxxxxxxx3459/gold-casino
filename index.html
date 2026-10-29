@@ -22,7 +22,6 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-/* Красивый фон с частицами (через CSS) */
 body::before {
   content: "";
   position: fixed;
@@ -191,7 +190,6 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
 let user = null, busy = false;
 const $ = id => document.getElementById(id);
 
-// Имитация сервера (LocalStorage), так как GitHub Pages не поддерживает бэкенд
 const db = {
   getUser: (name) => JSON.parse(localStorage.getItem('rg_user_' + name)),
   saveUser: (u) => localStorage.setItem('rg_user_' + u.username, JSON.stringify(u)),
@@ -256,11 +254,10 @@ async function play() {
   const r1 = $("r1"), r2 = $("r2"), r3 = $("r3");
   r1.classList.add("spinning"); r2.classList.add("spinning"); r3.classList.add("spinning");
 
-  // Списываем ставку
   user.balance -= stake;
   $("balance").textContent = Number(user.balance).toLocaleString("ru-RU");
 
-  // Генерация результата (ЖЕСТКИЕ ШАНСЫ)
+  // Генерация результата (ОБЩИЙ ШАНС ВЫИГРЫША = 30%)
   const symbols = ["🍒", "🍋", "🔔", "💎", "7️⃣"];
   let result = [], winType = 0, payout = 0, msg = "";
   
@@ -270,20 +267,19 @@ async function play() {
     // ДЖЕКПОТ 2%
     result = ["7️⃣", "7️⃣", "7️⃣"];
     winType = 3; payout = stake * 25; msg = "💥 ДЖЕКПОТ! x25 💥";
-  } else if (rand <= 22) { // 2 + 20 = 22%
-    // СРЕДНИЙ ВЫИГРЫШ 20%
+  } else if (rand <= 10) { // 2 + 8 = 10%
+    // КРУПНЫЙ ВЫИГРЫШ 8%
     result = ["💎", "💎", "💎"];
     winType = 2; payout = stake * 4; msg = "💎 Крупный выигрыш! x4 💎";
-  } else if (rand <= 52) { // 22 + 30 = 52%
-    // МИНИ-ВЫИГРЫШ 30%
+  } else if (rand <= 30) { // 10 + 20 = 30% (ОСТАЛЬНЫЕ 70% - ПРОИГРЫШ)
+    // МИНИ-ВЫИГРЫШ 20%
     result = ["🍒", "🍒", "🍋"]; // Два одинаковых
     winType = 1; payout = Math.floor(stake * 1.5); msg = "🍒 Неплохо! Возврат x1.5 🍒";
   } else {
-    // ПРОИГРЫШ 48%
+    // ПРОИГРЫШ 70%
     result = ["🍋", "🔔", "🍒"]; // Все разные
   }
 
-  // Анимация
   let count = 0;
   const timer = setInterval(() => {
     r1.textContent = symbols[Math.floor(Math.random() * symbols.length)];
@@ -294,10 +290,8 @@ async function play() {
       clearInterval(timer);
       r1.classList.remove("spinning"); r2.classList.remove("spinning"); r3.classList.remove("spinning");
       
-      // Ставим финальный результат
       r1.textContent = result[0]; r2.textContent = result[1]; r3.textContent = result[2];
 
-      // Начисляем выигрыш
       if (payout > 0) {
         user.balance += payout;
         $("balance").textContent = Number(user.balance).toLocaleString("ru-RU");
