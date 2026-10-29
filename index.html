@@ -13,6 +13,7 @@
   --bg: #0a0a0c;
   --panel: rgba(25, 25, 30, 0.8);
   --neon: #ff003c;
+  --space: #050510;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -91,15 +92,15 @@ button {
 }
 button:active { transform: scale(0.98); }
 button:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
-button.secondary {
-  background: transparent; border: 1px solid var(--gold); color: var(--gold); box-shadow: none;
-}
+button.secondary { background: transparent; border: 1px solid var(--gold); color: var(--gold); box-shadow: none; }
+button.danger { background: linear-gradient(135deg, #ff4b2b, #ff003c); color: white; box-shadow: 0 5px 15px rgba(255, 0, 60, 0.3); }
 .row { display: flex; gap: 10px; }
 .row button { margin-top: 0; }
 
 .balance { font-size: 38px; font-weight: 900; color: #fff; text-align: center; margin: 10px 0; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
 .balance span { color: var(--gold); font-size: 20px; }
 
+/* Слоты */
 .slot-window {
   background: #000; border: 2px solid #333; border-radius: 15px;
   padding: 30px 10px; margin: 20px 0; display: flex; justify-content: center; gap: 10px;
@@ -113,14 +114,61 @@ button.secondary {
 .spinning { animation: spin 0.1s infinite linear; }
 @keyframes spin { 100% { transform: translateY(10px); } }
 
-.result-msg {
-  text-align: center; font-size: 18px; font-weight: bold; min-height: 27px; margin-top: 15px;
-  text-shadow: 0 0 10px currentColor;
-}
+.result-msg { text-align: center; font-size: 18px; font-weight: bold; min-height: 27px; margin-top: 15px; text-shadow: 0 0 10px currentColor; }
 .win { color: #00ff88; }
 .lose { color: #ff003c; }
 .jackpot { color: #ffd700; animation: pulse 0.5s infinite alternate; }
 @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); text-shadow: 0 0 20px #ffd700; } }
+
+/* Космическая ракета */
+.space-window {
+  background: var(--space);
+  border-radius: 15px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  margin: 15px 0;
+  border: 1px solid #333;
+}
+.stars {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: starMove 10s linear infinite;
+}
+@keyframes starMove { from { background-position: 0 0; } to { background-position: 0 200px; } }
+
+.rocket {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  font-size: 50px; transition: all 0.3s ease-out; z-index: 2;
+}
+.rocket.flying { bottom: 80%; transform: translateX(-50%) rotate(45deg); }
+.rocket.explode { animation: explodeAnim 0.5s forwards; }
+@keyframes explodeAnim {
+  0% { transform: translateX(-50%) scale(1); opacity: 1; }
+  100% { transform: translateX(-50%) scale(3); opacity: 0; filter: blur(10px); }
+}
+
+.multiplier-display {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-size: 50px; font-weight: 900; color: #fff; z-index: 3;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5); opacity: 0.8;
+}
+
+/* Вкладки */
+.tabs { display: flex; gap: 10px; margin-bottom: 15px; }
+.tab-btn {
+  flex: 1; padding: 10px; background: rgba(255,255,255,0.1); border: 1px solid #444; color: #aaa;
+  border-radius: 10px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 12px;
+  transition: 0.3s;
+}
+.tab-btn.active { background: rgba(255,215,0,0.2); border-color: var(--gold); color: var(--gold); }
 
 .hidden { display: none !important; }
 footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
@@ -154,11 +202,18 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
  </div>
 </section>
 
-<!-- Игровой автомат -->
-<section class="card">
+<!-- Переключатель игр -->
+<div class="tabs hidden" id="gameTabs">
+  <button class="tab-btn active" onclick="switchGame('slots')" id="tabSlots">🎰 Слоты</button>
+  <button class="tab-btn" onclick="switchGame('crash')" id="tabCrash">🚀 Ракета</button>
+</div>
+
+<!-- ИГРА 1: Слоты -->
+<section class="card hidden" id="gameSlots">
  <h2>🎰 GOLDEN SLOTS</h2>
+ <p style="font-size:12px; color:#aaa; margin-bottom:10px;">Чем выше ставка, тем ниже шанс выигрыша.</p>
  
- <div class="slot-window" id="slotWindow">
+ <div class="slot-window">
   <div class="reel" id="r1">💎</div>
   <div class="reel" id="r2">7️⃣</div>
   <div class="reel" id="r3">💎</div>
@@ -167,12 +222,35 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
  <div class="row">
   <div style="flex: 1;">
    <label>Ставка (мин. 50 VC)</label>
-   <input id="stake" type="number" min="50" max="5000" value="50">
+   <input id="stakeSlots" type="number" min="50" max="5000" value="50">
   </div>
  </div>
  
- <button id="playBtn" onclick="play()" disabled>ВРАЩАТЬ БАРАБАНЫ</button>
- <div class="result-msg" id="gameMsg">Войди в аккаунт, чтобы играть.</div>
+ <button id="playSlotsBtn" onclick="playSlots()" disabled>ВРАЩАТЬ БАРАБАНЫ</button>
+ <div class="result-msg" id="msgSlots">Войди в аккаунт, чтобы играть.</div>
+</section>
+
+<!-- ИГРА 2: Ракета -->
+<section class="card hidden" id="gameCrash">
+ <h2>🚀 КОСМИЧЕСКИЙ КРАШ</h2>
+ <p style="font-size:12px; color:#aaa; margin-bottom:10px;">Забери деньги до того, как ракета взорвется! (Макс. x8)</p>
+ 
+ <div class="space-window">
+  <div class="stars"></div>
+  <div class="multiplier-display" id="crashMulti">x1.00</div>
+  <div class="rocket" id="rocketEl">🚀</div>
+ </div>
+
+ <div class="row">
+  <div style="flex: 1;">
+   <label>Ставка (мин. 50 VC)</label>
+   <input id="stakeCrash" type="number" min="50" max="5000" value="50">
+  </div>
+ </div>
+ 
+ <button id="playCrashBtn" class="danger" onclick="startCrash()" disabled>ЗАПУСТИТЬ РАКЕТУ</button>
+ <button id="cashoutBtn" class="hidden" style="background:#00ff88; color:#000;" onclick="cashout()">ЗАБРАТЬ ВЫИГРЫШ</button>
+ <div class="result-msg" id="msgCrash">Войди в аккаунт, чтобы играть.</div>
 </section>
 
 <!-- Рейтинг -->
@@ -187,9 +265,10 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
 </main>
 
 <script>
-let user = null, busy = false;
+let user = null;
 const $ = id => document.getElementById(id);
 
+// --- ЛОКАЛЬНАЯ БАЗА ДАННЫХ ---
 const db = {
   getUser: (name) => JSON.parse(localStorage.getItem('rg_user_' + name)),
   saveUser: (u) => localStorage.setItem('rg_user_' + u.username, JSON.stringify(u)),
@@ -207,16 +286,29 @@ function showUser(u) {
   user = u;
   $("authForm").classList.toggle("hidden", !!u);
   $("profile").classList.toggle("hidden", !u);
-  $("playBtn").disabled = !u || busy;
+  $("gameTabs").classList.toggle("hidden", !u);
+  
   if (u) {
     $("playerName").textContent = u.username;
-    $("balance").textContent = Number(u.balance).toLocaleString("ru-RU");
-    $("gameMsg").textContent = "Удачи, хайроллер!";
-    $("gameMsg").className = "result-msg";
+    updateUI();
+    // По умолчанию открываем слоты
+    if($("gameSlots").classList.contains("hidden") && $("gameCrash").classList.contains("hidden")) {
+        switchGame('slots');
+    }
   } else {
-    $("gameMsg").textContent = "Войди в аккаунт, чтобы играть.";
+    $("gameSlots").classList.add("hidden");
+    $("gameCrash").classList.add("hidden");
+    $("playSlotsBtn").disabled = true;
+    $("playCrashBtn").disabled = true;
   }
   loadBoard();
+}
+
+function updateUI() {
+  if (!user) return;
+  $("balance").textContent = Number(user.balance).toLocaleString("ru-RU");
+  $("playSlotsBtn").disabled = !user || isSlotsBusy;
+  $("playCrashBtn").disabled = !user || isCrashRunning;
 }
 
 function account(mode) {
@@ -239,49 +331,65 @@ function account(mode) {
 
 function logout() { showUser(null); }
 
-async function play() {
-  if (!user || busy) return;
-  const stake = Number($("stake").value);
-  
-  // Проверка минимальной ставки (50)
-  if (isNaN(stake) || stake < 50) {
-    return alert("Минимальная ставка — 50 VC. Ниже ставить нельзя!");
-  }
-  if (stake > user.balance) {
-    return alert("Недостаточно средств на балансе!");
-  }
+// --- ПЕРЕКЛЮЧЕНИЕ ИГР ---
+function switchGame(game) {
+  $("gameSlots").classList.toggle("hidden", game !== 'slots');
+  $("gameCrash").classList.toggle("hidden", game !== 'crash');
+  $("tabSlots").classList.toggle("active", game === 'slots');
+  $("tabCrash").classList.toggle("active", game === 'crash');
+}
 
-  busy = true;
-  $("playBtn").disabled = true;
-  $("gameMsg").textContent = "Крутим...";
-  $("gameMsg").className = "result-msg";
+
+// ==========================================
+// ИГРА 1: СЛОТЫ (Динамический шанс)
+// ==========================================
+let isSlotsBusy = false;
+
+async function playSlots() {
+  if (!user || isSlotsBusy) return;
+  const stake = Number($("stakeSlots").value);
+  
+  if (isNaN(stake) || stake < 50) return alert("Минимальная ставка — 50 VC!");
+  if (stake > user.balance) return alert("Недостаточно средств!");
+
+  isSlotsBusy = true;
+  $("playSlotsBtn").disabled = true;
+  $("msgSlots").textContent = "Крутим...";
+  $("msgSlots").className = "result-msg";
   
   const r1 = $("r1"), r2 = $("r2"), r3 = $("r3");
   r1.classList.add("spinning"); r2.classList.add("spinning"); r3.classList.add("spinning");
 
   user.balance -= stake;
-  $("balance").textContent = Number(user.balance).toLocaleString("ru-RU");
+  updateUI();
 
-  // Генерация результата (ОБЩИЙ ШАНС ВЫИГРЫША = 30%)
+  // ЛОГИКА: Чем выше ставка, тем ниже шанс выиграть
+  // От 50 до 1000: шанс падает с 30% до 15%
+  let baseChance = 30;
+  if (stake > 50) {
+      let penalty = ((stake - 50) / 950) * 15; // Максимальный штраф 15%
+      baseChance = Math.max(15, 30 - penalty);
+  }
+
+  const rand = Math.random() * 100;
   const symbols = ["🍒", "🍋", "🔔", "💎", "7️⃣"];
   let result = [], winType = 0, payout = 0, msg = "";
-  
-  const rand = Math.random() * 100; // от 0 до 100
 
+  // Распределяем шансы внутри выигрышной зоны
   if (rand <= 2) {
-    // ДЖЕКПОТ 2%
+    // ДЖЕКПОТ (x25) - всегда 2%
     result = ["7️⃣", "7️⃣", "7️⃣"];
     winType = 3; payout = stake * 25; msg = "💥 ДЖЕКПОТ! x25 💥";
-  } else if (rand <= 5) { // 2 + 3 = 5% (РЕДКИЙ x4)
-    // КРУПНЫЙ ВЫИГРЫШ 3%
+  } else if (rand <= 2 + (baseChance * 0.1)) { 
+    // РЕДКИЙ ВЫИГРЫШ (x1.5) - 10% от шанса выигрыша
     result = ["💎", "💎", "💎"];
-    winType = 2; payout = stake * 4; msg = "💎 Крупный выигрыш! x4 💎";
-  } else if (rand <= 30) { // 5 + 25 = 30% (ОБЫЧНЫЙ x2)
-    // ВЫИГРЫШ x2 (25%)
+    winType = 2; payout = Math.floor(stake * 1.5); msg = "💎 Редкая удача! x1.5 💎";
+  } else if (rand <= baseChance) { 
+    // ОБЫЧНЫЙ ВЫИГРЫШ (x2) - остаток выигрышного шанса
     result = ["🍒", "🍒", "🍋"]; 
     winType = 1; payout = stake * 2; msg = "🍒 Выигрыш! x2 🍒";
   } else {
-    // ПРОИГРЫШ 70%
+    // ПРОИГРЫШ
     result = ["🍋", "🔔", "🍒"];
   }
 
@@ -294,28 +402,153 @@ async function play() {
     if (count > 15) {
       clearInterval(timer);
       r1.classList.remove("spinning"); r2.classList.remove("spinning"); r3.classList.remove("spinning");
-      
       r1.textContent = result[0]; r2.textContent = result[1]; r3.textContent = result[2];
 
       if (payout > 0) {
         user.balance += payout;
-        $("balance").textContent = Number(user.balance).toLocaleString("ru-RU");
-        $("gameMsg").textContent = msg;
-        $("gameMsg").className = winType === 3 ? "result-msg jackpot" : "result-msg win";
+        $("msgSlots").textContent = msg;
+        $("msgSlots").className = winType === 3 ? "result-msg jackpot" : "result-msg win";
         if (winType === 3 && navigator.vibrate) navigator.vibrate([200, 100, 200]);
       } else {
-        $("gameMsg").textContent = "Повезет в следующий раз!";
-        $("gameMsg").className = "result-msg lose";
+        $("msgSlots").textContent = "Повезет в следующий раз!";
+        $("msgSlots").className = "result-msg lose";
       }
       
       db.saveUser(user);
+      updateUI();
       loadBoard();
-      busy = false;
-      $("playBtn").disabled = false;
+      isSlotsBusy = false;
+      $("playSlotsBtn").disabled = false;
     }
   }, 80);
 }
 
+
+// ==========================================
+// ИГРА 2: КОСМИЧЕСКАЯ РАКЕТА
+// ==========================================
+let isCrashRunning = false;
+let crashMulti = 1.0;
+let crashTimer = null;
+let crashTarget = 1.0; // До какого коэффициента долетит
+
+function startCrash() {
+  if (!user || isCrashRunning) return;
+  const stake = Number($("stakeCrash").value);
+  
+  if (isNaN(stake) || stake < 50) return alert("Минимальная ставка — 50 VC!");
+  if (stake > user.balance) return alert("Недостаточно средств!");
+
+  isCrashRunning = true;
+  crashMulti = 1.0;
+  
+  user.balance -= stake;
+  updateUI();
+
+  $("msgCrash").textContent = "Ракета в полете...";
+  $("msgCrash").className = "result-msg";
+  $("playCrashBtn").classList.add("hidden");
+  $("cashoutBtn").classList.remove("hidden");
+  $("crashMulti").textContent = "x1.00";
+  $("crashMulti").style.color = "#fff";
+  
+  const rocket = $("rocketEl");
+  rocket.className = "rocket";
+  
+  // Логика: 15% шанс, что ракета долетит до конца (x8.00)
+  // В остальных 85% случаев она взорвется в случайный момент от 1.01 до 7.99
+  const isWinRun = Math.random() < 0.15; 
+  
+  if (isWinRun) {
+    // Она не взорвется, пока игрок не заберет или не долетит до 8
+    crashTarget = 8.00; 
+  } else {
+    // Выбираем точку взрыва (чем ближе к 1, тем чаще)
+    // Используем экспоненциальное распределение для реалистичности
+    const rand = Math.random();
+    crashTarget = 1.0 + (Math.pow(rand, 2) * 7); // От 1.0 до 8.0, но чаще падает рано
+    if(crashTarget < 1.05) crashTarget = 1.05; // Не взрываем на старте
+  }
+
+  // Запуск анимации полета
+  rocket.classList.add("flying");
+
+  const startTime = Date.now();
+  
+  crashTimer = setInterval(() => {
+    // Коэффициент растет со временем (чем дольше летит, тем быстрее растет)
+    const elapsed = Date.now() - startTime;
+    crashMulti = 1.0 + (elapsed / 1000) * 0.5; // +0.5 в секунду
+
+    if (crashMulti >= crashTarget) {
+      // ВЗРЫВ
+      clearInterval(crashTimer);
+      rocket.classList.remove("flying");
+      rocket.classList.add("explode");
+      
+      $("msgCrash").textContent = `💥 Ракета взорвалась на x${crashTarget.toFixed(2)}!`;
+      $("msgCrash").className = "result-msg lose";
+      $("crashMulti").style.color = "#ff003c";
+      
+      if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+      
+      resetCrash();
+    } else if (crashMulti >= 8.00) {
+      // Долетела до максимума, автоматический сбор
+      crashMulti = 8.00;
+      $("crashMulti").textContent = "x8.00";
+      cashout(true);
+    } else {
+      // Обновляем табло
+      $("crashMulti").textContent = "x" + crashMulti.toFixed(2);
+      // Меняем цвет в зависимости от коэффициента
+      if (crashMulti > 4) $("crashMulti").style.color = "#ffd700";
+      else if (crashMulti > 2) $("crashMulti").style.color = "#00ff88";
+    }
+  }, 50); // Обновляем каждые 50мс
+}
+
+function cashout(auto = false) {
+  if (!isCrashRunning) return;
+  clearInterval(crashTimer);
+  
+  const stake = Number($("stakeCrash").value);
+  const winAmount = Math.floor(stake * crashMulti);
+  
+  user.balance += winAmount;
+  db.saveUser(user);
+  updateUI();
+  loadBoard();
+
+  $("msgCrash").textContent = `✅ Забрал на x${crashMulti.toFixed(2)}. Выигрыш: +${winAmount} VC`;
+  $("msgCrash").className = "result-msg win";
+  $("crashMulti").style.color = "#00ff88";
+  
+  const rocket = $("rocketEl");
+  rocket.classList.remove("flying");
+  
+  if (auto) {
+     $("msgCrash").textContent = `🚀 Ракета долетела до x8.00! Автовыигрыш: +${winAmount} VC`;
+  }
+  
+  resetCrash();
+}
+
+function resetCrash() {
+  isCrashRunning = false;
+  $("playCrashBtn").classList.remove("hidden");
+  $("cashoutBtn").classList.add("hidden");
+  
+  setTimeout(() => {
+    if(!isCrashRunning) {
+      $("rocketEl").className = "rocket"; // Возвращаем на место
+      $("crashMulti").textContent = "x1.00";
+      $("crashMulti").style.color = "#fff";
+    }
+  }, 1500);
+}
+
+// --- РЕЙТИНГ ---
 function loadBoard() {
   const board = db.getBoard();
   $("leaderboard").innerHTML = board.length ? 
