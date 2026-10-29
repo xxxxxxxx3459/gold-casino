@@ -166,8 +166,8 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
 
  <div class="row">
   <div style="flex: 1;">
-   <label>Ставка (VC)</label>
-   <input id="stake" type="number" min="10" max="5000" value="100">
+   <label>Ставка (мин. 50 VC)</label>
+   <input id="stake" type="number" min="50" max="5000" value="50">
   </div>
  </div>
  
@@ -242,8 +242,13 @@ function logout() { showUser(null); }
 async function play() {
   if (!user || busy) return;
   const stake = Number($("stake").value);
-  if (isNaN(stake) || stake < 10 || stake > user.balance) {
-    return alert("Проверь ставку. Она должна быть от 10 до " + user.balance);
+  
+  // Проверка минимальной ставки (50)
+  if (isNaN(stake) || stake < 50) {
+    return alert("Минимальная ставка — 50 VC. Ниже ставить нельзя!");
+  }
+  if (stake > user.balance) {
+    return alert("Недостаточно средств на балансе!");
   }
 
   busy = true;
@@ -267,17 +272,17 @@ async function play() {
     // ДЖЕКПОТ 2%
     result = ["7️⃣", "7️⃣", "7️⃣"];
     winType = 3; payout = stake * 25; msg = "💥 ДЖЕКПОТ! x25 💥";
-  } else if (rand <= 10) { // 2 + 8 = 10%
-    // КРУПНЫЙ ВЫИГРЫШ 8%
+  } else if (rand <= 5) { // 2 + 3 = 5% (РЕДКИЙ x4)
+    // КРУПНЫЙ ВЫИГРЫШ 3%
     result = ["💎", "💎", "💎"];
     winType = 2; payout = stake * 4; msg = "💎 Крупный выигрыш! x4 💎";
-  } else if (rand <= 30) { // 10 + 20 = 30% (ОСТАЛЬНЫЕ 70% - ПРОИГРЫШ)
-    // МИНИ-ВЫИГРЫШ 20%
-    result = ["🍒", "🍒", "🍋"]; // Два одинаковых
-    winType = 1; payout = Math.floor(stake * 1.5); msg = "🍒 Неплохо! Возврат x1.5 🍒";
+  } else if (rand <= 30) { // 5 + 25 = 30% (ОБЫЧНЫЙ x2)
+    // ВЫИГРЫШ x2 (25%)
+    result = ["🍒", "🍒", "🍋"]; 
+    winType = 1; payout = stake * 2; msg = "🍒 Выигрыш! x2 🍒";
   } else {
     // ПРОИГРЫШ 70%
-    result = ["🍋", "🔔", "🍒"]; // Все разные
+    result = ["🍋", "🔔", "🍒"];
   }
 
   let count = 0;
