@@ -69,6 +69,7 @@ button:active { transform: scale(0.98); }
 button:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
 button.secondary { background: transparent; border: 1px solid var(--gold); color: var(--gold); box-shadow: none; }
 button.danger { background: linear-gradient(135deg, #ff4b2b, #ff003c); color: white; box-shadow: 0 5px 15px rgba(255, 0, 60, 0.3); }
+button.success { background: linear-gradient(135deg, #00ff88, #00b359); color: #000; box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3); }
 .row { display: flex; gap: 10px; }
 .row button { margin-top: 0; }
 .balance { font-size: 38px; font-weight: 900; color: #fff; text-align: center; margin: 10px 0; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
@@ -87,7 +88,7 @@ button.danger { background: linear-gradient(135deg, #ff4b2b, #ff003c); color: wh
 }
 .spinning { animation: spin 0.1s infinite linear; }
 @keyframes spin { 100% { transform: translateY(10px); } }
-.result-msg { text-align: center; font-size: 18px; font-weight: bold; min-height: 27px; margin-top: 15px; text-shadow: 0 0 10px currentColor; }
+.result-msg { text-align: center; font-size: 16px; font-weight: bold; min-height: 27px; margin-top: 15px; text-shadow: 0 0 10px currentColor; }
 .win { color: #00ff88; }
 .lose { color: #ff003c; }
 .jackpot { color: #ffd700; animation: pulse 0.5s infinite alternate; }
@@ -95,8 +96,9 @@ button.danger { background: linear-gradient(135deg, #ff4b2b, #ff003c); color: wh
 
 /* Космическая ракета */
 .space-window {
-  background: var(--space); border-radius: 15px; height: 280px; position: relative;
+  background: var(--space); border-radius: 15px; height: 300px; position: relative;
   overflow: hidden; margin: 15px 0; border: 1px solid #333;
+  box-shadow: inset 0 0 50px rgba(0,0,0,1);
 }
 .stars {
   position: absolute; top: 0; left: 0; width: 100%; height: 200%; 
@@ -107,43 +109,46 @@ button.danger { background: linear-gradient(135deg, #ff4b2b, #ff003c); color: wh
     radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
     radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
   background-repeat: repeat; background-size: 200px 200px;
-  animation: starMove 2s linear infinite; /* Ускорил звезды */
+  animation: starMove 1.5s linear infinite;
 }
 @keyframes starMove { from { background-position: 0 0; } to { background-position: 0 200px; } }
 
-/* Контейнер для ракеты, чтобы управлять ее позицией */
+/* Контейнер для ракеты */
 .rocket-container {
-  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-  transition: all 0.1s linear; z-index: 2;
+  position: absolute; bottom: 40px; left: 50%; 
+  transition: none; /* Управляем через JS */
+  z-index: 2;
+  transform-origin: center center;
 }
 .rocket-img {
-  font-size: 50px; display: block; transform: rotate(45deg);
+  font-size: 55px; display: block; transform: rotate(0deg);
+  filter: drop-shadow(0 0 10px rgba(255, 200, 0, 0.8));
 }
 /* Анимация взрыва */
 .explode {
-  animation: explodeAnim 0.5s forwards !important;
+  animation: explodeAnim 0.6s forwards !important;
 }
 @keyframes explodeAnim {
-  0% { transform: translateX(-50%) scale(1); opacity: 1; }
-  50% { filter: brightness(3) blur(5px); }
-  100% { transform: translateX(-50%) scale(4); opacity: 0; filter: blur(20px); }
+  0% { transform: scale(1); opacity: 1; }
+  30% { transform: scale(1.5) rotate(20deg); filter: brightness(3); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; filter: blur(20px); }
 }
 
 .multiplier-display {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  font-size: 55px; font-weight: 900; color: #fff; z-index: 3;
-  text-shadow: 0 0 20px rgba(255,255,255,0.5); opacity: 0.9;
-  font-variant-numeric: tabular-nums; /* Чтобы цифры не прыгали */
+  font-size: 60px; font-weight: 900; color: #fff; z-index: 1;
+  text-shadow: 0 0 30px rgba(255,255,255,0.4); opacity: 0.9;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Вкладки */
 .tabs { display: flex; gap: 10px; margin-bottom: 15px; }
 .tab-btn {
-  flex: 1; padding: 10px; background: rgba(255,255,255,0.1); border: 1px solid #444; color: #aaa;
+  flex: 1; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid #333; color: #888;
   border-radius: 10px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 12px;
   transition: 0.3s;
 }
-.tab-btn.active { background: rgba(255,215,0,0.2); border-color: var(--gold); color: var(--gold); }
+.tab-btn.active { background: rgba(255,215,0,0.15); border-color: var(--gold); color: var(--gold); }
 .hidden { display: none !important; }
 footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
 </style>
@@ -155,7 +160,6 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
 </header>
 <main>
 
-<!-- Профиль / Авторизация -->
 <section class="card" id="authCard">
  <h2>👤 Вход в клуб</h2>
  <div id="authForm">
@@ -176,13 +180,12 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
  </div>
 </section>
 
-<!-- Переключатель игр -->
 <div class="tabs hidden" id="gameTabs">
   <button class="tab-btn active" onclick="switchGame('slots')" id="tabSlots">🎰 Слоты</button>
   <button class="tab-btn" onclick="switchGame('crash')" id="tabCrash">🚀 Ракета</button>
 </div>
 
-<!-- ИГРА 1: Слоты -->
+<!-- СЛОТЫ -->
 <section class="card hidden" id="gameSlots">
  <h2>🎰 GOLDEN SLOTS</h2>
  <p style="font-size:12px; color:#aaa; margin-bottom:10px;">Чем выше ставка, тем ниже шанс выигрыша.</p>
@@ -201,20 +204,19 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
  </div>
  
  <button id="playSlotsBtn" onclick="playSlots()" disabled>ВРАЩАТЬ БАРАБАНЫ</button>
- <div class="result-msg" id="msgSlots">Войди в аккаунт, чтобы играть.</div>
+ <div class="result-msg" id="msgSlots"></div>
 </section>
 
-<!-- ИГРА 2: Ракета -->
+<!-- РАКЕТА -->
 <section class="card hidden" id="gameCrash">
  <h2>🚀 КОСМИЧЕСКИЙ КРАШ</h2>
- <p style="font-size:12px; color:#aaa; margin-bottom:10px;">Забери деньги до того, как ракета взорвется! (Макс. x8)</p>
+ <p style="font-size:12px; color:#aaa; margin-bottom:10px;">Забери деньги до взрыва! (Макс. x8)</p>
  
  <div class="space-window">
   <div class="stars"></div>
   <div class="multiplier-display" id="crashMulti">x1.00</div>
-  <!-- Обертка для ракеты для плавного движения -->
   <div class="rocket-container" id="rocketContainer">
-    <span class="rocket-img">🚀</span>
+    <span class="rocket-img" id="rocketImg">🚀</span>
   </div>
  </div>
 
@@ -226,16 +228,13 @@ footer { text-align: center; color: #444; font-size: 11px; padding: 30px 15px; }
  </div>
  
  <button id="playCrashBtn" class="danger" onclick="startCrash()" disabled>ЗАПУСТИТЬ РАКЕТУ</button>
- <button id="cashoutBtn" class="hidden" style="background:#00ff88; color:#000; box-shadow: 0 5px 15px rgba(0,255,136,0.3);" onclick="cashout()">ЗАБРАТЬ ВЫИГРЫШ</button>
- <div class="result-msg" id="msgCrash">Войди в аккаунт, чтобы играть.</div>
+ <button id="cashoutBtn" class="success hidden" onclick="cashout()">ЗАБРАТЬ ВЫИГРЫШ</button>
+ <div class="result-msg" id="msgCrash"></div>
 </section>
 
-<!-- Рейтинг -->
 <section class="card">
  <h2>🏆 Зал Славы</h2>
- <ul class="list" id="leaderboard" style="list-style:none; padding:0; font-size:14px;">
-  <li style="color:#888;">Загрузка данных...</li>
- </ul>
+ <ul class="list" id="leaderboard" style="list-style:none; padding:0; font-size:14px;"></ul>
 </section>
 
 <footer>ROYAL GOLD © 2024 · ТОЛЬКО ВИРТУАЛЬНАЯ ВАЛЮТА · 18+</footer>
@@ -283,7 +282,7 @@ function updateUI() {
   if (!user) return;
   $("balance").textContent = Number(user.balance).toLocaleString("ru-RU");
   if(!isSlotsBusy) $("playSlotsBtn").disabled = !user;
-  if(!isCrashRunning) $("playCrashBtn").disabled = !user;
+  // Ракета управляется своей логикой
 }
 
 function account(mode) {
@@ -313,9 +312,8 @@ function switchGame(game) {
   $("tabCrash").classList.toggle("active", game === 'crash');
 }
 
-
 // ==========================================
-// ИГРА 1: СЛОТЫ (Динамический шанс)
+// СЛОТЫ
 // ==========================================
 let isSlotsBusy = false;
 
@@ -337,7 +335,6 @@ async function playSlots() {
   user.balance -= stake;
   updateUI();
 
-  // Логика: Чем выше ставка, тем ниже шанс выиграть
   let baseChance = 30;
   if (stake > 50) {
       let penalty = ((stake - 50) / 950) * 15; 
@@ -393,14 +390,12 @@ async function playSlots() {
 
 
 // ==========================================
-// ИГРА 2: КОСМИЧЕСКАЯ РАКЕТА
+// РАКЕТА (CRASH)
 // ==========================================
 let isCrashRunning = false;
 let crashMulti = 1.0;
 let crashTimer = null;
 let crashTarget = 1.0; 
-let rocketPosX = 0;
-let rocketPosY = 0;
 let crashStartTime = 0;
 
 function startCrash() {
@@ -425,16 +420,16 @@ function startCrash() {
   $("crashMulti").style.color = "#fff";
   
   const rocket = $("rocketContainer");
+  const rocketImg = $("rocketImg");
   
   // Сброс позиции перед полетом
-  rocketPosX = 0;
-  rocketPosY = 0;
-  rocket.style.transform = `translateX(-50%) translate(0px, 0px)`;
+  rocket.style.transform = `translate(0px, 0px)`;
+  rocketImg.style.transform = `rotate(45deg)`;
   rocket.style.opacity = "1";
+  rocket.classList.remove("explode");
   
-  // Логика: 15% шанс, что ракета долетит до конца (x8.00)
+  // Логика: 15% шанс на долет до x8
   const isWinRun = Math.random() < 0.15; 
-  
   if (isWinRun) {
     crashTarget = 8.00; 
   } else {
@@ -443,21 +438,15 @@ function startCrash() {
     if(crashTarget < 1.05) crashTarget = 1.05; 
   }
 
-  // Запуск анимации полета
   const startTime = Date.now();
   
   crashTimer = setInterval(() => {
     const elapsed = Date.now() - startTime;
-    
-    // Коэффициент растет со временем
     crashMulti = 1.0 + (elapsed / 1000) * 0.5; 
 
     if (crashMulti >= crashTarget) {
       // ВЗРЫВ
       clearInterval(crashTimer);
-      
-      // Анимация взрыва
-      rocket.style.transition = "all 0.5s ease-out";
       rocket.classList.add("explode");
       
       $("msgCrash").textContent = `💥 Ракета взорвалась на x${crashTarget.toFixed(2)}!`;
@@ -466,9 +455,7 @@ function startCrash() {
       
       if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
       
-      setTimeout(() => {
-        resetCrash();
-      }, 1500); // Ждем 1.5 сек после взрыва, чтобы игрок понял
+      setTimeout(resetCrash, 1500); // Ждем и сбрасываем
       
     } else if (crashMulti >= 8.00) {
       crashMulti = 8.00;
@@ -479,22 +466,20 @@ function startCrash() {
       if (crashMulti > 4) $("crashMulti").style.color = "#ffd700";
       else if (crashMulti > 2) $("crashMulti").style.color = "#00ff88";
 
-      // ДВИЖЕНИЕ РАКЕТЫ (плавное по дуге)
-      // Чем выше коэффициент, тем дальше улетает
-      let progress = crashMulti / 8; // от 0 до 1
+      // ДВИЖЕНИЕ РАКЕТЫ (Красивая дуга)
+      let progress = (crashMulti - 1) / 7; // от 0 до 1
       
-      // X движется вправо, Y движется вверх (отрицательный)
-      rocketPosX = progress * 120; 
-      rocketPosY = -(progress * progress) * 180; // Квадратичная функция для красивой дуги
+      // Ракета летит от центра вверх и вправо
+      let moveX = progress * 100; // Двигаем вправо на 100px
+      let moveY = -(progress * progress) * 180; // Двигаем вверх на 180px (квадратичная дуга)
       
-      // Наклон ракеты зависит от скорости (просто для красоты)
-      let angle = -45 - (progress * 20); 
-      
-      rocket.style.transition = "none"; // Убираем плавность для четкой синхронизации с таймером
-      rocket.style.transform = `translateX(-50%) translate(${rocketPosX}px, ${rocketPosY}px)`;
-      rocket.querySelector('.rocket-img').style.transform = `rotate(${angle}deg)`;
+      // Наклон (крен) ракеты: от 45 градусов до 20 градусов (выравнивается в полете)
+      let angle = 45 - (progress * 25);
+
+      rocket.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      rocketImg.style.transform = `rotate(${angle}deg)`;
     }
-  }, 30); // Обновляем чаще (каждые 30мс), чтобы полет был плавным
+  }, 30); 
 }
 
 function cashout(auto = false) {
@@ -517,31 +502,32 @@ function cashout(auto = false) {
      $("msgCrash").textContent = `🚀 Ракета долетела до x8.00! Автовыигрыш: +${winAmount} VC`;
   }
   
-  setTimeout(() => {
-    resetCrash();
-  }, 1500);
+  setTimeout(resetCrash, 1500);
 }
 
 function resetCrash() {
   isCrashRunning = false;
   
   const rocket = $("rocketContainer");
+  const rocketImg = $("rocketImg");
   
-  // Плавно возвращаем ракету на место
+  // Возвращаем ракету на старт
   rocket.style.transition = "all 0.5s ease-out";
-  rocket.style.transform = `translateX(-50%) translate(0px, 0px)`;
+  rocket.style.transform = `translate(0px, 0px)`;
   rocket.classList.remove("explode");
   rocket.style.opacity = "1";
+  rocketImg.style.transform = `rotate(45deg)`;
   
-  // Возвращаем кнопки
+  // ВОЗВРАЩАЕМ КНОПКИ (исправление бага)
   $("playCrashBtn").classList.remove("hidden");
   $("cashoutBtn").classList.add("hidden");
-  $("playCrashBtn").disabled = false;
+  $("playCrashBtn").disabled = false; // <--- ТЕПЕРЬ КНОПКА ВСЕГДА РАБОТАЕТ
   
-  // Сбрасываем текст
+  // Убираем плавность для следующего запуска
+  setTimeout(() => { rocket.style.transition = "none"; }, 500);
+  
   $("crashMulti").textContent = "x1.00";
   $("crashMulti").style.color = "#fff";
-  rocket.querySelector('.rocket-img').style.transform = `rotate(45deg)`;
 }
 
 // --- РЕЙТИНГ ---
