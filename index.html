@@ -2,2197 +2,2178 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#080810">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#090910">
 <title>ROYAL GOLD — Virtual Games</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
 :root{
+  --bg:#08080f;
+  --card:#11111b;
+  --card2:#151521;
   --gold:#ffd21c;
-  --gold2:#ff9d00;
-  --bg:#07070d;
-  --panel:#15151f;
-  --panel2:#101018;
-  --text:#fff;
-  --muted:#9b9aaa;
+  --gold2:#ffb700;
+  --purple:#765cff;
+  --purple2:#9c75ff;
+  --pink:#ff1758;
   --green:#00f5a0;
-  --green2:#00c878;
-  --red:#ff315c;
-  --purple:#705cff;
-  --blue:#35bfff;
+  --red:#ff315d;
+  --text:#f7f7fb;
+  --muted:#858594;
+  --border:rgba(255,210,28,.25);
 }
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-  -webkit-tap-highlight-color:transparent;
 }
+
 html{
   scroll-behavior:smooth;
 }
+
 body{
   min-height:100vh;
-  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(118,92,255,.20),transparent 35%),
+    radial-gradient(circle at 90% 40%,rgba(255,23,88,.08),transparent 30%),
+    var(--bg);
   color:var(--text);
-  font-family:Montserrat,Arial,sans-serif;
-  background:
-    radial-gradient(circle at 50% -10%,#292343 0%,transparent 34%),
-    radial-gradient(circle at 100% 30%,#15162c 0%,transparent 30%),
-    linear-gradient(180deg,#090910,#050508);
+  font-family:'Montserrat',sans-serif;
+  overflow-x:hidden;
 }
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  opacity:.14;
-  background-image:
-    radial-gradient(circle,#fff 1px,transparent 1px),
-    radial-gradient(circle,#9f8cff 1px,transparent 1px);
-  background-size:83px 83px,137px 137px;
-  background-position:20px 20px,70px 40px;
-}
-button,input{
-  font:inherit;
-}
-button{
-  border:0;
-}
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-header{
-  text-align:center;
-  padding:30px 15px 20px;
-}
-.logo{
-  font-size:clamp(25px,7vw,38px);
-  line-height:1;
-  font-weight:900;
-  letter-spacing:2px;
-  color:var(--gold);
-  text-shadow:
-    0 0 10px #ffd21c55,
-    0 0 35px #ffd21c22;
-}
-.subtitle{
-  margin-top:9px;
-  color:#858393;
-  font-size:10px;
-  letter-spacing:5px;
-  font-weight:600;
-}
-main{
-  width:min(760px,100%);
-  margin:auto;
-  padding:5px 15px 40px;
-}
-.card{
-  position:relative;
-  overflow:hidden;
-  margin-bottom:20px;
-  padding:23px;
-  border-radius:25px;
-  border:1px solid #ffd21c30;
-  background:
-    linear-gradient(145deg,#1b1a25f2,#101018f5);
-  box-shadow:
-    0 18px 55px #0009,
-    inset 0 1px #ffffff08;
-}
-.card:before{
-  content:"";
-  position:absolute;
-  left:10%;
-  right:10%;
-  top:0;
-  height:1px;
-  background:linear-gradient(90deg,transparent,#ffd21c55,transparent);
-}
-h2{
-  position:relative;
-  z-index:2;
-  margin-bottom:12px;
-  color:var(--gold);
-  font-size:clamp(19px,5vw,25px);
-  font-weight:900;
-}
-.description{
-  position:relative;
-  z-index:2;
-  margin-bottom:18px;
-  color:#a6a4b4;
-  font-size:14px;
-  line-height:1.8;
-}
-label{
-  display:block;
-  margin:17px 0 8px;
-  color:#aaa8b8;
-  font-size:13px;
-}
+
+button,
 input{
-  width:100%;
-  min-width:0;
-  outline:none;
-  padding:16px 17px;
-  border-radius:15px;
-  border:1px solid #403f4d;
-  color:#fff;
-  background:#08080e;
-  font-size:17px;
-  transition:.2s;
+  font-family:inherit;
 }
-input:focus{
-  border-color:#ffd21c;
-  box-shadow:0 0 20px #ffd21c18;
-}
-.row{
-  display:flex;
-  gap:10px;
-}
-.row>*{
-  flex:1;
-  min-width:0;
-}
+
 button{
-  min-height:52px;
-  border-radius:15px;
-  padding:14px 18px;
   cursor:pointer;
-  font-weight:900;
-  transition:
-    transform .15s ease,
-    filter .15s ease,
-    box-shadow .15s ease;
-  touch-action:manipulation;
 }
-button:active{
-  transform:scale(.97);
-}
-.primary{
-  color:#1a1300;
-  background:linear-gradient(135deg,#ffe76b,#ffb900);
-  box-shadow:0 8px 25px #ffbd0022;
-}
-.primary:hover{
-  filter:brightness(1.08);
-}
-.secondary{
-  color:var(--gold);
-  background:#23222c;
-  border:1px solid #63531b;
-}
-.danger{
-  color:#fff;
-  background:linear-gradient(135deg,#ff4164,#ef084b);
-  box-shadow:0 10px 30px #ff174d22;
-}
-.success{
-  color:#02170f;
-  background:linear-gradient(135deg,#12ffc0,#00bd78);
-  box-shadow:0 10px 30px #00f5a033;
-}
+
 .hidden{
   display:none!important;
 }
-.profile-name{
-  text-align:center;
-  color:var(--gold);
-  font-size:23px;
-  font-weight:900;
-}
-.balance-caption{
-  margin-top:13px;
-  color:#8d8b9a;
-  text-align:center;
-  font-size:11px;
-  letter-spacing:2px;
-}
-.balance{
-  margin:7px 0 17px;
-  text-align:center;
-  color:#fff;
-  font-size:clamp(32px,9vw,48px);
-  font-weight:900;
-  text-shadow:0 0 25px #fff2;
-}
-.balance small{
-  color:var(--gold);
-  font-size:21px;
-}
-.tabs{
-  display:flex;
-  gap:10px;
-  margin-bottom:18px;
-}
-.tab-btn{
-  flex:1;
-  min-height:65px;
-  color:#898795;
-  background:#171720;
-  border:1px solid #363541;
-  font-size:16px;
-}
-.tab-btn.active{
-  color:var(--gold);
-  border-color:var(--gold);
-  background:linear-gradient(135deg,#ffd21c12,#ff9d0008);
-  box-shadow:0 0 25px #ffd21c0d;
-}
-/* ================= BET LIMIT ================= */
-.bet-limit{
-  position:relative;
-  margin:12px 0 14px;
-  padding:15px 16px;
-  border-radius:17px;
-  border:1px solid #ffd21c66;
-  background:
-    linear-gradient(135deg,#ffd21c12,#ff9d0008),
-    #0d0d14;
-  box-shadow:
-    inset 0 1px #ffffff08,
-    0 0 22px #ffd21c10;
-  text-align:center;
-}
-.bet-limit:before{
-  content:"";
-  position:absolute;
-  left:12%;
-  right:12%;
+
+/* HEADER */
+
+header{
+  position:sticky;
   top:0;
-  height:1px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    #ffd21c88,
-    transparent
-  );
+  z-index:50;
+  background:rgba(8,8,15,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
-.bet-limit-title{
-  color:#8f8d9d;
-  font-size:10px;
-  letter-spacing:2px;
-  font-weight:800;
-}
-.bet-limit-value{
-  margin-top:5px;
-  color:var(--gold);
-  font-size:22px;
-  font-weight:900;
-  text-shadow:0 0 15px #ffd21c44;
-}
-.bet-limit-note{
-  margin-top:5px;
-  color:#777583;
-  font-size:10px;
-}
-/* ================= SLOTS ================= */
-.slot-window{
-  display:flex;
-  justify-content:center;
-  gap:9px;
-  padding:15px 9px;
-  margin:20px 0;
-  border-radius:21px;
-  border:1px solid #45434f;
-  background:
-    radial-gradient(circle at 50% 0%,#373342,#0b0b10 65%);
-  box-shadow:
-    inset 0 0 35px #000b,
-    0 10px 30px #0005;
-}
-.reel{
-  flex:1;
-  max-width:170px;
-  aspect-ratio:1/1.05;
+
+.header-inner{
+  max-width:1050px;
+  margin:auto;
+  min-height:76px;
+  padding:14px 20px;
   display:flex;
   align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  border-radius:17px;
-  border:1px solid #514e5d;
-  background:linear-gradient(145deg,#302e39,#111117);
-  box-shadow:
-    inset 0 0 25px #000a,
-    0 0 15px #0008;
-  font-size:clamp(42px,12vw,68px);
-  user-select:none;
+  justify-content:space-between;
+  gap:15px;
 }
-.reel.spinning{
-  animation:
-    reelShake .09s linear infinite;
-  filter:blur(1.2px);
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
-@keyframes reelShake{
-  0%{transform:translateY(-4px)}
-  50%{transform:translateY(5px)}
-  100%{transform:translateY(-4px)}
+
+.logo-icon{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#ffe76b,#ffad00);
+  color:#111;
+  font-size:22px;
+  box-shadow:0 0 25px rgba(255,193,0,.25);
 }
-.reel.win{
-  animation:reelWin .6s ease;
+
+.logo-title{
+  font-weight:900;
+  letter-spacing:2px;
+  font-size:16px;
 }
-@keyframes reelWin{
-  0%{transform:scale(1)}
-  40%{
-    transform:scale(1.1);
-    box-shadow:0 0 35px #ffd21c88
-  }
-  100%{transform:scale(1)}
+
+.logo-sub{
+  color:var(--muted);
+  font-size:8px;
+  letter-spacing:2px;
+  margin-top:3px;
 }
-/* ================= CRASH ================= */
-.space-window{
-  position:relative;
-  width:100%;
-  height:clamp(340px,72vw,520px);
-  overflow:hidden;
-  isolation:isolate;
-  border-radius:26px;
-  border:1px solid #7865ff;
+
+.balance-box{
+  border:1px solid rgba(255,210,28,.28);
+  background:rgba(255,210,28,.055);
+  border-radius:14px;
+  padding:8px 13px;
+  text-align:right;
+}
+
+.balance-label{
+  color:var(--muted);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+}
+
+.balance-value{
+  color:var(--gold);
+  font-size:15px;
+  font-weight:900;
+  margin-top:2px;
+}
+
+/* MAIN */
+
+main{
+  width:min(1050px,100%);
+  margin:auto;
+  padding:26px 18px 60px;
+}
+
+.card{
   background:
-    radial-gradient(circle at 25% 80%,#7040ff45,transparent 38%),
-    radial-gradient(circle at 85% 15%,#00aaff22,transparent 35%),
-    radial-gradient(circle at 50% 55%,#171743 0%,#090c1f 52%,#02030a 100%);
-  box-shadow:
-    inset 0 0 65px #000d,
-    0 0 30px #614dff18;
+    linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.008)),
+    var(--card);
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:25px;
+  padding:24px;
+  margin-bottom:20px;
+  box-shadow:0 20px 70px rgba(0,0,0,.28);
 }
-.space-grid{
+
+.card-title{
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.card-subtitle{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+}
+
+/* AUTH */
+
+.auth-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:20px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.field label{
+  color:#a9a9b7;
+  font-size:11px;
+  font-weight:600;
+}
+
+.field input,
+.stake-input{
+  width:100%;
+  background:#08080e;
+  color:#fff;
+  border:1px solid #363642;
+  outline:none;
+  border-radius:15px;
+  padding:16px;
+  font-size:16px;
+  transition:.2s;
+}
+
+.field input:focus,
+.stake-input:focus{
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px rgba(118,92,255,.1);
+}
+
+.auth-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.btn{
+  border:0;
+  border-radius:14px;
+  padding:14px 20px;
+  font-weight:800;
+  color:white;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#7c5cff,#5436df);
+  box-shadow:0 10px 25px rgba(108,75,255,.2);
+}
+
+.btn-secondary{
+  background:#20202c;
+  border:1px solid #353545;
+}
+
+.btn-danger{
+  background:#25111a;
+  color:#ff5879;
+  border:1px solid rgba(255,49,93,.25);
+}
+
+.profile{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.profile-name{
+  font-weight:800;
+}
+
+.profile-small{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+/* TABS */
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  padding:5px;
+  background:#0b0b12;
+  border-radius:17px;
+  border:1px solid rgba(255,255,255,.06);
+  margin-bottom:20px;
+}
+
+.tab{
+  border:0;
+  border-radius:13px;
+  padding:13px;
+  background:transparent;
+  color:#777787;
+  font-weight:800;
+}
+
+.tab.active{
+  color:#fff;
+  background:linear-gradient(135deg,#25223a,#171522);
+  box-shadow:0 0 0 1px rgba(118,92,255,.25);
+}
+
+/* LIMIT BOX */
+
+.limit-box{
+  position:relative;
+  overflow:hidden;
+  margin:20px 0;
+  padding:20px;
+  border-radius:22px;
+  border:1px solid rgba(255,210,28,.42);
+  background:
+    radial-gradient(circle at 10% 0%,rgba(255,210,28,.10),transparent 40%),
+    linear-gradient(135deg,rgba(255,210,28,.065),rgba(255,255,255,.015));
+  box-shadow:
+    inset 0 0 30px rgba(255,210,28,.025),
+    0 0 25px rgba(255,210,28,.04);
+}
+
+.limit-box:before{
+  content:"";
   position:absolute;
   inset:0;
-  z-index:0;
-  opacity:.55;
+  border-radius:22px;
+  pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);
+}
+
+.limit-head{
+  color:#b9b9c5;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-align:center;
+}
+
+.limit-main{
+  color:var(--gold);
+  font-size:28px;
+  font-weight:900;
+  text-align:center;
+  margin:6px 0;
+  text-shadow:0 0 20px rgba(255,210,28,.18);
+}
+
+.limit-sub{
+  text-align:center;
+  color:#777784;
+  font-size:10px;
+}
+
+.limit-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:14px;
+}
+
+.limit-mini{
+  padding:10px;
+  border-radius:12px;
+  background:rgba(0,0,0,.2);
+  border:1px solid rgba(255,255,255,.045);
+  text-align:center;
+}
+
+.limit-mini span{
+  display:block;
+  color:#777784;
+  font-size:9px;
+  margin-bottom:4px;
+}
+
+.limit-mini strong{
+  font-size:12px;
+  color:#dddde5;
+}
+
+/* SLOT */
+
+.slot-machine{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  padding:15px;
+  border-radius:22px;
   background:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 48px,
-      #9c91ff13 49px,
-      #9c91ff13 50px
-    ),
-    repeating-linear-gradient(
-      to right,
-      transparent 0,
-      transparent 74px,
-      #7b73ff09 75px,
-      #7b73ff09 76px
-    );
+    radial-gradient(circle at center,rgba(118,92,255,.15),transparent 65%),
+    #080810;
+  border:1px solid rgba(118,92,255,.25);
+  margin:20px 0;
 }
-.stars,
-.stars2{
+
+.reel{
+  height:110px;
+  border-radius:18px;
+  background:linear-gradient(180deg,#1b1b28,#090910);
+  border:1px solid rgba(255,255,255,.08);
+  display:grid;
+  place-items:center;
+  font-size:50px;
+  box-shadow:inset 0 0 25px rgba(0,0,0,.5);
+}
+
+.reel.spinning{
+  animation:reelShake .08s infinite alternate;
+}
+
+@keyframes reelShake{
+  from{transform:translateY(-2px)}
+  to{transform:translateY(2px)}
+}
+
+.game-result{
+  min-height:52px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:#9292a0;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.win{
+  color:var(--green);
+  font-weight:800;
+}
+
+.loss{
+  color:#ff6685;
+  font-weight:700;
+}
+
+.game-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:15px;
+}
+
+.input-label{
+  color:#9999a7;
+  font-size:11px;
+  margin-bottom:7px;
+}
+
+.action-btn{
+  width:100%;
+  min-height:56px;
+  border:0;
+  border-radius:17px;
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  background:linear-gradient(135deg,#ff376a,#ff0750);
+  box-shadow:0 12px 30px rgba(255,23,88,.18);
+}
+
+.action-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.small-note{
+  color:#666675;
+  font-size:10px;
+  text-align:center;
+  margin-top:13px;
+  line-height:1.6;
+}
+
+/* CRASH */
+
+.crash-window{
+  position:relative;
+  height:560px;
+  border-radius:24px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(118,92,255,.28),transparent 34%),
+    radial-gradient(circle at 80% 30%,rgba(0,190,255,.08),transparent 28%),
+    linear-gradient(145deg,#090a1c,#03040b);
+  border:1px solid #755cff;
+  box-shadow:
+    0 0 45px rgba(103,82,255,.18),
+    inset 0 0 60px rgba(60,70,180,.08);
+  margin:20px 0;
+}
+
+.crash-grid{
   position:absolute;
-  inset:-100% 0 0;
-  z-index:1;
-  pointer-events:none;
+  inset:0;
+  opacity:.45;
   background-image:
-    radial-gradient(circle at 20px 40px,#fff 0 1.5px,transparent 2px),
-    radial-gradient(circle at 90px 120px,#c9d8ff 0 1px,transparent 2px),
-    radial-gradient(circle at 170px 70px,#7ceaff 0 1.5px,transparent 2px),
-    radial-gradient(circle at 210px 180px,#fff 0 1px,transparent 2px),
-    radial-gradient(circle at 130px 220px,#b9aaff 0 1.5px,transparent 2px);
-  background-size:230px 250px;
-  animation:starsMove 7s linear infinite;
-  opacity:.7;
+    linear-gradient(rgba(130,130,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(130,130,255,.08) 1px,transparent 1px);
+  background-size:100px 100px;
 }
-.stars2{
-  background-size:170px 190px;
-  animation-duration:11s;
-  opacity:.35;
-  transform:scale(1.2);
-}
-@keyframes starsMove{
-  to{
-    background-position:0 500px;
-  }
-}
-.space-glow{
+
+.stars{
   position:absolute;
-  z-index:1;
-  left:50%;
-  top:48%;
-  width:230px;
-  height:180px;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:#6555ff20;
-  filter:blur(35px);
-  pointer-events:none;
+  inset:0;
+  background-image:
+    radial-gradient(circle at 18% 14%,#fff 0 2px,transparent 3px),
+    radial-gradient(circle at 36% 25%,#aaa 0 2px,transparent 3px),
+    radial-gradient(circle at 55% 16%,#fff 0 2px,transparent 3px),
+    radial-gradient(circle at 72% 30%,#aaa 0 2px,transparent 3px),
+    radial-gradient(circle at 87% 18%,#fff 0 2px,transparent 3px),
+    radial-gradient(circle at 20% 58%,#aaa 0 2px,transparent 3px),
+    radial-gradient(circle at 68% 62%,#fff 0 2px,transparent 3px),
+    radial-gradient(circle at 84% 72%,#aaa 0 2px,transparent 3px);
 }
-.multiplier-display{
+
+.multiplier{
   position:absolute;
-  z-index:6;
+  z-index:8;
   left:50%;
   top:42%;
   transform:translate(-50%,-50%);
-  white-space:nowrap;
-  font-size:clamp(45px,13vw,82px);
+  font-size:clamp(55px,12vw,95px);
   line-height:1;
   font-weight:900;
-  font-variant-numeric:tabular-nums;
+  letter-spacing:-4px;
   color:#fff;
   text-shadow:
-    0 0 12px #fff,
-    0 0 35px #8e7bff,
-    0 0 65px #654eff77;
-  pointer-events:none;
+    0 0 10px #fff,
+    0 0 30px rgba(118,92,255,.9),
+    0 0 60px rgba(118,92,255,.55);
 }
-.multiplier-display.hot{
-  animation:multiPulse .35s ease infinite alternate;
-}
-@keyframes multiPulse{
-  to{
-    transform:translate(-50%,-50%) scale(1.035);
-  }
-}
-.flight-path{
+
+.flight-line{
   position:absolute;
-  z-index:2;
-  left:7%;
-  bottom:13%;
-  width:86%;
-  height:74%;
-  pointer-events:none;
+  left:4%;
+  bottom:11%;
+  width:88%;
+  height:3px;
+  transform:rotate(-35deg);
+  transform-origin:left center;
+  background:repeating-linear-gradient(
+    90deg,
+    rgba(118,92,255,.8) 0 30px,
+    transparent 30px 52px
+  );
+  opacity:.55;
 }
-.flight-path svg{
-  width:100%;
-  height:100%;
-  overflow:visible;
-}
-.path-glow{
-  fill:none;
-  stroke:#694dff;
-  stroke-width:4;
-  opacity:.14;
-  filter:blur(7px);
-}
-.path-line{
-  fill:none;
-  stroke:url(#pathGradient);
-  stroke-width:2;
-  stroke-dasharray:8 9;
-  opacity:0;
-  transition:opacity .2s;
-}
-.path-line.active{
-  opacity:.85;
-  animation:pathDash .45s linear infinite;
-}
-@keyframes pathDash{
-  to{
-    stroke-dashoffset:-34;
-  }
-}
-/* ================= ROCKET ================= */
+
 .rocket{
   position:absolute;
-  z-index:8;
-  left:5%;
+  z-index:7;
+  left:8%;
   bottom:8%;
-  width:104px;
-  height:92px;
-  pointer-events:none;
-  will-change:transform;
-  transform-origin:50% 50%;
+  font-size:68px;
+  filter:drop-shadow(0 0 15px rgba(0,200,255,.8));
+  transform:rotate(-35deg);
 }
-.rocket-inner{
-  position:absolute;
-  inset:0;
-  transform:rotate(-30deg);
+
+.rocket.fly{
+  animation:rocketFly 3s linear forwards;
 }
-.rocket-body{
-  position:absolute;
-  left:29px;
-  top:26px;
-  width:61px;
-  height:31px;
-  border-radius:58% 52% 50% 58%;
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #d8edff 28%,
-      #78b8ed 55%,
-      #376a9e 72%,
-      #d9edff 100%
-    );
-  box-shadow:
-    0 0 14px #54cfff,
-    0 0 32px #168cff44,
-    inset 0 -5px 7px #193f6b;
-}
-.rocket-nose{
-  position:absolute;
-  right:-17px;
-  top:0;
-  width:0;
-  height:0;
-  border-top:16px solid transparent;
-  border-bottom:16px solid transparent;
-  border-left:22px solid #eaf7ff;
-  filter:drop-shadow(0 0 5px #8be8ff);
-}
-.rocket-window{
-  position:absolute;
-  right:12px;
-  top:6px;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  border:3px solid #f1fbff;
-  background:
-    radial-gradient(
-      circle at 32% 28%,
-      #c8ffff 0 8%,
-      #39cce8 18%,
-      #123967 68%
-    );
-  box-shadow:0 0 9px #58edff;
-}
-.rocket-fin{
-  position:absolute;
-  width:25px;
-  height:27px;
-  background:linear-gradient(135deg,#ffdd22,#ff6a1f);
-  clip-path:polygon(0 0,100% 15%,55% 100%,15% 65%);
-}
-.rocket-fin.bottom{
-  left:35px;
-  top:45px;
-  transform:rotate(12deg);
-}
-.rocket-fin.top{
-  left:35px;
-  top:11px;
-  transform:rotate(190deg);
-}
-.rocket-flame{
-  position:absolute;
-  left:-18px;
-  top:31px;
-  width:43px;
-  height:17px;
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #ff3518 30%,
-      #ff9e19 68%,
-      #fff 100%
-    );
-  clip-path:polygon(
-    0 50%,
-    32% 4%,
-    100% 50%,
-    32% 96%
-  );
-  filter:
-    drop-shadow(0 0 5px #ff4c18)
-    drop-shadow(0 0 14px #ff7c18);
-  animation:flame .09s ease-in-out infinite alternate;
-}
-.rocket-flame2{
-  position:absolute;
-  left:-38px;
-  top:34px;
-  width:38px;
-  height:10px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    #ff3518,
-    #ffb72a
-  );
-  clip-path:polygon(
-    0 50%,
-    100% 0,
-    75% 50%,
-    100% 100%
-  );
-  filter:blur(1px);
-}
-@keyframes flame{
-  from{
-    transform:scaleX(.78) scaleY(.9)
+
+@keyframes rocketFly{
+  0%{
+    left:8%;
+    bottom:8%;
+    transform:rotate(-35deg) scale(1);
   }
-  to{
-    transform:scaleX(1.18) scaleY(1.25)
+  100%{
+    left:78%;
+    bottom:72%;
+    transform:rotate(-35deg) scale(1.15);
   }
 }
-.rocket-trail{
-  position:absolute;
-  left:-70px;
-  top:39px;
-  width:72px;
-  height:13px;
-  border-radius:50%;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    #ff401955,
-    #ffab2466
-  );
-  filter:blur(8px);
-}
-.rocket.flying .rocket-inner{
-  animation:rocketTilt .7s ease-in-out infinite alternate;
-}
-@keyframes rocketTilt{
-  from{transform:rotate(-29deg)}
-  to{transform:rotate(-33deg)}
-}
+
 .explosion{
   position:absolute;
-  z-index:15;
+  z-index:9;
   left:50%;
   top:50%;
-  transform:translate(-50%,-50%) scale(.1);
+  transform:translate(-50%,-50%) scale(.2);
   opacity:0;
-  font-size:70px;
-  pointer-events:none;
+  font-size:110px;
 }
-.explosion.active{
-  animation:boom .75s ease-out forwards;
+
+.explosion.show{
+  animation:explode .65s ease forwards;
 }
-@keyframes boom{
+
+@keyframes explode{
   0%{
-    opacity:1;
+    opacity:0;
     transform:translate(-50%,-50%) scale(.2);
   }
-  35%{
+  45%{
     opacity:1;
-    transform:translate(-50%,-50%) scale(1.25);
-    filter:brightness(2);
+    transform:translate(-50%,-50%) scale(1.2);
   }
   100%{
     opacity:0;
-    transform:translate(-50%,-50%) scale(2.8);
-    filter:blur(10px);
+    transform:translate(-50%,-50%) scale(1.8);
   }
 }
-.crashed{
-  animation:crashedRocket .55s ease-out forwards;
-}
-@keyframes crashedRocket{
-  0%{opacity:1}
-  100%{
-    opacity:0;
-    transform:scale(1.7) rotate(25deg);
-  }
-}
-/* ================= STATUS ================= */
-.result-msg{
-  min-height:30px;
-  margin-top:17px;
+
+.crash-status{
+  min-height:65px;
   text-align:center;
-  font-size:14px;
-  font-weight:800;
-  line-height:1.65;
+  display:grid;
+  place-items:center;
+  margin-bottom:10px;
 }
-.win{
-  color:var(--green);
-  text-shadow:0 0 15px #00f5a033;
-}
-.lose{
-  color:var(--red);
-}
-.jackpot{
-  color:var(--gold);
-}
-.note{
-  margin-top:14px;
-  color:#777582;
-  text-align:center;
-  font-size:11px;
-  line-height:1.7;
-}
-/* ================= LEADERBOARD ================= */
+
+/* LEADERBOARD */
+
 .leaderboard{
-  list-style:none;
-}
-.leaderboard li{
   display:flex;
-  justify-content:space-between;
+  flex-direction:column;
+  gap:8px;
+  margin-top:17px;
+}
+
+.leader{
+  display:grid;
+  grid-template-columns:45px 1fr auto;
+  align-items:center;
   gap:10px;
-  padding:15px 0;
-  border-bottom:1px solid #ffffff0d;
-  color:#d8d6df;
-  font-size:13px;
+  padding:13px;
+  background:#0b0b12;
+  border:1px solid rgba(255,255,255,.045);
+  border-radius:14px;
 }
-.leaderboard li:last-child{
-  border-bottom:0;
-}
+
 .rank{
-  margin-right:8px;
-  color:var(--gold);
+  font-size:18px;
   font-weight:900;
-}
-.score{
-  color:var(--gold);
-  font-weight:800;
-  text-align:right;
-}
-footer{
-  padding:22px 10px;
-  color:#656371;
+  color:#777787;
   text-align:center;
+}
+
+.leader:nth-child(1) .rank{
+  color:#ffd21c;
+}
+
+.leader:nth-child(2) .rank{
+  color:#c6c8d0;
+}
+
+.leader:nth-child(3) .rank{
+  color:#c78c5a;
+}
+
+.leader-name{
+  font-size:12px;
+  font-weight:700;
+}
+
+.leader-balance{
+  color:var(--gold);
+  font-size:12px;
+  font-weight:800;
+}
+
+/* FOOTER */
+
+footer{
+  max-width:1050px;
+  margin:auto;
+  padding:0 18px 35px;
+  text-align:center;
+  color:#555563;
   font-size:10px;
   line-height:1.8;
 }
-/* ================= MOBILE ================= */
-@media(max-width:500px){
-  header{
-    padding-top:24px;
+
+.demo-warning{
+  color:#767684;
+  margin-top:8px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  z-index:100;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  padding:13px 18px;
+  border-radius:14px;
+  background:#191923;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 15px 40px rgba(0,0,0,.45);
+  font-size:12px;
+  font-weight:700;
+  transition:.25s;
+  white-space:nowrap;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+.toast.error{
+  border-color:rgba(255,49,93,.35);
+  color:#ff718c;
+}
+
+.toast.success{
+  border-color:rgba(0,245,160,.3);
+  color:var(--green);
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+  .header-inner{
+    min-height:65px;
+    padding:10px 14px;
   }
-  main{
-    padding-left:13px;
-    padding-right:13px;
+
+  .logo-icon{
+    width:36px;
+    height:36px;
+    font-size:18px;
   }
-  .card{
-    padding:18px;
-    border-radius:22px;
+
+  .logo-title{
+    font-size:13px;
   }
-  .row{
-    gap:8px;
+
+  .logo-sub{
+    font-size:7px;
   }
-  .row button{
-    padding-left:8px;
-    padding-right:8px;
+
+  .balance-box{
+    padding:7px 9px;
+  }
+
+  .balance-value{
     font-size:12px;
   }
-  .tab-btn{
-    min-height:60px;
-    font-size:14px;
+
+  main{
+    padding:15px 12px 45px;
   }
-  .space-window{
-    height:390px;
-  }
-  .rocket{
-    width:96px;
-    height:86px;
-  }
-  .multiplier-display{
-    top:39%;
-  }
-}
-@media(max-width:360px){
+
   .card{
-    padding:15px;
+    padding:17px;
+    border-radius:20px;
   }
-  .slot-window{
-    gap:5px;
-    padding:10px 5px;
+
+  .auth-grid{
+    grid-template-columns:1fr;
   }
+
+  .auth-buttons{
+    flex-direction:column;
+  }
+
+  .profile{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .crash-window{
+    height:570px;
+  }
+
+  .game-controls{
+    grid-template-columns:1fr;
+  }
+
+  .slot-machine{
+    gap:7px;
+    padding:10px;
+  }
+
   .reel{
-    font-size:39px;
+    height:92px;
+    font-size:40px;
   }
-  .space-window{
-    height:360px;
+
+  .limit-main{
+    font-size:25px;
+  }
+
+  .multiplier{
+    font-size:62px;
+  }
+
+  .rocket{
+    font-size:55px;
   }
 }
 </style>
 </head>
+
 <body>
+
 <header>
-  <div class="logo">
-    ♛ ROYAL GOLD ♛
-  </div>
-  <div class="subtitle">
-    PREMIUM VIRTUAL CASINO
-  </div>
-</header>
-<main>
-<!-- ================= AUTH ================= -->
-<section class="card" id="authCard">
-  <h2>👤 Вход в клуб</h2>
-  <div id="authForm">
-    <label>Никнейм</label>
-    <input
-      id="nick"
-      type="text"
-      minlength="3"
-      maxlength="15"
-      autocomplete="username"
-      placeholder="Твой ник"
-    >
-    <label>Пароль</label>
-    <input
-      id="password"
-      type="password"
-      minlength="8"
-      autocomplete="current-password"
-      placeholder="Минимум 8 символов"
-    >
-    <div class="row">
-      <button
-        class="primary"
-        onclick="account('login')"
-      >
-        Войти
-      </button>
-      <button
-        class="secondary"
-        onclick="account('register')"
-      >
-        Регистрация
-      </button>
-    </div>
-  </div>
-  <div id="profile" class="hidden">
-    <div
-      class="profile-name"
-      id="playerName"
-    ></div>
-    <div class="balance-caption">
-      ТВОЙ ВИРТУАЛЬНЫЙ БАЛАНС
-    </div>
-    <div class="balance">
-      <span id="balance">
-        0
-      </span>
-      <small>
-        ₽
-      </small>
-    </div>
-    <button
-      class="secondary"
-      style="width:100%"
-      onclick="logout()"
-    >
-      Выйти из аккаунта
-    </button>
-  </div>
-</section>
-<!-- ================= TABS ================= -->
-<div
-  class="tabs hidden"
-  id="gameTabs"
->
-  <button
-    class="tab-btn active"
-    id="tabSlots"
-    onclick="switchGame('slots')"
-  >
-    🎰 Слоты
-  </button>
-  <button
-    class="tab-btn"
-    id="tabCrash"
-    onclick="switchGame('crash')"
-  >
-    🚀 Ракетка
-  </button>
-</div>
-<!-- ================= SLOTS ================= -->
-<section
-  class="card hidden"
-  id="gameSlots"
->
-  <h2>
-    🎰 GOLDEN SLOTS
-  </h2>
-  <p class="description">
-    Три барабана, редкие комбинации и виртуальные выигрыши.
-    Максимальная ставка — 50 000 ₽.
-  </p>
-  <div class="slot-window">
-    <div
-      class="reel"
-      id="r1"
-    >
-      💎
-    </div>
-    <div
-      class="reel"
-      id="r2"
-    >
-      7️⃣
-    </div>
-    <div
-      class="reel"
-      id="r3"
-    >
-      💎
-    </div>
-  </div>
-  <div class="bet-limit">
-    <div class="bet-limit-title">
-      МАКСИМАЛЬНАЯ СТАВКА
-    </div>
-    <div class="bet-limit-value">
-      50 000 ₽
-    </div>
-    <div class="bet-limit-note">
-      Максимальная ставка за один раунд
-    </div>
-  </div>
-  <label>
-    Твоя ставка
-  </label>
-  <input
-    id="stakeSlots"
-    type="number"
-    min="50"
-    max="50000"
-    step="1"
-    value="50"
-    inputmode="numeric"
-  >
-  <button
-    class="primary"
-    id="playSlotsBtn"
-    onclick="playSlots()"
-    style="width:100%;margin-top:16px"
-  >
-    🎰 ВРАЩАТЬ БАРАБАНЫ
-  </button>
-  <div
-    class="result-msg"
-    id="msgSlots"
-  ></div>
-</section>
-<!-- ================= CRASH ================= -->
-<section
-  class="card hidden"
-  id="gameCrash"
->
-  <h2>
-    🚀 КОСМИЧЕСКАЯ РАКЕТКА
-  </h2>
-  <p class="description">
-    Запускай ракету и следи за коэффициентом.
-    Успей забрать виртуальный выигрыш до взрыва.
-  </p>
-  <div
-    class="space-window"
-    id="spaceWindow"
-  >
-    <div class="space-grid"></div>
-    <div class="stars"></div>
-    <div class="stars2"></div>
-    <div class="space-glow"></div>
-    <div class="flight-path">
-      <svg
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient
-            id="pathGradient"
-            x1="0%"
-            y1="100%"
-            x2="100%"
-            y2="0%"
-          >
-            <stop
-              offset="0%"
-              stop-color="#5e3dff"
-            />
-            <stop
-              offset="50%"
-              stop-color="#8e75ff"
-            />
-            <stop
-              offset="100%"
-              stop-color="#49d9ff"
-            />
-          </linearGradient>
-        </defs>
-        <path
-          class="path-glow"
-          d="M 2 94 Q 28 88 48 60 T 98 3"
-        />
-        <path
-          id="flightPathLine"
-          class="path-line"
-          d="M 2 94 Q 28 88 48 60 T 98 3"
-        />
-      </svg>
-    </div>
-    <div
-      class="multiplier-display"
-      id="crashMulti"
-    >
-      x1.00
-    </div>
-    <div
-      class="rocket"
-      id="rocketContainer"
-    >
-      <div class="rocket-inner">
-        <div class="rocket-trail"></div>
-        <div class="rocket-flame2"></div>
-        <div class="rocket-flame"></div>
-        <div class="rocket-fin top"></div>
-        <div class="rocket-fin bottom"></div>
-        <div class="rocket-body">
-          <div class="rocket-window"></div>
-          <div class="rocket-nose"></div>
-        </div>
+  <div class="header-inner">
+
+    <div class="logo">
+      <div class="logo-icon">👑</div>
+      <div>
+        <div class="logo-title">ROYAL GOLD</div>
+        <div class="logo-sub">VIRTUAL GAMES</div>
       </div>
     </div>
-    <div
-      class="explosion"
-      id="explosion"
-    >
-      💥
+
+    <div class="balance-box">
+      <div class="balance-label">Баланс</div>
+      <div class="balance-value" id="headerBalance">0 ₽</div>
     </div>
+
   </div>
-  <div class="bet-limit">
-    <div class="bet-limit-title">
-      МАКСИМАЛЬНАЯ СТАВКА
+</header>
+
+<main>
+
+  <!-- AUTH -->
+
+  <section class="card" id="authCard">
+
+    <div class="card-title">Добро пожаловать 👑</div>
+    <div class="card-subtitle">
+      Создай профиль и играй в демо-режиме на виртуальные очки.
     </div>
-    <div class="bet-limit-value">
-      50 000 ₽
+
+    <div id="authForm">
+
+      <div class="auth-grid">
+
+        <div class="field">
+          <label>НИКНЕЙМ</label>
+          <input
+            id="nickname"
+            type="text"
+            maxlength="20"
+            placeholder="Например: RoyalPlayer"
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="field">
+          <label>ПАРОЛЬ</label>
+          <input
+            id="password"
+            type="password"
+            maxlength="30"
+            placeholder="Введите пароль"
+          >
+        </div>
+
+      </div>
+
+      <div class="auth-buttons">
+        <button class="btn btn-primary" onclick="login()">Войти</button>
+        <button class="btn btn-secondary" onclick="register()">Регистрация</button>
+      </div>
+
     </div>
-    <div class="bet-limit-note">
-      Максимальная ставка за один раунд
+
+    <div id="profileBlock" class="hidden">
+
+      <div class="profile">
+
+        <div>
+          <div class="profile-name" id="profileName">Игрок</div>
+          <div class="profile-small">
+            Демо-профиль • виртуальный баланс
+          </div>
+        </div>
+
+        <button class="btn btn-danger" onclick="logout()">Выйти</button>
+
+      </div>
+
     </div>
+
+  </section>
+
+
+  <!-- GAMES -->
+
+  <section class="card">
+
+    <div class="tabs">
+
+      <button
+        class="tab active"
+        id="slotsTab"
+        onclick="switchGame('slots')"
+      >
+        🎰 Слоты
+      </button>
+
+      <button
+        class="tab"
+        id="crashTab"
+        onclick="switchGame('crash')"
+      >
+        🚀 Ракетка
+      </button>
+
+    </div>
+
+
+    <!-- SLOTS -->
+
+    <div id="slotsGame">
+
+      <div class="card-title">ROYAL SLOTS</div>
+
+      <div class="card-subtitle">
+        Собери комбинацию и получи виртуальный выигрыш.
+      </div>
+
+      <div class="limit-box">
+
+        <div class="limit-head">
+          Максимальная ставка
+        </div>
+
+        <div class="limit-main">
+          50 000 ₽
+        </div>
+
+        <div class="limit-sub">
+          Максимальная ставка за один раунд
+        </div>
+
+        <div class="limit-row">
+
+          <div class="limit-mini">
+            <span>Минимальная ставка</span>
+            <strong>50 ₽</strong>
+          </div>
+
+          <div class="limit-mini">
+            <span>Макс. чистый выигрыш</span>
+            <strong>+30 000 ₽</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="slot-machine">
+
+        <div class="reel" id="reel1">🍒</div>
+        <div class="reel" id="reel2">💎</div>
+        <div class="reel" id="reel3">7️⃣</div>
+
+      </div>
+
+      <div class="game-result" id="slotsResult">
+        Сделай ставку и запусти вращение.
+      </div>
+
+      <div class="game-controls">
+
+        <div>
+          <div class="input-label">Твоя ставка</div>
+
+          <input
+            class="stake-input"
+            id="slotsStake"
+            type="number"
+            min="50"
+            max="50000"
+            step="50"
+            value="50"
+            inputmode="numeric"
+          >
+        </div>
+
+        <div style="display:flex;align-items:end">
+
+          <button
+            class="action-btn"
+            id="slotsButton"
+            onclick="playSlots()"
+          >
+            🎰 КРУТИТЬ
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="small-note">
+        Выигрыш масштабируется от размера ставки. Максимальный чистый
+        выигрыш за раунд — 30 000 ₽.
+      </div>
+
+    </div>
+
+
+    <!-- CRASH -->
+
+    <div id="crashGame" class="hidden">
+
+      <div class="card-title">ROCKET CRASH</div>
+
+      <div class="card-subtitle">
+        Запусти ракету и забери виртуальный выигрыш до взрыва.
+      </div>
+
+      <div class="crash-window" id="crashWindow">
+
+        <div class="crash-grid"></div>
+        <div class="stars"></div>
+
+        <div class="flight-line"></div>
+
+        <div class="multiplier" id="crashMultiplier">
+          x1.00
+        </div>
+
+        <div class="rocket" id="rocket">
+          🚀
+        </div>
+
+        <div class="explosion" id="explosion">
+          💥
+        </div>
+
+      </div>
+
+
+      <div class="limit-box">
+
+        <div class="limit-head">
+          Максимальная ставка
+        </div>
+
+        <div class="limit-main">
+          50 000 ₽
+        </div>
+
+        <div class="limit-sub">
+          Максимальная ставка за один раунд
+        </div>
+
+        <div class="limit-row">
+
+          <div class="limit-mini">
+            <span>Минимальная ставка</span>
+            <strong>50 ₽</strong>
+          </div>
+
+          <div class="limit-mini">
+            <span>Макс. чистый выигрыш</span>
+            <strong>+30 000 ₽</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="crash-status" id="crashStatus">
+        <span style="color:#777787">
+          Сделай ставку и запусти ракету.
+        </span>
+      </div>
+
+
+      <div class="game-controls">
+
+        <div>
+          <div class="input-label">Твоя ставка</div>
+
+          <input
+            class="stake-input"
+            id="crashStake"
+            type="number"
+            min="50"
+            max="50000"
+            step="50"
+            value="50"
+            inputmode="numeric"
+          >
+        </div>
+
+        <div style="display:flex;align-items:end">
+
+          <button
+            class="action-btn"
+            id="crashButton"
+            onclick="startCrash()"
+          >
+            🚀 ЗАПУСТИТЬ РАКЕТУ
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="small-note">
+        Чем больше ставка — тем больше возможный выигрыш.
+        Максимальный чистый выигрыш ограничен +30 000 ₽.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- LEADERBOARD -->
+
+  <section class="card">
+
+    <div class="card-title">🏆 Таблица игроков</div>
+
+    <div class="card-subtitle">
+      Топ виртуальных балансов.
+    </div>
+
+    <div class="leaderboard" id="leaderboard"></div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div>
+    ROYAL GOLD — VIRTUAL GAMES
   </div>
-  <label>
-    Твоя ставка
-  </label>
-  <input
-    id="stakeCrash"
-    type="number"
-    min="50"
-    max="50000"
-    step="1"
-    value="50"
-    inputmode="numeric"
-  >
-  <button
-    class="danger"
-    id="playCrashBtn"
-    onclick="startCrash()"
-    style="width:100%;margin-top:16px"
-  >
-    🚀 ЗАПУСТИТЬ РАКЕТУ
-  </button>
-  <button
-    class="success hidden"
-    id="cashoutBtn"
-    onclick="cashout()"
-    style="width:100%;margin-top:16px"
-  >
-    ЗАБРАТЬ ВЫИГРЫШ
-  </button>
-  <div
-    class="result-msg"
-    id="msgCrash"
-  ></div>
-  <div class="note">
-    Демо-игра на виртуальные очки.
-    Баланс не имеет денежной стоимости.
+
+  <div class="demo-warning">
+    Демо-игра на виртуальные очки. Баланс не имеет денежной стоимости.
     Пополнение и вывод средств отключены.
   </div>
-</section>
-<!-- ================= LEADERBOARD ================= -->
-<section class="card">
-  <h2>
-    🏆 Зал славы
-  </h2>
-  <p class="description">
-    Локальный рейтинг игроков этого браузера.
-  </p>
-  <ul
-    class="leaderboard"
-    id="leaderboard"
-  >
-    <li>
-      Пока нет игроков.
-    </li>
-  </ul>
-</section>
-<footer>
-  ROYAL GOLD © 2026 · ВИРТУАЛЬНЫЕ ₽ ·
-  ПОПОЛНЕНИЕ И ВЫВОД СРЕДСТВ ОТКЛЮЧЕНЫ
+
 </footer>
-</main>
+
+
+<div class="toast" id="toast"></div>
+
+
 <script>
-"use strict";
+
+/* =========================================================
+   НАСТРОЙКИ
+========================================================= */
+
+const MAX_BET = 50000;
+const MIN_BET = 50;
+const MAX_PROFIT = 30000;
+
+/*
+  P = 45% — заданный базовый параметр.
+
+  Чтобы получить примерно 57–58% проигрышных раундов,
+  фактическая вероятность выигрыша выставлена около 42.5%.
+
+  1 - 0.425 = 0.575 = 57.5%
+*/
+const P = 0.45;
+const WIN_RATE = 0.425;
+const LOSS_RATE = 1 - WIN_RATE;
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let user = null;
+
+let slotsBusy = false;
+
+let crashRunning = false;
+let crashCashedOut = false;
+let crashStake = 0;
+let crashMultiplier = 1;
+let crashTarget = 1;
+let crashTimer = null;
+
+
 /* =========================================================
    HELPERS
 ========================================================= */
-const $ = id =>
-  document.getElementById(id);
-const fmt = n =>
-  Math.floor(n).toLocaleString("ru-RU");
-let user = null;
-let isSlotsBusy = false;
-let isCrashRunning = false;
-let crashFrame = null;
-let crashStart = 0;
-let crashMulti = 1;
-let crashTarget = 2;
-let crashStake = 0;
-let crashRunId = 0;
-/* =========================================================
-   LOCAL DATABASE
-========================================================= */
-const db = {
-  getUser(name){
-    try{
-      return JSON.parse(
-        localStorage.getItem(
-          "royal_gold_user_" + name
-        )
-      );
-    }catch(e){
-      return null;
-    }
-  },
-  saveUser(u){
-    localStorage.setItem(
-      "royal_gold_user_" + u.username,
-      JSON.stringify(u)
-    );
-  },
-  getBoard(){
-    const list = [];
-    for(
-      let i=0;
-      i<localStorage.length;
-      i++
-    ){
-      const key =
-        localStorage.key(i);
-      if(
-        key &&
-        key.startsWith(
-          "royal_gold_user_"
-        )
-      ){
-        try{
-          const x =
-            JSON.parse(
-              localStorage.getItem(key)
-            );
-          if(
-            x &&
-            typeof x.balance === "number"
-          ){
-            list.push(x);
-          }
-        }catch(e){}
-      }
-    }
-    return list
-      .sort(
-        (a,b)=>
-          b.balance-a.balance
-      )
-      .slice(0,10);
-  }
-};
-/* =========================================================
-   UI
-========================================================= */
-function showUser(u){
-  user = u;
-  $("authForm")
-    .classList.toggle(
-      "hidden",
-      !!u
-    );
-  $("profile")
-    .classList.toggle(
-      "hidden",
-      !u
-    );
-  $("gameTabs")
-    .classList.toggle(
-      "hidden",
-      !u
-    );
-  if(u){
-    $("playerName")
-      .textContent =
-      u.username;
-    updateUI();
-    switchGame("slots");
-  }else{
-    $("gameSlots")
-      .classList.add(
-        "hidden"
-      );
-    $("gameCrash")
-      .classList.add(
-        "hidden"
-      );
-  }
-  loadBoard();
+
+const $ = id => document.getElementById(id);
+
+function fmt(value){
+  return Math.round(value).toLocaleString('ru-RU');
 }
-function updateUI(){
+
+function showToast(text, type = ''){
+  const toast = $('toast');
+
+  toast.textContent = text;
+  toast.className = 'toast show ' + type;
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer = setTimeout(() => {
+    toast.className = 'toast';
+  }, 2300);
+}
+
+function randomInt(min,max){
+  return Math.floor(
+    Math.random() * (max - min + 1)
+  ) + min;
+}
+
+
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
+
+function userKey(nickname){
+  return 'royal_gold_user_' + nickname.toLowerCase();
+}
+
+function saveUser(){
   if(!user) return;
-  $("balance")
-    .textContent =
-    fmt(user.balance);
-  $("playSlotsBtn")
-    .disabled =
-    isSlotsBusy ||
-    isCrashRunning;
-  $("playCrashBtn")
-    .disabled =
-    isCrashRunning ||
-    isSlotsBusy;
+
+  localStorage.setItem(
+    userKey(user.nickname),
+    JSON.stringify(user)
+  );
 }
+
+function loadUser(nickname){
+
+  const raw = localStorage.getItem(
+    userKey(nickname)
+  );
+
+  if(!raw) return null;
+
+  try{
+    return JSON.parse(raw);
+  }catch{
+    return null;
+  }
+}
+
+
 /* =========================================================
    AUTH
 ========================================================= */
-function account(mode){
-  const name =
-    $("nick")
-      .value
-      .trim();
-  const pass =
-    $("password")
-      .value;
-  if(name.length < 3){
-    alert(
-      "Никнейм должен содержать минимум 3 символа."
-    );
+
+function register(){
+
+  const nickname = $('nickname').value.trim();
+  const password = $('password').value;
+
+  if(nickname.length < 3){
+    showToast('Никнейм минимум 3 символа', 'error');
     return;
   }
-  if(pass.length < 8){
-    alert(
-      "Пароль должен содержать минимум 8 символов."
-    );
+
+  if(password.length < 3){
+    showToast('Пароль минимум 3 символа', 'error');
     return;
   }
-  let existing =
-    db.getUser(name);
-  if(mode === "register"){
-    if(existing){
-      alert(
-        "Такой ник уже зарегистрирован."
-      );
-      return;
-    }
-    existing = {
-      username:name,
-      password:pass,
-      balance:10000
-    };
-    db.saveUser(existing);
-  }else{
-    if(
-      !existing ||
-      existing.password !== pass
-    ){
-      alert(
-        "Неверный ник или пароль."
-      );
-      return;
-    }
+
+  if(loadUser(nickname)){
+    showToast('Такой игрок уже существует', 'error');
+    return;
   }
-  $("password")
-    .value = "";
-  showUser(existing);
+
+  user = {
+    nickname,
+    password,
+    balance: 100000,
+    createdAt: Date.now()
+  };
+
+  saveUser();
+
+  showUser();
+
+  showToast(
+    'Профиль создан. Стартовый баланс 100 000 ₽',
+    'success'
+  );
 }
+
+function login(){
+
+  const nickname = $('nickname').value.trim();
+  const password = $('password').value;
+
+  if(!nickname || !password){
+    showToast('Заполни никнейм и пароль', 'error');
+    return;
+  }
+
+  const found = loadUser(nickname);
+
+  if(!found){
+    showToast('Пользователь не найден', 'error');
+    return;
+  }
+
+  if(found.password !== password){
+    showToast('Неверный пароль', 'error');
+    return;
+  }
+
+  user = found;
+
+  showUser();
+
+  showToast('Вход выполнен', 'success');
+}
+
 function logout(){
-  if(isCrashRunning){
-    alert(
-      "Сначала заверши раунд ракетки."
-    );
-    return;
-  }
-  if(isSlotsBusy){
-    alert(
-      "Дождись окончания вращения."
-    );
-    return;
-  }
-  showUser(null);
+
+  user = null;
+
+  showUser();
+
+  resetCrash();
+
+  showToast('Ты вышел из профиля');
 }
+
+function showUser(){
+
+  const authForm = $('authForm');
+  const profileBlock = $('profileBlock');
+
+  if(user){
+
+    authForm.classList.add('hidden');
+    profileBlock.classList.remove('hidden');
+
+    $('profileName').textContent =
+      user.nickname;
+
+  }else{
+
+    authForm.classList.remove('hidden');
+    profileBlock.classList.add('hidden');
+
+  }
+
+  updateUI();
+}
+
+
 /* =========================================================
-   TABS
+   UI
 ========================================================= */
-function switchGame(game){
-  if(
-    isCrashRunning ||
-    isSlotsBusy
-  ){
-    return;
-  }
-  $("gameSlots")
-    .classList.toggle(
-      "hidden",
-      game !== "slots"
-    );
-  $("gameCrash")
-    .classList.toggle(
-      "hidden",
-      game !== "crash"
-    );
-  $("tabSlots")
-    .classList.toggle(
-      "active",
-      game === "slots"
-    );
-  $("tabCrash")
-    .classList.toggle(
-      "active",
-      game === "crash"
-    );
+
+function updateUI(){
+
+  $('headerBalance').textContent =
+    user ? fmt(user.balance) + ' ₽' : '0 ₽';
+
+  updateLeaderboard();
 }
+
+
 /* =========================================================
    STAKE
 ========================================================= */
+
 function getStake(id){
-  if(!user) return null;
-  const raw =
-    $(id)
-      .value
-      .trim();
-  if(raw === ""){
-    alert(
-      "Введи сумму ставки."
+
+  if(!user){
+    showToast('Сначала войди в профиль', 'error');
+    return null;
+  }
+
+  const input = $(id);
+
+  let stake = Number(input.value);
+
+  if(!Number.isFinite(stake)){
+    showToast('Введи корректную ставку', 'error');
+    return null;
+  }
+
+  stake = Math.floor(stake);
+
+  if(stake < MIN_BET){
+    showToast(
+      `Минимальная ставка — ${fmt(MIN_BET)} ₽`,
+      'error'
     );
     return null;
   }
-  const stake =
-    Number(raw);
-  if(
-    !Number.isSafeInteger(stake) ||
-    stake < 50
-  ){
-    alert(
-      "Минимальная ставка — 50 ₽."
+
+  if(stake > MAX_BET){
+    showToast(
+      `Максимальная ставка — ${fmt(MAX_BET)} ₽`,
+      'error'
     );
     return null;
   }
-  if(stake > 50000){
-    alert(
-      "Максимальная ставка — 50 000 ₽."
-    );
-    $(id).value =
-      50000;
-    return null;
-  }
+
   if(stake > user.balance){
-    alert(
-      "Недостаточно виртуальных средств."
-    );
+    showToast('Недостаточно виртуального баланса', 'error');
     return null;
   }
+
   return stake;
 }
+
+
 /* =========================================================
-   WIN SYSTEM
+   РАСЧЁТ ВЫИГРЫША
 ========================================================= */
+
 /*
-  45% — выигрыш
-  55% — проигрыш
-  Это виртуальная демо-механика.
+  ВАЖНО:
+
+  Выигрыш зависит от ставки.
+
+  50 ₽:
+    +15 ... +30 ₽
+
+  500 ₽:
+    +150 ... +300 ₽
+
+  1 000 ₽:
+    +300 ... +600 ₽
+
+  5 000 ₽:
+    +1500 ... +3000 ₽
+
+  10 000 ₽:
+    +3000 ... +6000 ₽
+
+  50 000 ₽:
+    +15000 ... +30000 ₽
+
+  Таким образом маленькая ставка никогда не получает
+  случайно +2000 или +3000 ₽.
 */
-function getWinChance(){
-  return 0.45;
-}
-/*
-  Расчёт чистой прибыли.
-  До 4 000 ₽:
-  прибыль 2 000–4 000 ₽.
-  После 4 000 ₽:
-  прибыль примерно 60% от ставки.
-  Максимум:
-  +30 000 ₽.
-*/
-function getMaxProfit(stake){
-  if(stake <= 4000){
-    return Math.min(
-      4000,
-      2000 +
-      Math.floor(
-        Math.random() * 2001
-      )
-    );
+
+function getWinProfit(stake, jackpot = false){
+
+  const maxProfit = Math.min(
+    MAX_PROFIT,
+    Math.floor(stake * 0.60)
+  );
+
+  if(maxProfit <= 0){
+    return 0;
   }
-  return Math.min(
-    30000,
-    Math.max(
-      4000,
-      Math.floor(
-        stake * 0.60
-      )
-    )
+
+  /*
+    777 — редкий максимальный выигрыш.
+  */
+  if(jackpot){
+    return maxProfit;
+  }
+
+  const minProfit = Math.max(
+    1,
+    Math.floor(stake * 0.30)
+  );
+
+  return randomInt(
+    minProfit,
+    maxProfit
   );
 }
+
+
 /* =========================================================
-   SLOTS
+   СЛОТЫ
 ========================================================= */
+
+const symbols = [
+  '🍒',
+  '🔔',
+  '💎',
+  '🍋',
+  '⭐',
+  '7️⃣'
+];
+
 function playSlots(){
-  if(
-    !user ||
-    isSlotsBusy ||
-    isCrashRunning
-  ){
+
+  if(slotsBusy){
     return;
   }
-  const stake =
-    getStake(
-      "stakeSlots"
-    );
-  if(stake === null)
+
+  const stake = getStake('slotsStake');
+
+  if(stake === null){
     return;
-  isSlotsBusy = true;
-  user.balance -=
-    stake;
-  db.saveUser(user);
+  }
+
+  slotsBusy = true;
+
+  $('slotsButton').disabled = true;
+
+  user.balance -= stake;
+
+  saveUser();
   updateUI();
+
   const reels = [
-    $("r1"),
-    $("r2"),
-    $("r3")
+    $('reel1'),
+    $('reel2'),
+    $('reel3')
   ];
-  const symbols = [
-    "🍒",
-    "🍋",
-    "🔔",
-    "💎",
-    "7️⃣",
-    "🍀"
-  ];
-  $("msgSlots")
-    .textContent =
-    "🎰 Барабаны вращаются...";
-  $("msgSlots")
-    .className =
-    "result-msg";
-  reels.forEach(r=>{
-    r.classList.remove(
-      "win"
-    );
-    r.classList.add(
-      "spinning"
-    );
+
+  reels.forEach(reel => {
+    reel.classList.add('spinning');
   });
-  const winChance =
-    getWinChance();
-  const roll =
-    Math.random();
-  let result;
-  let payout = 0;
-  let msg = "";
-  let type =
-    "win";
+
+  $('slotsResult').innerHTML =
+    '<span>🎰 Вращение...</span>';
+
+  let ticks = 0;
+
+  const spinInterval = setInterval(() => {
+
+    reels.forEach(reel => {
+
+      reel.textContent =
+        symbols[randomInt(0,symbols.length - 1)];
+
+    });
+
+    ticks++;
+
+    if(ticks >= 20){
+
+      clearInterval(spinInterval);
+
+      finishSlots(stake);
+
+    }
+
+  }, 80);
+}
+
+
+function finishSlots(stake){
+
+  const reels = [
+    $('reel1'),
+    $('reel2'),
+    $('reel3')
+  ];
+
+  reels.forEach(reel => {
+    reel.classList.remove('spinning');
+  });
+
+
   /*
-    =========================
-    55% ПРОИГРЫШ
-    =========================
+    42.5% выигрышных раундов
+    57.5% проигрышных.
   */
-  if(roll >= winChance){
-    result = [
-      symbols[
-        Math.floor(
-          Math.random() *
-          symbols.length
-        )
-      ],
-      symbols[
-        Math.floor(
-          Math.random() *
-          symbols.length
-        )
-      ],
-      symbols[
-        Math.floor(
-          Math.random() *
-          symbols.length
-        )
-      ]
+
+  const isWin =
+    Math.random() < WIN_RATE;
+
+
+  if(!isWin){
+
+    const loseSymbols = [
+      '🍒',
+      '🍋',
+      '⭐',
+      '🔔',
+      '💎'
     ];
+
+    reels[0].textContent =
+      loseSymbols[randomInt(0,loseSymbols.length - 1)];
+
+    reels[1].textContent =
+      loseSymbols[randomInt(0,loseSymbols.length - 1)];
+
+    reels[2].textContent =
+      loseSymbols[randomInt(0,loseSymbols.length - 1)];
+
+    /*
+      Чтобы проигрышная комбинация не выглядела
+      как три одинаковых символа.
+    */
+
+    if(
+      reels[0].textContent === reels[1].textContent &&
+      reels[1].textContent === reels[2].textContent
+    ){
+      reels[2].textContent = '🍋';
+    }
+
+    $('slotsResult').innerHTML = `
+      <div class="loss">
+        ❌ Не повезло. Ставка ${fmt(stake)} ₽ проиграна.
+      </div>
+    `;
+
+    slotsBusy = false;
+    $('slotsButton').disabled = false;
+
+    saveUser();
+    updateUI();
+
+    return;
   }
+
+
   /*
-    =========================
-    45% ВЫИГРЫШ
-    =========================
+    777 очень редкие:
+    1% от выигрышных раундов.
   */
-  else{
-    const winRoll =
-      Math.random();
+
+  const jackpot =
+    Math.random() < 0.01;
+
+
+  if(jackpot){
+
+    reels[0].textContent = '7️⃣';
+    reels[1].textContent = '7️⃣';
+    reels[2].textContent = '7️⃣';
+
     const profit =
-      getMaxProfit(stake);
+      getWinProfit(stake,true);
+
+    const totalReturn =
+      stake + profit;
+
+    user.balance += totalReturn;
+
+    saveUser();
+    updateUI();
+
+    $('slotsResult').innerHTML = `
+      <div class="win">
+        👑 ТРИ СЕМЁРКИ! +${fmt(profit)} ₽
+        <br>
+        <span style="font-size:11px;color:#8c8c9a">
+          Возврат: ${fmt(totalReturn)} ₽
+        </span>
+      </div>
+    `;
+
+  }else{
+
     /*
-      1.5% от выигрышных
-      раундов — 777.
+      Обычная выигрышная комбинация.
     */
-    if(winRoll < 0.015){
-      result = [
-        "7️⃣",
-        "7️⃣",
-        "7️⃣"
-      ];
-      payout =
-        stake +
-        profit;
-      msg =
-        "👑 ДЖЕКПОТ! ТРИ СЕМЁРКИ! " +
-        "Чистый выигрыш: +" +
-        fmt(profit) +
-        " ₽";
-      type =
-        "jackpot";
-    }
-    /*
-      Бриллианты
-    */
-    else if(winRoll < 0.12){
-      result = [
-        "💎",
-        "💎",
-        "💎"
-      ];
-      payout =
-        stake +
-        profit;
-      msg =
-        "💎 ТРИ БРИЛЛИАНТА! " +
-        "Чистый выигрыш: +" +
-        fmt(profit) +
-        " ₽";
-    }
-    /*
-      Вишни
-    */
-    else if(winRoll < 0.35){
-      result = [
-        "🍒",
-        "🍒",
-        "🍒"
-      ];
-      payout =
-        stake +
-        profit;
-      msg =
-        "🍒 ТРИ ВИШНИ! " +
-        "Чистый выигрыш: +" +
-        fmt(profit) +
-        " ₽";
-    }
-    /*
-      Колокольчики
-    */
-    else{
-      result = [
-        "🔔",
-        "🔔",
-        "🔔"
-      ];
-      payout =
-        stake +
-        profit;
-      msg =
-        "🔔 УДАЧНАЯ КОМБИНАЦИЯ! " +
-        "Чистый выигрыш: +" +
-        fmt(profit) +
-        " ₽";
-    }
+
+    const symbol =
+      symbols[randomInt(0,4)];
+
+    reels[0].textContent = symbol;
+    reels[1].textContent = symbol;
+    reels[2].textContent = symbol;
+
+    const profit =
+      getWinProfit(stake,false);
+
+    const totalReturn =
+      stake + profit;
+
+    user.balance += totalReturn;
+
+    saveUser();
+    updateUI();
+
+    $('slotsResult').innerHTML = `
+      <div class="win">
+        🎉 Выигрыш: +${fmt(profit)} ₽
+        <br>
+        <span style="font-size:11px;color:#8c8c9a">
+          Возврат: ${fmt(totalReturn)} ₽
+        </span>
+      </div>
+    `;
   }
-  let count = 0;
-  const timer =
-    setInterval(()=>{
-      reels.forEach(r=>{
-        r.textContent =
-          symbols[
-            Math.floor(
-              Math.random() *
-              symbols.length
-            )
-          ];
-      });
-      count++;
-      if(count >= 20){
-        clearInterval(timer);
-        reels.forEach(
-          (r,i)=>{
-            r.classList.remove(
-              "spinning"
-            );
-            r.textContent =
-              result[i];
-          }
-        );
-        if(payout > 0){
-          user.balance +=
-            payout;
-          db.saveUser(user);
-          $("msgSlots")
-            .textContent =
-            msg;
-          $("msgSlots")
-            .className =
-            "result-msg " +
-            type;
-          reels.forEach(r=>{
-            r.classList.add(
-              "win"
-            );
-            setTimeout(()=>{
-              r.classList.remove(
-                "win"
-              );
-            },700);
-          });
-          if(
-            navigator.vibrate
-          ){
-            navigator.vibrate([
-              70,
-              40,
-              90
-            ]);
-          }
-        }else{
-          $("msgSlots")
-            .textContent =
-            "😔 Не повезло. Попробуй ещё раз.";
-          $("msgSlots")
-            .className =
-            "result-msg lose";
-        }
-        isSlotsBusy =
-          false;
-        updateUI();
-        loadBoard();
-      }
-    },75);
+
+
+  slotsBusy = false;
+  $('slotsButton').disabled = false;
 }
+
+
 /* =========================================================
-   CRASH TARGET
+   CRASH
 ========================================================= */
-function generateCrashTarget(stake){
-  const roll =
-    Math.random();
+
+function generateCrashTarget(){
+
   /*
-    55% — проигрышный раунд.
-    Ракета взрывается раньше.
+    Базово:
+      ~57.5% коротких/неудачных раундов
+      ~42.5% более длинных раундов.
+
+    В crash итог также зависит от того,
+    когда игрок нажал "забрать".
   */
-  if(roll >= 0.45){
+
+  const goodRound =
+    Math.random() < WIN_RATE;
+
+  if(!goodRound){
+
+    /*
+      Короткий раунд.
+    */
+
     return (
-      1.20 +
-      Math.random() * 0.40
+      1.05 +
+      Math.random() * 0.55
     );
+
   }
+
   /*
-    45% — раунд,
-    в котором можно успеть
-    забрать выигрыш.
+    Более длинный раунд.
   */
-  const r =
-    Math.random();
-  return Math.min(
-    4.5,
-    1.65 +
-    Math.pow(
-      r,
-      0.8
-    ) * 2.7
+
+  return (
+    1.60 +
+    Math.pow(Math.random(),0.75) * 3.9
   );
 }
-/* =========================================================
-   START ROCKET
-========================================================= */
-function startCrash(){
-  if(
-    !user ||
-    isCrashRunning ||
-    isSlotsBusy
-  ){
-    return;
-  }
-  const stake =
-    getStake(
-      "stakeCrash"
+
+
+/*
+  Расчёт чистого выигрыша ракеты.
+
+  Например:
+
+  50 ₽ × x1.26
+  = +13 ₽
+
+  5 000 ₽ × x1.50
+  = +2 500 ₽
+
+  50 000 ₽ × x1.60
+  = +30 000 ₽
+
+  Максимум всегда +30 000 ₽.
+*/
+
+function calculateCrashProfit(stake,multiplier){
+
+  const rawProfit =
+    Math.floor(
+      stake * (multiplier - 1)
     );
-  if(stake === null)
-    return;
-  crashStake =
-    stake;
-  user.balance -=
-    stake;
-  db.saveUser(user);
-  updateUI();
-  isCrashRunning =
-    true;
-  crashMulti =
-    1;
-  crashStart =
-    performance.now();
-  const id =
-    ++crashRunId;
-  crashTarget =
-    generateCrashTarget(
-      stake
-    );
-  const rocket =
-    $("rocketContainer");
-  rocket.classList.remove(
-    "crashed"
-  );
-  rocket.classList.add(
-    "flying"
-  );
-  rocket.style.opacity =
-    "1";
-  rocket.style.left =
-    "5%";
-  rocket.style.bottom =
-    "8%";
-  rocket.style.transform =
-    "translate(0,0)";
-  $("explosion")
-    .classList.remove(
-      "active"
-    );
-  $("flightPathLine")
-    .classList.add(
-      "active"
-    );
-  $("crashMulti")
-    .textContent =
-    "x1.00";
-  $("crashMulti")
-    .style.color =
-    "#fff";
-  $("crashMulti")
-    .classList.remove(
-      "hot"
-    );
-  $("playCrashBtn")
-    .classList.add(
-      "hidden"
-    );
-  $("cashoutBtn")
-    .classList.remove(
-      "hidden"
-    );
-  $("cashoutBtn")
-    .disabled =
-    false;
-  $("msgCrash")
-    .textContent =
-    "🚀 Ракета взлетела! Успей забрать выигрыш.";
-  $("msgCrash")
-    .className =
-    "result-msg";
-  animateCrash(
-    crashStart,
-    id
-  );
-}
-/* =========================================================
-   ROCKET ANIMATION
-========================================================= */
-function animateCrash(
-  now,
-  id
-){
-  if(
-    !isCrashRunning ||
-    id !== crashRunId
-  ){
-    return;
-  }
-  const elapsed =
-    (now - crashStart) /
-    1000;
-  crashMulti =
+
+  const maxProfit =
     Math.min(
-      crashTarget,
-      Math.exp(
-        elapsed * 0.30
-      )
+      MAX_PROFIT,
+      Math.floor(stake * 0.60)
     );
-  if(
-    crashMulti >=
-    crashTarget
-  ){
-    crashMulti =
-      crashTarget;
-    $("crashMulti")
-      .textContent =
-      "x" +
-      crashMulti.toFixed(2);
-    explodeCrash();
-    return;
-  }
-  $("crashMulti")
-    .textContent =
-    "x" +
-    crashMulti.toFixed(2);
-  if(crashMulti >= 3){
-    $("crashMulti")
-      .style.color =
-      "#ffd21c";
-    $("crashMulti")
-      .classList.add(
-        "hot"
-      );
-  }
-  else if(crashMulti >= 2){
-    $("crashMulti")
-      .style.color =
-      "#00f5a0";
-  }
-  else{
-    $("crashMulti")
-      .style.color =
-      "#fff";
-  }
-  const duration =
-    Math.max(
-      1,
-      Math.min(
-        8,
-        crashTarget * 0.85
-      )
-    );
-  const progress =
+
+  return Math.max(
+    0,
     Math.min(
-      1,
-      elapsed / duration
-    );
-  const eased =
-    1 -
-    Math.pow(
-      1-progress,
-      2.25
-    );
-  const box =
-    $("spaceWindow");
-  const rocket =
-    $("rocketContainer");
-  const rocketWidth =
-    rocket.offsetWidth ||
-    100;
-  const rocketHeight =
-    rocket.offsetHeight ||
-    90;
-  const startX =
-    box.clientWidth * 0.04;
-  const startY =
-    box.clientHeight * 0.76;
-  const endX =
-    box.clientWidth -
-    rocketWidth * 0.78;
-  const endY =
-    rocketHeight * 0.20;
-  const x =
-    startX +
-    (endX-startX) *
-    eased;
-  const curve =
-    Math.sin(
-      eased * Math.PI
-    ) *
-    box.clientHeight *
-    0.07;
-  const y =
-    startY +
-    (endY-startY) *
-    eased -
-    curve;
-  rocket.style.left =
-    x + "px";
-  rocket.style.bottom =
-    "auto";
-  rocket.style.top =
-    y + "px";
-  const line =
-    $("flightPathLine");
-  line.style.opacity =
-    String(
-      Math.min(
-        .95,
-        .25 + progress
-      )
-    );
-  crashFrame =
-    requestAnimationFrame(
-      t =>
-        animateCrash(
-          t,
-          id
-        )
-    );
-}
-/* =========================================================
-   EXPLOSION
-========================================================= */
-function explodeCrash(){
-  if(!isCrashRunning)
-    return;
-  isCrashRunning =
-    false;
-  if(crashFrame){
-    cancelAnimationFrame(
-      crashFrame
-    );
-    crashFrame =
-      null;
-  }
-  const rocket =
-    $("rocketContainer");
-  rocket.classList.remove(
-    "flying"
-  );
-  rocket.classList.add(
-    "crashed"
-  );
-  const explosion =
-    $("explosion");
-  explosion.classList.remove(
-    "active"
-  );
-  void explosion.offsetWidth;
-  explosion.classList.add(
-    "active"
-  );
-  $("crashMulti")
-    .textContent =
-    "x" +
-    crashTarget.toFixed(2);
-  $("crashMulti")
-    .style.color =
-    "#ff315c";
-  $("msgCrash")
-    .textContent =
-    "💥 Взрыв на x" +
-    crashTarget.toFixed(2) +
-    ". Ставка проиграна.";
-  $("msgCrash")
-    .className =
-    "result-msg lose";
-  $("cashoutBtn")
-    .classList.add(
-      "hidden"
-    );
-  $("flightPathLine")
-    .classList.remove(
-      "active"
-    );
-  if(navigator.vibrate){
-    navigator.vibrate([
-      100,
-      50,
-      160
-    ]);
-  }
-  db.saveUser(user);
-  updateUI();
-  loadBoard();
-  setTimeout(
-    resetCrash,
-    1200
-  );
-}
-/* =========================================================
-   CASHOUT
-========================================================= */
-function cashout(){
-  if(!isCrashRunning)
-    return;
-  isCrashRunning =
-    false;
-  if(crashFrame){
-    cancelAnimationFrame(
-      crashFrame
-    );
-    crashFrame =
-      null;
-  }
-  const multiplier =
-    Math.max(
-      1.05,
-      Math.min(
-        crashMulti,
-        crashTarget
-      )
-    );
-  /*
-    Чистая прибыль.
-    Максимум +30 000 ₽.
-  */
-  const profit =
-    getMaxProfit(
-      crashStake
-    );
-  const payout =
-    crashStake +
-    profit;
-  if(
-    !Number.isSafeInteger(
-      payout
+      rawProfit,
+      maxProfit
     )
-  ){
-    resetCrash();
+  );
+}
+
+
+function startCrash(){
+
+  if(crashRunning){
     return;
   }
-  user.balance +=
-    payout;
-  db.saveUser(user);
-  $("cashoutBtn")
-    .classList.add(
-      "hidden"
-    );
-  $("crashMulti")
-    .style.color =
-    "#00f5a0";
-  $("crashMulti")
-    .classList.remove(
-      "hot"
-    );
-  $("msgCrash")
-    .textContent =
-    "✅ Успешный вывод! " +
-    "Коэффициент x" +
-    multiplier.toFixed(2) +
-    ". Чистый выигрыш: +" +
-    fmt(profit) +
-    " ₽";
-  $("msgCrash")
-    .className =
-    "result-msg win";
-  $("flightPathLine")
-    .classList.remove(
-      "active"
-    );
-  if(navigator.vibrate){
-    navigator.vibrate(70);
+
+  const stake =
+    getStake('crashStake');
+
+  if(stake === null){
+    return;
   }
+
+  crashStake = stake;
+
+  crashRunning = true;
+  crashCashedOut = false;
+
+  crashMultiplier = 1;
+
+  crashTarget =
+    generateCrashTarget();
+
+  user.balance -= stake;
+
+  saveUser();
   updateUI();
-  loadBoard();
-  setTimeout(
-    resetCrash,
-    1100
-  );
+
+
+  $('crashButton').textContent =
+    '💰 ЗАБРАТЬ ВЫИГРЫШ';
+
+  $('crashButton').onclick =
+    cashout;
+
+
+  $('crashMultiplier').textContent =
+    'x1.00';
+
+  $('crashStatus').innerHTML = `
+    <span style="color:#b7b7c5">
+      Ракета летит... Забери выигрыш вовремя.
+    </span>
+  `;
+
+
+  $('rocket').classList.remove('fly');
+
+  /*
+    Перезапускаем CSS-анимацию.
+  */
+
+  void $('rocket').offsetWidth;
+
+  $('rocket').classList.add('fly');
+
+  $('explosion').classList.remove('show');
+
+
+  clearInterval(crashTimer);
+
+  crashTimer =
+    setInterval(updateCrash,80);
 }
-/* =========================================================
-   RESET
-========================================================= */
+
+
+function updateCrash(){
+
+  if(!crashRunning){
+    return;
+  }
+
+  /*
+    Плавный рост коэффициента.
+  */
+
+  crashMultiplier +=
+    0.012 +
+    crashMultiplier * 0.004;
+
+
+  $('crashMultiplier').textContent =
+    'x' + crashMultiplier.toFixed(2);
+
+
+  /*
+    Автоматический взрыв.
+  */
+
+  if(crashMultiplier >= crashTarget){
+
+    explodeCrash();
+
+  }
+}
+
+
+function cashout(){
+
+  if(
+    !crashRunning ||
+    crashCashedOut
+  ){
+    return;
+  }
+
+  crashCashedOut = true;
+  crashRunning = false;
+
+  clearInterval(crashTimer);
+
+  $('rocket').classList.remove('fly');
+
+  const multiplier =
+    crashMultiplier;
+
+  const profit =
+    calculateCrashProfit(
+      crashStake,
+      multiplier
+    );
+
+  const totalReturn =
+    crashStake + profit;
+
+  user.balance += totalReturn;
+
+  saveUser();
+  updateUI();
+
+
+  $('crashStatus').innerHTML = `
+    <div class="win">
+      ✅ Успешный вывод! Коэффициент x${multiplier.toFixed(2)}.
+      <br>
+      Чистый выигрыш: +${fmt(profit)} ₽
+    </div>
+  `;
+
+
+  $('crashButton').textContent =
+    '🚀 ЗАПУСТИТЬ РАКЕТУ';
+
+  $('crashButton').onclick =
+    startCrash;
+}
+
+
+function explodeCrash(){
+
+  crashRunning = false;
+
+  clearInterval(crashTimer);
+
+  $('rocket').classList.remove('fly');
+
+  $('explosion').classList.remove('show');
+
+  void $('explosion').offsetWidth;
+
+  $('explosion').classList.add('show');
+
+
+  $('crashStatus').innerHTML = `
+    <div class="loss">
+      💥 Ракета взорвалась на x${crashTarget.toFixed(2)}.
+      <br>
+      Ставка ${fmt(crashStake)} ₽ проиграна.
+    </div>
+  `;
+
+
+  $('crashButton').textContent =
+    '🚀 ЗАПУСТИТЬ РАКЕТУ';
+
+  $('crashButton').onclick =
+    startCrash;
+
+  updateUI();
+}
+
+
 function resetCrash(){
-  if(crashFrame){
-    cancelAnimationFrame(
-      crashFrame
-    );
-    crashFrame =
-      null;
-  }
-  isCrashRunning =
-    false;
-  const rocket =
-    $("rocketContainer");
-  rocket.classList.remove(
-    "crashed",
-    "flying"
-  );
-  rocket.style.opacity =
-    "1";
-  rocket.style.left =
-    "5%";
-  rocket.style.top =
-    "auto";
-  rocket.style.bottom =
-    "8%";
-  rocket.style.transform =
-    "translate(0,0)";
-  $("flightPathLine")
-    .classList.remove(
-      "active"
-    );
-  $("explosion")
-    .classList.remove(
-      "active"
-    );
-  $("cashoutBtn")
-    .classList.add(
-      "hidden"
-    );
-  $("playCrashBtn")
-    .classList.remove(
-      "hidden"
-    );
-  $("crashMulti")
-    .textContent =
-    "x1.00";
-  $("crashMulti")
-    .style.color =
-    "#fff";
-  $("crashMulti")
-    .classList.remove(
-      "hot"
-    );
-  updateUI();
+
+  crashRunning = false;
+  crashCashedOut = false;
+
+  clearInterval(crashTimer);
+
+  crashMultiplier = 1;
+  crashTarget = 1;
+
+  $('crashMultiplier').textContent =
+    'x1.00';
+
+  $('rocket').classList.remove('fly');
+  $('explosion').classList.remove('show');
+
+  $('crashButton').textContent =
+    '🚀 ЗАПУСТИТЬ РАКЕТУ';
+
+  $('crashButton').onclick =
+    startCrash;
+
+  $('crashStatus').innerHTML = `
+    <span style="color:#777787">
+      Сделай ставку и запусти ракету.
+    </span>
+  `;
 }
+
+
+/* =========================================================
+   SWITCH GAMES
+========================================================= */
+
+function switchGame(game){
+
+  const slots =
+    $('slotsGame');
+
+  const crash =
+    $('crashGame');
+
+  const slotsTab =
+    $('slotsTab');
+
+  const crashTab =
+    $('crashTab');
+
+
+  if(game === 'slots'){
+
+    slots.classList.remove('hidden');
+    crash.classList.add('hidden');
+
+    slotsTab.classList.add('active');
+    crashTab.classList.remove('active');
+
+    resetCrash();
+
+  }else{
+
+    slots.classList.add('hidden');
+    crash.classList.remove('hidden');
+
+    slotsTab.classList.remove('active');
+    crashTab.classList.add('active');
+
+  }
+}
+
+
 /* =========================================================
    LEADERBOARD
 ========================================================= */
-function loadBoard(){
+
+function updateLeaderboard(){
+
   const board =
-    $("leaderboard");
-  const list =
-    db.getBoard();
-  if(!list.length){
-    board.innerHTML =
-      "<li>Пока нет игроков.</li>";
+    $('leaderboard');
+
+  const players = [];
+
+  /*
+    Собираем виртуальных игроков.
+  */
+
+  for(let i = 0; i < localStorage.length; i++){
+
+    const key =
+      localStorage.key(i);
+
+    if(!key || !key.startsWith('royal_gold_user_')){
+      continue;
+    }
+
+    try{
+
+      const player =
+        JSON.parse(
+          localStorage.getItem(key)
+        );
+
+      if(
+        player &&
+        typeof player.balance === 'number'
+      ){
+        players.push(player);
+      }
+
+    }catch(e){}
+  }
+
+
+  /*
+    Если игроков нет.
+  */
+
+  if(players.length === 0){
+
+    board.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:20px;
+        color:#666675;
+        font-size:12px;
+      ">
+        Пока нет игроков.
+      </div>
+    `;
+
     return;
   }
-  board.innerHTML =
-    "";
-  list.forEach(
-    (x,i)=>{
-      const li =
-        document.createElement(
-          "li"
-        );
-      const left =
-        document.createElement(
-          "span"
-        );
-      const right =
-        document.createElement(
-          "span"
-        );
-      const rank =
-        document.createElement(
-          "span"
-        );
-      rank.className =
-        "rank";
-      rank.textContent =
-        "#" +
-        (i+1);
-      left.appendChild(
-        rank
-      );
-      left.appendChild(
-        document.createTextNode(
-          x.username
-        )
-      );
-      right.className =
-        "score";
-      right.textContent =
-        fmt(x.balance) +
-        " ₽";
-      li.append(
-        left,
-        right
-      );
-      board.appendChild(
-        li
-      );
-    }
+
+
+  players.sort(
+    (a,b) =>
+      b.balance - a.balance
   );
+
+
+  board.innerHTML =
+    players
+      .slice(0,10)
+      .map((player,index) => {
+
+        const medal =
+          index === 0 ? '🥇' :
+          index === 1 ? '🥈' :
+          index === 2 ? '🥉' :
+          (index + 1);
+
+        return `
+          <div class="leader">
+
+            <div class="rank">
+              ${medal}
+            </div>
+
+            <div class="leader-name">
+              ${escapeHtml(player.nickname)}
+            </div>
+
+            <div class="leader-balance">
+              ${fmt(player.balance)} ₽
+            </div>
+
+          </div>
+        `;
+
+      })
+      .join('');
 }
+
+
+/* =========================================================
+   SECURITY HELPER
+========================================================= */
+
+function escapeHtml(text){
+
+  return String(text)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+}
+
+
+/* =========================================================
+   INPUT LIMITS
+========================================================= */
+
+function setupStakeInput(id){
+
+  const input = $(id);
+
+  input.addEventListener('input',() => {
+
+    let value =
+      Number(input.value);
+
+    if(!Number.isFinite(value)){
+      return;
+    }
+
+    if(value > MAX_BET){
+      input.value = MAX_BET;
+    }
+
+    if(value < 0){
+      input.value = MIN_BET;
+    }
+
+  });
+}
+
+setupStakeInput('slotsStake');
+setupStakeInput('crashStake');
+
+
 /* =========================================================
    INIT
 ========================================================= */
-showUser(null);
+
+showUser();
+
+updateLeaderboard();
+
 </script>
+
 </body>
 </html>
