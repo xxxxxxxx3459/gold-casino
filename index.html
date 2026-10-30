@@ -5,11 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#080810">
 <title>ROYAL GOLD — Virtual Games</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <style>
 :root{
   --gold:#ffd21c;
@@ -25,18 +23,15 @@
   --purple:#705cff;
   --blue:#35bfff;
 }
-
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
   -webkit-tap-highlight-color:transparent;
 }
-
 html{
   scroll-behavior:smooth;
 }
-
 body{
   min-height:100vh;
   overflow-x:hidden;
@@ -47,7 +42,6 @@ body{
     radial-gradient(circle at 100% 30%,#15162c 0%,transparent 30%),
     linear-gradient(180deg,#090910,#050508);
 }
-
 body:before{
   content:"";
   position:fixed;
@@ -61,25 +55,20 @@ body:before{
   background-size:83px 83px,137px 137px;
   background-position:20px 20px,70px 40px;
 }
-
 button,input{
   font:inherit;
 }
-
 button{
   border:0;
 }
-
 button:disabled{
   opacity:.45;
   cursor:not-allowed;
 }
-
 header{
   text-align:center;
   padding:30px 15px 20px;
 }
-
 .logo{
   font-size:clamp(25px,7vw,38px);
   line-height:1;
@@ -90,7 +79,6 @@ header{
     0 0 10px #ffd21c55,
     0 0 35px #ffd21c22;
 }
-
 .subtitle{
   margin-top:9px;
   color:#858393;
@@ -98,13 +86,11 @@ header{
   letter-spacing:5px;
   font-weight:600;
 }
-
 main{
   width:min(760px,100%);
   margin:auto;
   padding:5px 15px 40px;
 }
-
 .card{
   position:relative;
   overflow:hidden;
@@ -118,7 +104,6 @@ main{
     0 18px 55px #0009,
     inset 0 1px #ffffff08;
 }
-
 .card:before{
   content:"";
   position:absolute;
@@ -128,7 +113,6 @@ main{
   height:1px;
   background:linear-gradient(90deg,transparent,#ffd21c55,transparent);
 }
-
 h2{
   position:relative;
   z-index:2;
@@ -137,7 +121,6 @@ h2{
   font-size:clamp(19px,5vw,25px);
   font-weight:900;
 }
-
 .description{
   position:relative;
   z-index:2;
@@ -146,14 +129,12 @@ h2{
   font-size:14px;
   line-height:1.8;
 }
-
 label{
   display:block;
   margin:17px 0 8px;
   color:#aaa8b8;
   font-size:13px;
 }
-
 input{
   width:100%;
   min-width:0;
@@ -166,22 +147,18 @@ input{
   font-size:17px;
   transition:.2s;
 }
-
 input:focus{
   border-color:#ffd21c;
   box-shadow:0 0 20px #ffd21c18;
 }
-
 .row{
   display:flex;
   gap:10px;
 }
-
 .row>*{
   flex:1;
   min-width:0;
 }
-
 button{
   min-height:52px;
   border-radius:15px;
@@ -194,50 +171,41 @@ button{
     box-shadow .15s ease;
   touch-action:manipulation;
 }
-
 button:active{
   transform:scale(.97);
 }
-
 .primary{
   color:#1a1300;
   background:linear-gradient(135deg,#ffe76b,#ffb900);
   box-shadow:0 8px 25px #ffbd0022;
 }
-
 .primary:hover{
   filter:brightness(1.08);
 }
-
 .secondary{
   color:var(--gold);
   background:#23222c;
   border:1px solid #63531b;
 }
-
 .danger{
   color:#fff;
   background:linear-gradient(135deg,#ff4164,#ef084b);
   box-shadow:0 10px 30px #ff174d22;
 }
-
 .success{
   color:#02170f;
   background:linear-gradient(135deg,#12ffc0,#00bd78);
   box-shadow:0 10px 30px #00f5a033;
 }
-
 .hidden{
   display:none!important;
 }
-
 .profile-name{
   text-align:center;
   color:var(--gold);
   font-size:23px;
   font-weight:900;
 }
-
 .balance-caption{
   margin-top:13px;
   color:#8d8b9a;
@@ -245,7 +213,6 @@ button:active{
   font-size:11px;
   letter-spacing:2px;
 }
-
 .balance{
   margin:7px 0 17px;
   text-align:center;
@@ -254,18 +221,15 @@ button:active{
   font-weight:900;
   text-shadow:0 0 25px #fff2;
 }
-
 .balance small{
   color:var(--gold);
   font-size:21px;
 }
-
 .tabs{
   display:flex;
   gap:10px;
   margin-bottom:18px;
 }
-
 .tab-btn{
   flex:1;
   min-height:65px;
@@ -274,16 +238,60 @@ button:active{
   border:1px solid #363541;
   font-size:16px;
 }
-
 .tab-btn.active{
   color:var(--gold);
   border-color:var(--gold);
   background:linear-gradient(135deg,#ffd21c12,#ff9d0008);
   box-shadow:0 0 25px #ffd21c0d;
 }
-
+/* ================= BET LIMIT ================= */
+.bet-limit{
+  position:relative;
+  margin:12px 0 14px;
+  padding:15px 16px;
+  border-radius:17px;
+  border:1px solid #ffd21c66;
+  background:
+    linear-gradient(135deg,#ffd21c12,#ff9d0008),
+    #0d0d14;
+  box-shadow:
+    inset 0 1px #ffffff08,
+    0 0 22px #ffd21c10;
+  text-align:center;
+}
+.bet-limit:before{
+  content:"";
+  position:absolute;
+  left:12%;
+  right:12%;
+  top:0;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #ffd21c88,
+    transparent
+  );
+}
+.bet-limit-title{
+  color:#8f8d9d;
+  font-size:10px;
+  letter-spacing:2px;
+  font-weight:800;
+}
+.bet-limit-value{
+  margin-top:5px;
+  color:var(--gold);
+  font-size:22px;
+  font-weight:900;
+  text-shadow:0 0 15px #ffd21c44;
+}
+.bet-limit-note{
+  margin-top:5px;
+  color:#777583;
+  font-size:10px;
+}
 /* ================= SLOTS ================= */
-
 .slot-window{
   display:flex;
   justify-content:center;
@@ -298,7 +306,6 @@ button:active{
     inset 0 0 35px #000b,
     0 10px 30px #0005;
 }
-
 .reel{
   flex:1;
   max-width:170px;
@@ -316,31 +323,28 @@ button:active{
   font-size:clamp(42px,12vw,68px);
   user-select:none;
 }
-
 .reel.spinning{
   animation:
     reelShake .09s linear infinite;
   filter:blur(1.2px);
 }
-
 @keyframes reelShake{
   0%{transform:translateY(-4px)}
   50%{transform:translateY(5px)}
   100%{transform:translateY(-4px)}
 }
-
 .reel.win{
   animation:reelWin .6s ease;
 }
-
 @keyframes reelWin{
   0%{transform:scale(1)}
-  40%{transform:scale(1.1);box-shadow:0 0 35px #ffd21c88}
+  40%{
+    transform:scale(1.1);
+    box-shadow:0 0 35px #ffd21c88
+  }
   100%{transform:scale(1)}
 }
-
 /* ================= CRASH ================= */
-
 .space-window{
   position:relative;
   width:100%;
@@ -357,8 +361,6 @@ button:active{
     inset 0 0 65px #000d,
     0 0 30px #614dff18;
 }
-
-/* сетка */
 .space-grid{
   position:absolute;
   inset:0;
@@ -380,8 +382,6 @@ button:active{
       #7b73ff09 76px
     );
 }
-
-/* звёзды */
 .stars,
 .stars2{
   position:absolute;
@@ -398,21 +398,17 @@ button:active{
   animation:starsMove 7s linear infinite;
   opacity:.7;
 }
-
 .stars2{
   background-size:170px 190px;
   animation-duration:11s;
   opacity:.35;
   transform:scale(1.2);
 }
-
 @keyframes starsMove{
   to{
     background-position:0 500px;
   }
 }
-
-/* центральное свечение */
 .space-glow{
   position:absolute;
   z-index:1;
@@ -426,8 +422,6 @@ button:active{
   filter:blur(35px);
   pointer-events:none;
 }
-
-/* коэффициент */
 .multiplier-display{
   position:absolute;
   z-index:6;
@@ -446,18 +440,14 @@ button:active{
     0 0 65px #654eff77;
   pointer-events:none;
 }
-
 .multiplier-display.hot{
   animation:multiPulse .35s ease infinite alternate;
 }
-
 @keyframes multiPulse{
   to{
     transform:translate(-50%,-50%) scale(1.035);
   }
 }
-
-/* траектория */
 .flight-path{
   position:absolute;
   z-index:2;
@@ -467,13 +457,11 @@ button:active{
   height:74%;
   pointer-events:none;
 }
-
 .flight-path svg{
   width:100%;
   height:100%;
   overflow:visible;
 }
-
 .path-glow{
   fill:none;
   stroke:#694dff;
@@ -481,7 +469,6 @@ button:active{
   opacity:.14;
   filter:blur(7px);
 }
-
 .path-line{
   fill:none;
   stroke:url(#pathGradient);
@@ -490,19 +477,16 @@ button:active{
   opacity:0;
   transition:opacity .2s;
 }
-
 .path-line.active{
   opacity:.85;
   animation:pathDash .45s linear infinite;
 }
-
 @keyframes pathDash{
   to{
     stroke-dashoffset:-34;
   }
 }
-
-/* РАКЕТА */
+/* ================= ROCKET ================= */
 .rocket{
   position:absolute;
   z-index:8;
@@ -514,14 +498,11 @@ button:active{
   will-change:transform;
   transform-origin:50% 50%;
 }
-
 .rocket-inner{
   position:absolute;
   inset:0;
   transform:rotate(-30deg);
 }
-
-/* корпус */
 .rocket-body{
   position:absolute;
   left:29px;
@@ -543,8 +524,6 @@ button:active{
     0 0 32px #168cff44,
     inset 0 -5px 7px #193f6b;
 }
-
-/* нос */
 .rocket-nose{
   position:absolute;
   right:-17px;
@@ -556,8 +535,6 @@ button:active{
   border-left:22px solid #eaf7ff;
   filter:drop-shadow(0 0 5px #8be8ff);
 }
-
-/* иллюминатор */
 .rocket-window{
   position:absolute;
   right:12px;
@@ -567,11 +544,14 @@ button:active{
   border-radius:50%;
   border:3px solid #f1fbff;
   background:
-    radial-gradient(circle at 32% 28%,#c8ffff 0 8%,#39cce8 18%,#123967 68%);
+    radial-gradient(
+      circle at 32% 28%,
+      #c8ffff 0 8%,
+      #39cce8 18%,
+      #123967 68%
+    );
   box-shadow:0 0 9px #58edff;
 }
-
-/* крылья */
 .rocket-fin{
   position:absolute;
   width:25px;
@@ -579,20 +559,16 @@ button:active{
   background:linear-gradient(135deg,#ffdd22,#ff6a1f);
   clip-path:polygon(0 0,100% 15%,55% 100%,15% 65%);
 }
-
 .rocket-fin.bottom{
   left:35px;
   top:45px;
   transform:rotate(12deg);
 }
-
 .rocket-fin.top{
   left:35px;
   top:11px;
   transform:rotate(190deg);
 }
-
-/* пламя */
 .rocket-flame{
   position:absolute;
   left:-18px;
@@ -607,30 +583,45 @@ button:active{
       #ff9e19 68%,
       #fff 100%
     );
-  clip-path:polygon(0 50%,32% 4%,100% 50%,32% 96%);
+  clip-path:polygon(
+    0 50%,
+    32% 4%,
+    100% 50%,
+    32% 96%
+  );
   filter:
     drop-shadow(0 0 5px #ff4c18)
     drop-shadow(0 0 14px #ff7c18);
   animation:flame .09s ease-in-out infinite alternate;
 }
-
 .rocket-flame2{
   position:absolute;
   left:-38px;
   top:34px;
   width:38px;
   height:10px;
-  background:linear-gradient(90deg,transparent,#ff3518,#ffb72a);
-  clip-path:polygon(0 50%,100% 0,75% 50%,100% 100%);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #ff3518,
+    #ffb72a
+  );
+  clip-path:polygon(
+    0 50%,
+    100% 0,
+    75% 50%,
+    100% 100%
+  );
   filter:blur(1px);
 }
-
 @keyframes flame{
-  from{transform:scaleX(.78) scaleY(.9)}
-  to{transform:scaleX(1.18) scaleY(1.25)}
+  from{
+    transform:scaleX(.78) scaleY(.9)
+  }
+  to{
+    transform:scaleX(1.18) scaleY(1.25)
+  }
 }
-
-/* след */
 .rocket-trail{
   position:absolute;
   left:-70px;
@@ -638,21 +629,21 @@ button:active{
   width:72px;
   height:13px;
   border-radius:50%;
-  background:linear-gradient(90deg,transparent,#ff401955,#ffab2466);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #ff401955,
+    #ffab2466
+  );
   filter:blur(8px);
 }
-
-/* движение ракеты */
 .rocket.flying .rocket-inner{
   animation:rocketTilt .7s ease-in-out infinite alternate;
 }
-
 @keyframes rocketTilt{
   from{transform:rotate(-29deg)}
   to{transform:rotate(-33deg)}
 }
-
-/* взрыв */
 .explosion{
   position:absolute;
   z-index:15;
@@ -663,11 +654,9 @@ button:active{
   font-size:70px;
   pointer-events:none;
 }
-
 .explosion.active{
   animation:boom .75s ease-out forwards;
 }
-
 @keyframes boom{
   0%{
     opacity:1;
@@ -684,11 +673,9 @@ button:active{
     filter:blur(10px);
   }
 }
-
 .crashed{
   animation:crashedRocket .55s ease-out forwards;
 }
-
 @keyframes crashedRocket{
   0%{opacity:1}
   100%{
@@ -696,8 +683,7 @@ button:active{
     transform:scale(1.7) rotate(25deg);
   }
 }
-
-/* статус */
+/* ================= STATUS ================= */
 .result-msg{
   min-height:30px;
   margin-top:17px;
@@ -706,20 +692,16 @@ button:active{
   font-weight:800;
   line-height:1.65;
 }
-
 .win{
   color:var(--green);
   text-shadow:0 0 15px #00f5a033;
 }
-
 .lose{
   color:var(--red);
 }
-
 .jackpot{
   color:var(--gold);
 }
-
 .note{
   margin-top:14px;
   color:#777582;
@@ -727,12 +709,10 @@ button:active{
   font-size:11px;
   line-height:1.7;
 }
-
-/* рейтинг */
+/* ================= LEADERBOARD ================= */
 .leaderboard{
   list-style:none;
 }
-
 .leaderboard li{
   display:flex;
   justify-content:space-between;
@@ -742,23 +722,19 @@ button:active{
   color:#d8d6df;
   font-size:13px;
 }
-
 .leaderboard li:last-child{
   border-bottom:0;
 }
-
 .rank{
   margin-right:8px;
   color:var(--gold);
   font-weight:900;
 }
-
 .score{
   color:var(--gold);
   font-weight:800;
   text-align:right;
 }
-
 footer{
   padding:22px 10px;
   color:#656371;
@@ -766,92 +742,73 @@ footer{
   font-size:10px;
   line-height:1.8;
 }
-
-/* мобильная адаптация */
+/* ================= MOBILE ================= */
 @media(max-width:500px){
-
   header{
     padding-top:24px;
   }
-
   main{
     padding-left:13px;
     padding-right:13px;
   }
-
   .card{
     padding:18px;
     border-radius:22px;
   }
-
   .row{
     gap:8px;
   }
-
   .row button{
     padding-left:8px;
     padding-right:8px;
     font-size:12px;
   }
-
   .tab-btn{
     min-height:60px;
     font-size:14px;
   }
-
   .space-window{
     height:390px;
   }
-
   .rocket{
     width:96px;
     height:86px;
   }
-
   .multiplier-display{
     top:39%;
   }
 }
-
 @media(max-width:360px){
-
   .card{
     padding:15px;
   }
-
   .slot-window{
     gap:5px;
     padding:10px 5px;
   }
-
   .reel{
     font-size:39px;
   }
-
   .space-window{
     height:360px;
   }
 }
 </style>
 </head>
-
 <body>
-
 <header>
-  <div class="logo">♛ ROYAL GOLD ♛</div>
-  <div class="subtitle">PREMIUM VIRTUAL CASINO</div>
+  <div class="logo">
+    ♛ ROYAL GOLD ♛
+  </div>
+  <div class="subtitle">
+    PREMIUM VIRTUAL CASINO
+  </div>
 </header>
-
 <main>
-
 <!-- ================= AUTH ================= -->
-
 <section class="card" id="authCard">
-
   <h2>👤 Вход в клуб</h2>
-
   <div id="authForm">
-
     <label>Никнейм</label>
     <input
       id="nick"
@@ -861,7 +818,6 @@ footer{
       autocomplete="username"
       placeholder="Твой ник"
     >
-
     <label>Пароль</label>
     <input
       id="password"
@@ -870,32 +826,37 @@ footer{
       autocomplete="current-password"
       placeholder="Минимум 8 символов"
     >
-
     <div class="row">
-      <button class="primary" onclick="account('login')">
+      <button
+        class="primary"
+        onclick="account('login')"
+      >
         Войти
       </button>
-
-      <button class="secondary" onclick="account('register')">
+      <button
+        class="secondary"
+        onclick="account('register')"
+      >
         Регистрация
       </button>
     </div>
-
   </div>
-
   <div id="profile" class="hidden">
-
-    <div class="profile-name" id="playerName"></div>
-
+    <div
+      class="profile-name"
+      id="playerName"
+    ></div>
     <div class="balance-caption">
       ТВОЙ ВИРТУАЛЬНЫЙ БАЛАНС
     </div>
-
     <div class="balance">
-      <span id="balance">0</span>
-      <small>₽</small>
+      <span id="balance">
+        0
+      </span>
+      <small>
+        ₽
+      </small>
     </div>
-
     <button
       class="secondary"
       style="width:100%"
@@ -903,16 +864,13 @@ footer{
     >
       Выйти из аккаунта
     </button>
-
   </div>
-
 </section>
-
-
 <!-- ================= TABS ================= -->
-
-<div class="tabs hidden" id="gameTabs">
-
+<div
+  class="tabs hidden"
+  id="gameTabs"
+>
   <button
     class="tab-btn active"
     id="tabSlots"
@@ -920,7 +878,6 @@ footer{
   >
     🎰 Слоты
   </button>
-
   <button
     class="tab-btn"
     id="tabCrash"
@@ -928,42 +885,62 @@ footer{
   >
     🚀 Ракетка
   </button>
-
 </div>
-
-
 <!-- ================= SLOTS ================= -->
-
-<section class="card hidden" id="gameSlots">
-
-  <h2>🎰 GOLDEN SLOTS</h2>
-
+<section
+  class="card hidden"
+  id="gameSlots"
+>
+  <h2>
+    🎰 GOLDEN SLOTS
+  </h2>
   <p class="description">
-    Три барабана, несколько комбинаций и виртуальные выигрыши.
-    Чем больше ставка относительно баланса — тем ниже шанс успешной комбинации.
+    Три барабана, редкие комбинации и виртуальные выигрыши.
+    Максимальная ставка — 50 000 ₽.
   </p>
-
   <div class="slot-window">
-
-    <div class="reel" id="r1">💎</div>
-    <div class="reel" id="r2">7️⃣</div>
-    <div class="reel" id="r3">💎</div>
-
+    <div
+      class="reel"
+      id="r1"
+    >
+      💎
+    </div>
+    <div
+      class="reel"
+      id="r2"
+    >
+      7️⃣
+    </div>
+    <div
+      class="reel"
+      id="r3"
+    >
+      💎
+    </div>
   </div>
-
+  <div class="bet-limit">
+    <div class="bet-limit-title">
+      МАКСИМАЛЬНАЯ СТАВКА
+    </div>
+    <div class="bet-limit-value">
+      50 000 ₽
+    </div>
+    <div class="bet-limit-note">
+      Максимальная ставка за один раунд
+    </div>
+  </div>
   <label>
-    Ставка — минимум 50 ₽, максимум весь баланс
+    Твоя ставка
   </label>
-
   <input
     id="stakeSlots"
     type="number"
     min="50"
+    max="50000"
     step="1"
     value="50"
     inputmode="numeric"
   >
-
   <button
     class="primary"
     id="playSlotsBtn"
@@ -972,45 +949,36 @@ footer{
   >
     🎰 ВРАЩАТЬ БАРАБАНЫ
   </button>
-
   <div
     class="result-msg"
     id="msgSlots"
   ></div>
-
 </section>
-
-
-<!-- ================= ROCKET ================= -->
-
-<section class="card hidden" id="gameCrash">
-
-  <h2>🚀 КОСМИЧЕСКАЯ РАКЕТКА</h2>
-
+<!-- ================= CRASH ================= -->
+<section
+  class="card hidden"
+  id="gameCrash"
+>
+  <h2>
+    🚀 КОСМИЧЕСКАЯ РАКЕТКА
+  </h2>
   <p class="description">
     Запускай ракету и следи за коэффициентом.
-    Забери виртуальный выигрыш до того, как ракета достигнет точки взрыва.
+    Успей забрать виртуальный выигрыш до взрыва.
   </p>
-
-
-  <div class="space-window" id="spaceWindow">
-
+  <div
+    class="space-window"
+    id="spaceWindow"
+  >
     <div class="space-grid"></div>
-
     <div class="stars"></div>
     <div class="stars2"></div>
-
     <div class="space-glow"></div>
-
-
-    <!-- Траектория -->
     <div class="flight-path">
-
       <svg
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
-
         <defs>
           <linearGradient
             id="pathGradient"
@@ -1019,92 +987,83 @@ footer{
             x2="100%"
             y2="0%"
           >
-            <stop offset="0%" stop-color="#5e3dff"/>
-            <stop offset="50%" stop-color="#8e75ff"/>
-            <stop offset="100%" stop-color="#49d9ff"/>
+            <stop
+              offset="0%"
+              stop-color="#5e3dff"
+            />
+            <stop
+              offset="50%"
+              stop-color="#8e75ff"
+            />
+            <stop
+              offset="100%"
+              stop-color="#49d9ff"
+            />
           </linearGradient>
         </defs>
-
         <path
           class="path-glow"
           d="M 2 94 Q 28 88 48 60 T 98 3"
         />
-
         <path
           id="flightPathLine"
           class="path-line"
           d="M 2 94 Q 28 88 48 60 T 98 3"
         />
-
       </svg>
-
     </div>
-
-
-    <!-- Коэффициент -->
     <div
       class="multiplier-display"
       id="crashMulti"
     >
       x1.00
     </div>
-
-
-    <!-- Ракета -->
     <div
       class="rocket"
       id="rocketContainer"
     >
-
       <div class="rocket-inner">
-
         <div class="rocket-trail"></div>
-
         <div class="rocket-flame2"></div>
-
         <div class="rocket-flame"></div>
-
         <div class="rocket-fin top"></div>
-
         <div class="rocket-fin bottom"></div>
-
         <div class="rocket-body">
-
           <div class="rocket-window"></div>
-
           <div class="rocket-nose"></div>
-
         </div>
-
       </div>
-
     </div>
-
-
     <div
       class="explosion"
       id="explosion"
     >
       💥
     </div>
-
   </div>
-
-
+  <div class="bet-limit">
+    <div class="bet-limit-title">
+      МАКСИМАЛЬНАЯ СТАВКА
+    </div>
+    <div class="bet-limit-value">
+      50 000 ₽
+    </div>
+    <div class="bet-limit-note">
+      Максимальная ставка за один раунд
+    </div>
+  </div>
   <label>
-    Ставка — минимум 50 ₽, максимум весь баланс
+    Твоя ставка
   </label>
-
   <input
     id="stakeCrash"
     type="number"
     min="50"
+    max="50000"
     step="1"
     value="50"
     inputmode="numeric"
   >
-
-
   <button
     class="danger"
     id="playCrashBtn"
@@ -1113,8 +1072,6 @@ footer{
   >
     🚀 ЗАПУСТИТЬ РАКЕТУ
   </button>
-
-
   <button
     class="success hidden"
     id="cashoutBtn"
@@ -1123,89 +1080,61 @@ footer{
   >
     ЗАБРАТЬ ВЫИГРЫШ
   </button>
-
-
   <div
     class="result-msg"
     id="msgCrash"
   ></div>
-
-
   <div class="note">
     Демо-игра на виртуальные очки.
     Баланс не имеет денежной стоимости.
+    Пополнение и вывод средств отключены.
   </div>
-
 </section>
-
-
 <!-- ================= LEADERBOARD ================= -->
-
 <section class="card">
-
-  <h2>🏆 Зал славы</h2>
-
+  <h2>
+    🏆 Зал славы
+  </h2>
   <p class="description">
     Локальный рейтинг игроков этого браузера.
   </p>
-
   <ul
     class="leaderboard"
     id="leaderboard"
   >
-    <li>Пока нет игроков.</li>
+    <li>
+      Пока нет игроков.
+    </li>
   </ul>
-
 </section>
-
-
 <footer>
   ROYAL GOLD © 2026 · ВИРТУАЛЬНЫЕ ₽ ·
   ПОПОЛНЕНИЕ И ВЫВОД СРЕДСТВ ОТКЛЮЧЕНЫ
 </footer>
-
 </main>
-
-
 <script>
 "use strict";
-
 /* =========================================================
-   BASIC HELPERS
+   HELPERS
 ========================================================= */
-
-const $ = id => document.getElementById(id);
-
+const $ = id =>
+  document.getElementById(id);
 const fmt = n =>
   Math.floor(n).toLocaleString("ru-RU");
-
 let user = null;
-
 let isSlotsBusy = false;
-
 let isCrashRunning = false;
-
 let crashFrame = null;
-
 let crashStart = 0;
-
 let crashMulti = 1;
-
 let crashTarget = 2;
-
 let crashStake = 0;
-
 let crashRunId = 0;
-
-
 /* =========================================================
    LOCAL DATABASE
 ========================================================= */
-
 const db = {
-
   getUser(name){
-
     try{
       return JSON.parse(
         localStorage.getItem(
@@ -1215,353 +1144,287 @@ const db = {
     }catch(e){
       return null;
     }
-
   },
-
-
   saveUser(u){
-
     localStorage.setItem(
       "royal_gold_user_" + u.username,
       JSON.stringify(u)
     );
-
   },
-
-
   getBoard(){
-
     const list = [];
-
-    for(let i=0;i<localStorage.length;i++){
-
-      const key = localStorage.key(i);
-
+    for(
+      let i=0;
+      i<localStorage.length;
+      i++
+    ){
+      const key =
+        localStorage.key(i);
       if(
         key &&
-        key.startsWith("royal_gold_user_")
+        key.startsWith(
+          "royal_gold_user_"
+        )
       ){
-
         try{
-
-          const x = JSON.parse(
-            localStorage.getItem(key)
-          );
-
+          const x =
+            JSON.parse(
+              localStorage.getItem(key)
+            );
           if(
             x &&
             typeof x.balance === "number"
           ){
             list.push(x);
           }
-
         }catch(e){}
-
       }
-
     }
-
     return list
-      .sort((a,b)=>b.balance-a.balance)
+      .sort(
+        (a,b)=>
+          b.balance-a.balance
+      )
       .slice(0,10);
-
   }
-
 };
-
-
 /* =========================================================
    UI
 ========================================================= */
-
 function showUser(u){
-
   user = u;
-
-  $("authForm").classList.toggle(
-    "hidden",
-    !!u
-  );
-
-  $("profile").classList.toggle(
-    "hidden",
-    !u
-  );
-
-  $("gameTabs").classList.toggle(
-    "hidden",
-    !u
-  );
-
+  $("authForm")
+    .classList.toggle(
+      "hidden",
+      !!u
+    );
+  $("profile")
+    .classList.toggle(
+      "hidden",
+      !u
+    );
+  $("gameTabs")
+    .classList.toggle(
+      "hidden",
+      !u
+    );
   if(u){
-
-    $("playerName").textContent =
+    $("playerName")
+      .textContent =
       u.username;
-
     updateUI();
-
     switchGame("slots");
-
   }else{
-
-    $("gameSlots").classList.add(
-      "hidden"
-    );
-
-    $("gameCrash").classList.add(
-      "hidden"
-    );
-
+    $("gameSlots")
+      .classList.add(
+        "hidden"
+      );
+    $("gameCrash")
+      .classList.add(
+        "hidden"
+      );
   }
-
   loadBoard();
-
 }
-
-
 function updateUI(){
-
   if(!user) return;
-
-  $("balance").textContent =
+  $("balance")
+    .textContent =
     fmt(user.balance);
-
-  $("playSlotsBtn").disabled =
+  $("playSlotsBtn")
+    .disabled =
     isSlotsBusy ||
     isCrashRunning;
-
-  $("playCrashBtn").disabled =
+  $("playCrashBtn")
+    .disabled =
     isCrashRunning ||
     isSlotsBusy;
-
 }
-
-
 /* =========================================================
    AUTH
 ========================================================= */
-
 function account(mode){
-
   const name =
-    $("nick").value.trim();
-
+    $("nick")
+      .value
+      .trim();
   const pass =
-    $("password").value;
-
+    $("password")
+      .value;
   if(name.length < 3){
-
     alert(
       "Никнейм должен содержать минимум 3 символа."
     );
-
     return;
   }
-
   if(pass.length < 8){
-
     alert(
       "Пароль должен содержать минимум 8 символов."
     );
-
     return;
   }
-
   let existing =
     db.getUser(name);
-
   if(mode === "register"){
-
     if(existing){
-
       alert(
         "Такой ник уже зарегистрирован."
       );
-
       return;
     }
-
     existing = {
       username:name,
       password:pass,
       balance:10000
     };
-
     db.saveUser(existing);
-
   }else{
-
     if(
       !existing ||
       existing.password !== pass
     ){
-
       alert(
         "Неверный ник или пароль."
       );
-
       return;
     }
-
   }
-
-  $("password").value = "";
-
+  $("password")
+    .value = "";
   showUser(existing);
-
 }
-
-
 function logout(){
-
   if(isCrashRunning){
-
     alert(
       "Сначала заверши раунд ракетки."
     );
-
     return;
   }
-
   if(isSlotsBusy){
-
     alert(
       "Дождись окончания вращения."
     );
-
     return;
   }
-
   showUser(null);
-
 }
-
-
 /* =========================================================
    TABS
 ========================================================= */
-
 function switchGame(game){
-
   if(
     isCrashRunning ||
     isSlotsBusy
   ){
     return;
   }
-
-  $("gameSlots").classList.toggle(
-    "hidden",
-    game !== "slots"
-  );
-
-  $("gameCrash").classList.toggle(
-    "hidden",
-    game !== "crash"
-  );
-
-  $("tabSlots").classList.toggle(
-    "active",
-    game === "slots"
-  );
-
-  $("tabCrash").classList.toggle(
-    "active",
-    game === "crash"
-  );
-
+  $("gameSlots")
+    .classList.toggle(
+      "hidden",
+      game !== "slots"
+    );
+  $("gameCrash")
+    .classList.toggle(
+      "hidden",
+      game !== "crash"
+    );
+  $("tabSlots")
+    .classList.toggle(
+      "active",
+      game === "slots"
+    );
+  $("tabCrash")
+    .classList.toggle(
+      "active",
+      game === "crash"
+    );
 }
-
-
 /* =========================================================
    STAKE
 ========================================================= */
-
 function getStake(id){
-
   if(!user) return null;
-
   const raw =
-    $(id).value.trim();
-
+    $(id)
+      .value
+      .trim();
   if(raw === ""){
-
     alert(
       "Введи сумму ставки."
     );
-
     return null;
   }
-
   const stake =
     Number(raw);
-
   if(
     !Number.isSafeInteger(stake) ||
     stake < 50
   ){
-
     alert(
       "Минимальная ставка — 50 ₽."
     );
-
     return null;
   }
-
+  if(stake > 50000){
+    alert(
+      "Максимальная ставка — 50 000 ₽."
+    );
+    $(id).value =
+      50000;
+    return null;
+  }
   if(stake > user.balance){
-
     alert(
       "Недостаточно виртуальных средств."
     );
-
     return null;
   }
-
   return stake;
-
 }
-
-
 /* =========================================================
-   CHANCE BY STAKE
-=========================================================
-
-   Чем больше ставка относительно баланса,
-   тем меньше вероятность успешного результата.
-
-   Это только виртуальная демо-механика.
+   WIN SYSTEM
 ========================================================= */
-
-function getStakeFactor(stake){
-
-  const ratio =
-    stake / Math.max(1,user.balance);
-
-  /*
-    Маленькая ставка:
-    около 90% от базового шанса.
-
-    Большая:
-    заметно ниже.
-
-    Но никогда не делаем вероятность
-    буквально нулевой.
-  */
-
-  return Math.max(
-    0.20,
-    1 - ratio * 0.75
-  );
-
+/*
+  45% — выигрыш
+  55% — проигрыш
+  Это виртуальная демо-механика.
+*/
+function getWinChance(){
+  return 0.45;
 }
-
-
+/*
+  Расчёт чистой прибыли.
+  До 4 000 ₽:
+  прибыль 2 000–4 000 ₽.
+  После 4 000 ₽:
+  прибыль примерно 60% от ставки.
+  Максимум:
+  +30 000 ₽.
+*/
+function getMaxProfit(stake){
+  if(stake <= 4000){
+    return Math.min(
+      4000,
+      2000 +
+      Math.floor(
+        Math.random() * 2001
+      )
+    );
+  }
+  return Math.min(
+    30000,
+    Math.max(
+      4000,
+      Math.floor(
+        stake * 0.60
+      )
+    )
+  );
+}
 /* =========================================================
    SLOTS
 ========================================================= */
-
 function playSlots(){
-
   if(
     !user ||
     isSlotsBusy ||
@@ -1569,26 +1432,22 @@ function playSlots(){
   ){
     return;
   }
-
   const stake =
-    getStake("stakeSlots");
-
-  if(stake === null) return;
-
+    getStake(
+      "stakeSlots"
+    );
+  if(stake === null)
+    return;
   isSlotsBusy = true;
-
-  user.balance -= stake;
-
+  user.balance -=
+    stake;
   db.saveUser(user);
-
   updateUI();
-
   const reels = [
     $("r1"),
     $("r2"),
     $("r3")
   ];
-
   const symbols = [
     "🍒",
     "🍋",
@@ -1597,309 +1456,247 @@ function playSlots(){
     "7️⃣",
     "🍀"
   ];
-
-  $("msgSlots").textContent =
+  $("msgSlots")
+    .textContent =
     "🎰 Барабаны вращаются...";
-
-  $("msgSlots").className =
+  $("msgSlots")
+    .className =
     "result-msg";
-
   reels.forEach(r=>{
-    r.classList.remove("win");
-    r.classList.add("spinning");
+    r.classList.remove(
+      "win"
+    );
+    r.classList.add(
+      "spinning"
+    );
   });
-
-
-  /*
-    Базовый шанс уменьшается
-    при увеличении ставки.
-  */
-
-  const factor =
-    getStakeFactor(stake);
-
-
-  /*
-    Шанс любой выигрышной
-    комбинации.
-
-    Максимально ограничен,
-    чтобы игра не превращалась
-    в гарантированный выигрыш.
-  */
-
   const winChance =
-    0.31 * factor;
-
-
+    getWinChance();
   const roll =
     Math.random();
-
-
   let result;
-
   let payout = 0;
-
   let msg = "";
-
-  let type = "win";
-
-
-  if(roll < winChance * 0.06){
-
-    result = [
-      "7️⃣",
-      "7️⃣",
-      "7️⃣"
-    ];
-
-    payout =
-      stake * 10;
-
-    msg =
-      "👑 ДЖЕКПОТ! x10!";
-
-    type =
-      "jackpot";
-
-  }else if(
-    roll < winChance * 0.24
-  ){
-
-    result = [
-      "💎",
-      "💎",
-      "💎"
-    ];
-
-    payout =
-      stake * 4;
-
-    msg =
-      "💎 ТРИ БРИЛЛИАНТА! x4!";
-
-  }else if(
-    roll < winChance * 0.58
-  ){
-
-    result = [
-      "🍒",
-      "🍒",
-      "🍒"
-    ];
-
-    payout =
-      stake * 2;
-
-    msg =
-      "🍒 ТРИ ВИШНИ! x2!";
-
-  }else if(
-    roll < winChance
-  ){
-
-    result = [
-      "🔔",
-      "🔔",
-      "🔔"
-    ];
-
-    payout =
-      Math.floor(
-        stake * 1.5
-      );
-
-    msg =
-      "🔔 УДАЧНАЯ КОМБИНАЦИЯ!";
-
-  }else{
-
+  let type =
+    "win";
+  /*
+    =========================
+    55% ПРОИГРЫШ
+    =========================
+  */
+  if(roll >= winChance){
     result = [
       symbols[
         Math.floor(
-          Math.random()*symbols.length
+          Math.random() *
+          symbols.length
         )
       ],
       symbols[
         Math.floor(
-          Math.random()*symbols.length
+          Math.random() *
+          symbols.length
         )
       ],
       symbols[
         Math.floor(
-          Math.random()*symbols.length
+          Math.random() *
+          symbols.length
         )
       ]
     ];
-
   }
-
-
+  /*
+    =========================
+    45% ВЫИГРЫШ
+    =========================
+  */
+  else{
+    const winRoll =
+      Math.random();
+    const profit =
+      getMaxProfit(stake);
+    /*
+      1.5% от выигрышных
+      раундов — 777.
+    */
+    if(winRoll < 0.015){
+      result = [
+        "7️⃣",
+        "7️⃣",
+        "7️⃣"
+      ];
+      payout =
+        stake +
+        profit;
+      msg =
+        "👑 ДЖЕКПОТ! ТРИ СЕМЁРКИ! " +
+        "Чистый выигрыш: +" +
+        fmt(profit) +
+        " ₽";
+      type =
+        "jackpot";
+    }
+    /*
+      Бриллианты
+    */
+    else if(winRoll < 0.12){
+      result = [
+        "💎",
+        "💎",
+        "💎"
+      ];
+      payout =
+        stake +
+        profit;
+      msg =
+        "💎 ТРИ БРИЛЛИАНТА! " +
+        "Чистый выигрыш: +" +
+        fmt(profit) +
+        " ₽";
+    }
+    /*
+      Вишни
+    */
+    else if(winRoll < 0.35){
+      result = [
+        "🍒",
+        "🍒",
+        "🍒"
+      ];
+      payout =
+        stake +
+        profit;
+      msg =
+        "🍒 ТРИ ВИШНИ! " +
+        "Чистый выигрыш: +" +
+        fmt(profit) +
+        " ₽";
+    }
+    /*
+      Колокольчики
+    */
+    else{
+      result = [
+        "🔔",
+        "🔔",
+        "🔔"
+      ];
+      payout =
+        stake +
+        profit;
+      msg =
+        "🔔 УДАЧНАЯ КОМБИНАЦИЯ! " +
+        "Чистый выигрыш: +" +
+        fmt(profit) +
+        " ₽";
+    }
+  }
   let count = 0;
-
   const timer =
     setInterval(()=>{
-
       reels.forEach(r=>{
-
         r.textContent =
           symbols[
             Math.floor(
-              Math.random()*symbols.length
+              Math.random() *
+              symbols.length
             )
           ];
-
       });
-
       count++;
-
       if(count >= 20){
-
         clearInterval(timer);
-
-        reels.forEach((r,i)=>{
-
-          r.classList.remove(
-            "spinning"
-          );
-
-          r.textContent =
-            result[i];
-
-        });
-
-
+        reels.forEach(
+          (r,i)=>{
+            r.classList.remove(
+              "spinning"
+            );
+            r.textContent =
+              result[i];
+          }
+        );
         if(payout > 0){
-
-          user.balance += payout;
-
+          user.balance +=
+            payout;
           db.saveUser(user);
-
-          $("msgSlots").textContent =
-            msg +
-            " Выигрыш: +" +
-            fmt(payout) +
-            " ₽";
-
-          $("msgSlots").className =
-            "result-msg " + type;
-
+          $("msgSlots")
+            .textContent =
+            msg;
+          $("msgSlots")
+            .className =
+            "result-msg " +
+            type;
           reels.forEach(r=>{
-            r.classList.add("win");
-
+            r.classList.add(
+              "win"
+            );
             setTimeout(()=>{
-              r.classList.remove("win");
+              r.classList.remove(
+                "win"
+              );
             },700);
           });
-
-          if(navigator.vibrate){
-
+          if(
+            navigator.vibrate
+          ){
             navigator.vibrate([
-              70,40,90
+              70,
+              40,
+              90
             ]);
-
           }
-
         }else{
-
-          $("msgSlots").textContent =
+          $("msgSlots")
+            .textContent =
             "😔 Не повезло. Попробуй ещё раз.";
-
-          $("msgSlots").className =
+          $("msgSlots")
+            .className =
             "result-msg lose";
-
         }
-
-
-        isSlotsBusy = false;
-
+        isSlotsBusy =
+          false;
         updateUI();
-
         loadBoard();
-
       }
-
     },75);
-
 }
-
-
 /* =========================================================
    CRASH TARGET
 ========================================================= */
-
 function generateCrashTarget(stake){
-
+  const roll =
+    Math.random();
   /*
-    Сначала определяем вероятность
-    безопасного раунда.
-
-    Большая ставка относительно баланса
-    уменьшает шанс.
+    55% — проигрышный раунд.
+    Ракета взрывается раньше.
   */
-
-  const factor =
-    getStakeFactor(stake);
-
-
-  /*
-    Минимум не меньше 1.25,
-    чтобы игра никогда не выглядела
-    как мгновенный x1.00 cashout.
-
-    В демо есть достаточно времени
-    нажать кнопку.
-  */
-
-  const baseSafeChance =
-    0.72 * factor;
-
-
-  /*
-    Если раунд "безопасный",
-    точка взрыва будет выше.
-
-    Иначе — ниже.
-  */
-
-  if(Math.random() < baseSafeChance){
-
-    /*
-      От 1.45 до примерно 6+
-    */
-
-    const r = Math.random();
-
-    return Math.min(
-      7.5,
-      1.45 +
-      Math.pow(r,0.72)*5.8
+  if(roll >= 0.45){
+    return (
+      1.20 +
+      Math.random() * 0.40
     );
-
   }
-
-
   /*
-    Неудачный раунд:
-
-    всё равно не взрываем
-    прямо на старте.
+    45% — раунд,
+    в котором можно успеть
+    забрать выигрыш.
   */
-
-  return (
+  const r =
+    Math.random();
+  return Math.min(
+    4.5,
     1.65 +
-    Math.random()*1.15
+    Math.pow(
+      r,
+      0.8
+    ) * 2.7
   );
-
 }
-
-
 /* =========================================================
    START ROCKET
 ========================================================= */
-
 function startCrash(){
-
   if(
     !user ||
     isCrashRunning ||
@@ -1907,157 +1704,102 @@ function startCrash(){
   ){
     return;
   }
-
-
   const stake =
-    getStake("stakeCrash");
-
-  if(stake === null) return;
-
-
+    getStake(
+      "stakeCrash"
+    );
+  if(stake === null)
+    return;
   crashStake =
     stake;
-
-
   user.balance -=
     stake;
-
   db.saveUser(user);
-
   updateUI();
-
-
   isCrashRunning =
     true;
-
   crashMulti =
     1;
-
   crashStart =
     performance.now();
-
   const id =
     ++crashRunId;
-
-
-  /*
-    ВАЖНО:
-    точка взрыва рассчитывается
-    ДО запуска анимации.
-  */
-
   crashTarget =
-    generateCrashTarget(stake);
-
-
-  /*
-    Сбрасываем визуальное состояние.
-  */
-
+    generateCrashTarget(
+      stake
+    );
   const rocket =
     $("rocketContainer");
-
   rocket.classList.remove(
     "crashed"
   );
-
   rocket.classList.add(
     "flying"
   );
-
   rocket.style.opacity =
     "1";
-
   rocket.style.left =
     "5%";
-
   rocket.style.bottom =
     "8%";
-
   rocket.style.transform =
     "translate(0,0)";
-
-
   $("explosion")
     .classList.remove(
       "active"
     );
-
-
   $("flightPathLine")
     .classList.add(
       "active"
     );
-
-
-  $("crashMulti").textContent =
+  $("crashMulti")
+    .textContent =
     "x1.00";
-
   $("crashMulti")
     .style.color =
     "#fff";
-
   $("crashMulti")
     .classList.remove(
       "hot"
     );
-
-
   $("playCrashBtn")
     .classList.add(
       "hidden"
     );
-
-
   $("cashoutBtn")
     .classList.remove(
       "hidden"
     );
-
-
   $("cashoutBtn")
     .disabled =
     false;
-
-
-  $("msgCrash").textContent =
+  $("msgCrash")
+    .textContent =
     "🚀 Ракета взлетела! Успей забрать выигрыш.";
-
-  $("msgCrash").className =
+  $("msgCrash")
+    .className =
     "result-msg";
-
-
   animateCrash(
     crashStart,
     id
   );
-
 }
-
-
 /* =========================================================
    ROCKET ANIMATION
 ========================================================= */
-
-function animateCrash(now,id){
-
+function animateCrash(
+  now,
+  id
+){
   if(
     !isCrashRunning ||
     id !== crashRunId
   ){
     return;
   }
-
-
   const elapsed =
-    (now - crashStart) / 1000;
-
-
-  /*
-    Коэффициент растёт плавно.
-    Никакого мгновенного x1.00.
-  */
-
+    (now - crashStart) /
+    1000;
   crashMulti =
     Math.min(
       crashTarget,
@@ -2065,177 +1807,103 @@ function animateCrash(now,id){
         elapsed * 0.30
       )
     );
-
-
   if(
     crashMulti >=
     crashTarget
   ){
-
     crashMulti =
       crashTarget;
-
     $("crashMulti")
       .textContent =
       "x" +
       crashMulti.toFixed(2);
-
     explodeCrash();
-
     return;
   }
-
-
   $("crashMulti")
     .textContent =
     "x" +
     crashMulti.toFixed(2);
-
-
-  if(crashMulti >= 4){
-
+  if(crashMulti >= 3){
     $("crashMulti")
       .style.color =
       "#ffd21c";
-
     $("crashMulti")
       .classList.add(
         "hot"
       );
-
-  }else if(crashMulti >= 2){
-
+  }
+  else if(crashMulti >= 2){
     $("crashMulti")
       .style.color =
       "#00f5a0";
-
-  }else{
-
+  }
+  else{
     $("crashMulti")
       .style.color =
       "#fff";
-
   }
-
-
-  /*
-    Полёт от нижнего левого
-    к верхнему правому.
-
-    Используем кривую,
-    чтобы движение было
-    красивым, а не просто
-    диагональным.
-  */
-
   const duration =
     Math.max(
       1,
       Math.min(
-        12,
+        8,
         crashTarget * 0.85
       )
     );
-
-
   const progress =
     Math.min(
       1,
       elapsed / duration
     );
-
-
-  /*
-    Плавность.
-  */
-
   const eased =
     1 -
     Math.pow(
       1-progress,
       2.25
     );
-
-
   const box =
     $("spaceWindow");
-
-
   const rocket =
     $("rocketContainer");
-
-
   const rocketWidth =
-    rocket.offsetWidth || 100;
-
+    rocket.offsetWidth ||
+    100;
   const rocketHeight =
-    rocket.offsetHeight || 90;
-
-
-  /*
-    Конечная точка:
-    практически правый верхний угол.
-  */
-
+    rocket.offsetHeight ||
+    90;
   const startX =
     box.clientWidth * 0.04;
-
   const startY =
     box.clientHeight * 0.76;
-
-
   const endX =
     box.clientWidth -
     rocketWidth * 0.78;
-
   const endY =
     rocketHeight * 0.20;
-
-
   const x =
     startX +
     (endX-startX) *
     eased;
-
-
-  /*
-    Немного кривой вверх,
-    чтобы ракета красиво
-    поднималась.
-  */
-
   const curve =
     Math.sin(
       eased * Math.PI
     ) *
     box.clientHeight *
     0.07;
-
-
   const y =
     startY +
     (endY-startY) *
     eased -
     curve;
-
-
   rocket.style.left =
     x + "px";
-
   rocket.style.bottom =
     "auto";
-
   rocket.style.top =
     y + "px";
-
-
-  /*
-    След за ракетой.
-  */
-
   const line =
     $("flightPathLine");
-
   line.style.opacity =
     String(
       Math.min(
@@ -2243,8 +1911,6 @@ function animateCrash(now,id){
         .25 + progress
       )
     );
-
-
   crashFrame =
     requestAnimationFrame(
       t =>
@@ -2253,149 +1919,92 @@ function animateCrash(now,id){
           id
         )
     );
-
 }
-
-
 /* =========================================================
    EXPLOSION
 ========================================================= */
-
 function explodeCrash(){
-
-  if(!isCrashRunning){
+  if(!isCrashRunning)
     return;
-  }
-
-
   isCrashRunning =
     false;
-
-
   if(crashFrame){
-
     cancelAnimationFrame(
       crashFrame
     );
-
     crashFrame =
       null;
   }
-
-
   const rocket =
     $("rocketContainer");
-
-
   rocket.classList.remove(
     "flying"
   );
-
   rocket.classList.add(
     "crashed"
   );
-
-
   const explosion =
     $("explosion");
-
-
   explosion.classList.remove(
     "active"
   );
-
-
   void explosion.offsetWidth;
-
-
   explosion.classList.add(
     "active"
   );
-
-
   $("crashMulti")
     .textContent =
     "x" +
     crashTarget.toFixed(2);
-
   $("crashMulti")
     .style.color =
     "#ff315c";
-
-
-  $("msgCrash").textContent =
+  $("msgCrash")
+    .textContent =
     "💥 Взрыв на x" +
     crashTarget.toFixed(2) +
     ". Ставка проиграна.";
-
-  $("msgCrash").className =
+  $("msgCrash")
+    .className =
     "result-msg lose";
-
-
   $("cashoutBtn")
     .classList.add(
       "hidden"
     );
-
-
   $("flightPathLine")
     .classList.remove(
       "active"
     );
-
-
   if(navigator.vibrate){
-
     navigator.vibrate([
       100,
       50,
       160
     ]);
-
   }
-
-
   db.saveUser(user);
-
   updateUI();
-
   loadBoard();
-
-
   setTimeout(
     resetCrash,
     1200
   );
-
 }
-
-
 /* =========================================================
    CASHOUT
 ========================================================= */
-
 function cashout(){
-
-  if(!isCrashRunning){
+  if(!isCrashRunning)
     return;
-  }
-
-
   isCrashRunning =
     false;
-
-
   if(crashFrame){
-
     cancelAnimationFrame(
       crashFrame
     );
-
     crashFrame =
       null;
   }
-
-
   const multiplier =
     Math.max(
       1.05,
@@ -2404,285 +2013,186 @@ function cashout(){
         crashTarget
       )
     );
-
-
-  const payout =
-    Math.floor(
-      crashStake *
-      multiplier
+  /*
+    Чистая прибыль.
+    Максимум +30 000 ₽.
+  */
+  const profit =
+    getMaxProfit(
+      crashStake
     );
-
-
+  const payout =
+    crashStake +
+    profit;
   if(
     !Number.isSafeInteger(
       payout
     )
   ){
-
     resetCrash();
-
     return;
   }
-
-
   user.balance +=
     payout;
-
-
   db.saveUser(user);
-
-
   $("cashoutBtn")
     .classList.add(
       "hidden"
     );
-
-
   $("crashMulti")
     .style.color =
     "#00f5a0";
-
-
   $("crashMulti")
     .classList.remove(
       "hot"
     );
-
-
-  $("msgCrash").textContent =
+  $("msgCrash")
+    .textContent =
     "✅ Успешный вывод! " +
     "Коэффициент x" +
     multiplier.toFixed(2) +
-    ". Выигрыш: +" +
-    fmt(payout) +
+    ". Чистый выигрыш: +" +
+    fmt(profit) +
     " ₽";
-
-
-  $("msgCrash").className =
+  $("msgCrash")
+    .className =
     "result-msg win";
-
-
   $("flightPathLine")
     .classList.remove(
       "active"
     );
-
-
   if(navigator.vibrate){
-
     navigator.vibrate(70);
-
   }
-
-
   updateUI();
-
   loadBoard();
-
-
   setTimeout(
     resetCrash,
     1100
   );
-
 }
-
-
 /* =========================================================
-   RESET ROCKET
+   RESET
 ========================================================= */
-
 function resetCrash(){
-
   if(crashFrame){
-
     cancelAnimationFrame(
       crashFrame
     );
-
     crashFrame =
       null;
   }
-
-
   isCrashRunning =
     false;
-
-
   const rocket =
     $("rocketContainer");
-
-
   rocket.classList.remove(
     "crashed",
     "flying"
   );
-
-
   rocket.style.opacity =
     "1";
-
-
   rocket.style.left =
     "5%";
-
-
   rocket.style.top =
     "auto";
-
-
   rocket.style.bottom =
     "8%";
-
-
   rocket.style.transform =
     "translate(0,0)";
-
-
   $("flightPathLine")
     .classList.remove(
       "active"
     );
-
-
   $("explosion")
     .classList.remove(
       "active"
     );
-
-
   $("cashoutBtn")
     .classList.add(
       "hidden"
     );
-
-
   $("playCrashBtn")
     .classList.remove(
       "hidden"
     );
-
-
   $("crashMulti")
     .textContent =
     "x1.00";
-
-
   $("crashMulti")
     .style.color =
     "#fff";
-
-
   $("crashMulti")
     .classList.remove(
       "hot"
     );
-
-
   updateUI();
-
 }
-
-
 /* =========================================================
    LEADERBOARD
 ========================================================= */
-
 function loadBoard(){
-
   const board =
     $("leaderboard");
-
   const list =
     db.getBoard();
-
-
   if(!list.length){
-
     board.innerHTML =
       "<li>Пока нет игроков.</li>";
-
     return;
   }
-
-
   board.innerHTML =
     "";
-
-
   list.forEach(
     (x,i)=>{
-
       const li =
         document.createElement(
           "li"
         );
-
       const left =
         document.createElement(
           "span"
         );
-
       const right =
         document.createElement(
           "span"
         );
-
-
       const rank =
         document.createElement(
           "span"
         );
-
       rank.className =
         "rank";
-
       rank.textContent =
-        "#" + (i+1);
-
-
+        "#" +
+        (i+1);
       left.appendChild(
         rank
       );
-
       left.appendChild(
         document.createTextNode(
           x.username
         )
       );
-
-
       right.className =
         "score";
-
       right.textContent =
         fmt(x.balance) +
         " ₽";
-
-
       li.append(
         left,
         right
       );
-
-
       board.appendChild(
         li
       );
-
     }
   );
-
 }
-
-
 /* =========================================================
    INIT
 ========================================================= */
-
 showUser(null);
-
 </script>
-
 </body>
 </html>
