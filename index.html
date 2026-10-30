@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#050611">
-
+<meta name="theme-color" content="#070812">
 <title>ROYAL GOLD — Space Games</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,9 +40,9 @@ body{
   color:var(--text);
   font-family:Montserrat,Arial,sans-serif;
   background:
-    radial-gradient(circle at 50% -10%,#292354 0%,transparent 38%),
-    radial-gradient(circle at 100% 35%,#101d43 0%,transparent 28%),
-    radial-gradient(circle at 0% 70%,#281442 0%,transparent 30%),
+    radial-gradient(circle at 50% -10%,#25214d 0%,transparent 38%),
+    radial-gradient(circle at 100% 35%,#111c3b 0%,transparent 28%),
+    radial-gradient(circle at 0% 70%,#24153e 0%,transparent 30%),
     #05060d;
   overflow-x:hidden;
 }
@@ -331,13 +330,12 @@ button:disabled{
   100%{transform:translateY(-3px)}
 }
 
-.message{
-  min-height:29px;
-  margin-top:15px;
+.slot-result{
+  min-height:28px;
+  margin-top:14px;
   text-align:center;
-  font-size:13px;
   font-weight:800;
-  line-height:1.7;
+  line-height:1.6;
 }
 
 .win{
@@ -353,25 +351,23 @@ button:disabled{
   text-shadow:0 0 20px #ffd52a66;
 }
 
-/* =========================
-   SPACE WINDOW
-========================= */
+/* CRASH */
 
 .space-window{
   position:relative;
   width:100%;
-  height:clamp(350px,72vw,520px);
+  height:clamp(330px,72vw,500px);
   margin-top:20px;
   overflow:hidden;
-  border-radius:28px;
-  border:1px solid #7865ff;
+  border-radius:27px;
+  border:1px solid #725cff;
   background:
-    radial-gradient(circle at 25% 78%,#713dff35,transparent 28%),
-    radial-gradient(circle at 92% 8%,#00c8ff18,transparent 30%),
-    radial-gradient(circle at 55% 45%,#181b4a 0%,#080b20 48%,#02030a 100%);
+    radial-gradient(circle at 35% 78%,#653bff35,transparent 30%),
+    radial-gradient(circle at 90% 10%,#00aaff16,transparent 30%),
+    radial-gradient(circle at 50% 50%,#151735 0%,#070a18 55%,#02030a 100%);
   box-shadow:
-    inset 0 0 90px #000e,
-    0 0 40px #6248ff18;
+    inset 0 0 70px #000d,
+    0 0 35px #6248ff12;
   isolation:isolate;
 }
 
@@ -380,7 +376,7 @@ button:disabled{
 .space-window .grid{
   position:absolute;
   inset:0;
-  opacity:.25;
+  opacity:.22;
   background:
     repeating-linear-gradient(
       to bottom,
@@ -427,62 +423,26 @@ button:disabled{
   }
 }
 
-/* PLANET */
-
-.planet{
-  position:absolute;
-  width:160px;
-  height:160px;
-  right:-65px;
-  top:-65px;
-  border-radius:50%;
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #7defff 0%,
-      #3b75d8 18%,
-      #27326d 48%,
-      #0b0d28 72%,
-      #03040d 100%
-    );
-  box-shadow:
-    0 0 30px #4b82ff66,
-    0 0 80px #6950ff22;
-  opacity:.65;
-}
-
-.planet:after{
-  content:"";
-  position:absolute;
-  width:210px;
-  height:48px;
-  left:-25px;
-  top:50px;
-  border:2px solid #7b74ff55;
-  border-radius:50%;
-  transform:rotate(-18deg);
-}
-
-/* ORBIT */
+/* ORBIT GLOW */
 
 .orbit{
   position:absolute;
-  width:340px;
-  height:340px;
-  left:35%;
+  width:330px;
+  height:330px;
+  left:38%;
   top:18%;
   border-radius:50%;
   border:1px solid #735cff12;
-  box-shadow:0 0 90px #644cff0b;
+  box-shadow:0 0 80px #644cff0b;
 }
 
 /* MULTIPLIER */
 
 .multiplier{
   position:absolute;
-  z-index:20;
+  z-index:8;
   left:50%;
-  top:34%;
+  top:35%;
   transform:translate(-50%,-50%);
   white-space:nowrap;
   font-size:clamp(48px,13vw,82px);
@@ -500,346 +460,226 @@ button:disabled{
 
 .flight-trail{
   position:absolute;
-  z-index:4;
+  z-index:2;
   left:7%;
   bottom:14%;
   width:0;
-  height:7px;
-  border-radius:50%;
+  height:5px;
+  border-radius:10px;
   transform:rotate(-30deg);
   transform-origin:left center;
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #7c4dff,
-      #4de8ff,
-      #fff,
-      #ffb52e
-    );
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #ff5b21,
+    #ffd84a,
+    #66dfff,
+    #7d5cff
+  );
   box-shadow:
-    0 0 8px #55dfff,
-    0 0 20px #7455ff,
-    0 0 40px #4f8cff;
+    0 0 8px #ff5b21,
+    0 0 22px #5c6dff;
   opacity:0;
-  pointer-events:none;
 }
 
-/* =========================
-   BEAUTIFUL ROCKET
-========================= */
+/* ROCKET */
 
 .rocket{
   position:absolute;
-  z-index:15;
+  z-index:10;
   left:7%;
   top:72%;
-  width:128px;
-  height:100px;
+  width:112px;
+  height:85px;
   opacity:1;
   will-change:left,top,transform;
-  filter:
-    drop-shadow(0 0 10px #4bdcff)
-    drop-shadow(0 0 25px #735cff55);
+  transition:filter .15s;
 }
-
-.rocket-glow{
-  position:absolute;
-  left:2px;
-  top:18px;
-  width:115px;
-  height:65px;
-  border-radius:50%;
-  background:
-    radial-gradient(
-      ellipse,
-      #62eaff35,
-      #725cff16,
-      transparent 72%
-    );
-  filter:blur(15px);
-}
-
-/* main hull */
 
 .rocket-body{
   position:absolute;
-  left:28px;
-  top:27px;
-  width:76px;
-  height:40px;
-  border-radius:
-    70% 58% 58% 70%;
-  transform:rotate(-11deg);
+  left:25px;
+  top:20px;
+  width:67px;
+  height:34px;
+  border-radius:60% 52% 52% 60%;
+  transform:rotate(-10deg);
   background:
     linear-gradient(
       180deg,
       #ffffff 0%,
-      #dff8ff 22%,
-      #79c9ef 48%,
-      #3976b8 72%,
-      #182b60 100%
+      #c8edff 30%,
+      #70a7d9 55%,
+      #294a7c 100%
     );
-  border:1px solid #baf5ff;
   box-shadow:
-    inset 0 -7px 12px #102957,
-    inset 5px 2px 10px #fff8,
-    0 0 12px #56ddff,
-    0 0 28px #428dff77;
+    inset 0 -5px 8px #18325b,
+    0 0 15px #57cfff,
+    0 0 35px #428dff66;
 }
 
-/* nose */
+.rocket-body:before{
+  content:"";
+  position:absolute;
+  right:9px;
+  top:6px;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  border:3px solid #eaffff;
+  background:
+    radial-gradient(circle at 30% 25%,#ffffff,#5defff 30%,#123b6a 70%);
+  box-shadow:
+    0 0 8px #70efff,
+    inset 0 0 5px #000;
+}
 
 .rocket-body:after{
   content:"";
   position:absolute;
-  right:-27px;
-  top:3px;
+  right:-19px;
+  top:0;
   width:0;
   height:0;
-  border-top:18px solid transparent;
-  border-bottom:18px solid transparent;
-  border-left:29px solid #eafaff;
-  filter:
-    drop-shadow(0 0 5px #72eaff)
-    drop-shadow(0 0 12px #6b7cff);
+  border-top:17px solid transparent;
+  border-bottom:17px solid transparent;
+  border-left:25px solid #e9f7ff;
+  filter:drop-shadow(0 0 7px #70dfff);
 }
-
-/* cockpit */
-
-.rocket-window{
-  position:absolute;
-  z-index:8;
-  left:69px;
-  top:31px;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  border:3px solid #ecffff;
-  background:
-    radial-gradient(
-      circle at 28% 22%,
-      #ffffff,
-      #61eaff 25%,
-      #2864a5 55%,
-      #081936 100%
-    );
-  box-shadow:
-    0 0 8px #72efff,
-    inset 0 0 7px #000;
-}
-
-/* fins */
 
 .rocket-fin{
   position:absolute;
-  z-index:2;
-  left:34px;
-  top:52px;
-  width:31px;
-  height:34px;
-  background:
-    linear-gradient(
-      145deg,
-      #ffe66b,
-      #ff9c2b 42%,
-      #ff315d
-    );
-  clip-path:
-    polygon(
-      0 0,
-      100% 22%,
-      58% 100%,
-      15% 73%
-    );
-  filter:
-    drop-shadow(0 0 5px #ff5928)
-    drop-shadow(0 0 12px #ff3b5f55);
+  z-index:-1;
+  left:31px;
+  top:42px;
+  width:26px;
+  height:28px;
+  background:linear-gradient(145deg,#ffdd35,#ff4d30);
+  clip-path:polygon(0 0,100% 22%,55% 100%,18% 70%);
   transform:rotate(-12deg);
+  filter:drop-shadow(0 0 5px #ff5928);
 }
 
 .rocket-fin.top{
-  top:8px;
+  top:4px;
   transform:rotate(173deg);
 }
 
-/* engine */
-
-.engine{
+.rocket-window{
   position:absolute;
-  left:15px;
-  top:35px;
-  width:23px;
-  height:25px;
+  z-index:3;
+  left:62px;
+  top:25px;
+  width:17px;
+  height:17px;
   border-radius:50%;
-  background:
-    radial-gradient(
-      circle,
-      #dfffff 0%,
-      #65eaff 30%,
-      #4163ff 58%,
-      #17154c 100%
-    );
-  box-shadow:
-    0 0 12px #62eaff,
-    0 0 25px #665cff;
+  border:3px solid #eaffff;
+  background:#17426f;
 }
-
-/* flame */
 
 .flame{
   position:absolute;
-  z-index:1;
-  left:-22px;
-  top:39px;
-  width:62px;
-  height:27px;
-  clip-path:
-    polygon(
-      0 50%,
-      22% 8%,
-      100% 50%,
-      22% 92%
-    );
+  left:-20px;
+  top:31px;
+  width:48px;
+  height:18px;
   background:
     linear-gradient(
       90deg,
       transparent,
-      #633cff 18%,
-      #2eeaff 42%,
-      #fff 68%,
-      #ffd43b 100%
+      #ff3d17 20%,
+      #ff9d21 55%,
+      #fff 100%
     );
+  clip-path:polygon(0 50%,25% 10%,100% 50%,25% 90%);
   filter:
-    drop-shadow(0 0 7px #4edfff)
-    drop-shadow(0 0 16px #674cff)
-    drop-shadow(0 0 25px #ff9d21);
-  animation:
-    flamePulse .09s infinite alternate;
+    drop-shadow(0 0 7px #ff4b16)
+    drop-shadow(0 0 15px #ff9c1e);
+  animation:flamePulse .09s infinite alternate;
 }
 
 .flame.inner{
-  left:-13px;
-  top:45px;
-  width:42px;
-  height:13px;
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #fff,
-      #9cffff
-    );
-  filter:drop-shadow(0 0 9px #fff);
+  left:-10px;
+  top:35px;
+  width:32px;
+  height:10px;
+  background:linear-gradient(90deg,transparent,#fff,#7defff);
+  filter:drop-shadow(0 0 8px #fff);
 }
 
 @keyframes flamePulse{
   from{
-    transform:
-      scaleX(.78)
-      scaleY(.84);
+    transform:scaleX(.75) scaleY(.85);
   }
   to{
-    transform:
-      scaleX(1.16)
-      scaleY(1.18);
+    transform:scaleX(1.15) scaleY(1.15);
   }
 }
 
-/* ROCKET DETAILS */
-
-.rocket-detail{
+.rocket-glow{
   position:absolute;
-  z-index:6;
-  left:43px;
-  top:31px;
-  width:17px;
-  height:4px;
-  border-radius:5px;
-  background:#ffffff77;
-  box-shadow:
-    0 8px 0 #ffffff35,
-    0 16px 0 #ffffff20;
-  transform:rotate(-10deg);
+  left:0;
+  top:10px;
+  width:100px;
+  height:65px;
+  border-radius:50%;
+  background:#6455ff25;
+  filter:blur(18px);
 }
 
 /* EXPLOSION */
 
 .explosion{
   position:absolute;
-  z-index:50;
+  z-index:30;
   left:50%;
   top:50%;
-  font-size:75px;
+  font-size:70px;
   opacity:0;
-  transform:
-    translate(-50%,-50%)
-    scale(.1);
+  transform:translate(-50%,-50%) scale(.1);
   pointer-events:none;
 }
 
 .explosion.active{
-  animation:
-    explode .8s ease-out forwards;
+  animation:explode .75s ease-out forwards;
 }
 
 @keyframes explode{
-
   0%{
     opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(.1);
+    transform:translate(-50%,-50%) scale(.1);
     filter:brightness(1);
   }
-
-  25%{
+  35%{
     opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(.85);
-    filter:brightness(1.5);
-  }
-
-  50%{
-    opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(1.5);
+    transform:translate(-50%,-50%) scale(1.35);
     filter:brightness(2);
   }
-
   100%{
     opacity:0;
-    transform:
-      translate(-50%,-50%)
-      scale(3);
-    filter:
-      blur(10px)
-      brightness(1);
+    transform:translate(-50%,-50%) scale(2.7);
+    filter:blur(10px);
   }
 }
 
+/* ROCKET CRASH */
+
 .rocket.crashed{
-  animation:
-    rocketCrash .52s ease-out forwards;
+  animation:rocketCrash .5s ease-out forwards;
 }
 
 @keyframes rocketCrash{
-
   0%{
     opacity:1;
-    transform:rotate(-18deg) scale(1);
+    transform:rotate(0) scale(1);
   }
-
-  35%{
+  50%{
     opacity:1;
-    transform:rotate(10deg) scale(1.18);
+    transform:rotate(25deg) scale(1.25);
   }
-
   100%{
     opacity:0;
-    transform:rotate(55deg) scale(.25);
+    transform:rotate(60deg) scale(.4);
   }
 }
 
@@ -849,6 +689,15 @@ button:disabled{
   width:100%;
   margin-top:16px;
   font-size:15px;
+}
+
+.message{
+  min-height:29px;
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  font-weight:800;
+  line-height:1.7;
 }
 
 /* LEADERBOARD */
@@ -940,8 +789,8 @@ footer{
   }
 
   .rocket{
-    width:115px;
-    height:92px;
+    width:100px;
+    height:78px;
   }
 
   .multiplier{
@@ -973,7 +822,6 @@ footer{
   <div id="authForm">
 
     <label>Никнейм</label>
-
     <input
       id="nick"
       maxlength="15"
@@ -983,7 +831,6 @@ footer{
     >
 
     <label>Пароль</label>
-
     <input
       id="password"
       type="password"
@@ -993,21 +840,13 @@ footer{
     >
 
     <div class="row" style="margin-top:14px">
-
-      <button
-        class="primary"
-        onclick="account('login')"
-      >
+      <button class="primary" onclick="account('login')">
         ВОЙТИ
       </button>
 
-      <button
-        class="secondary"
-        onclick="account('register')"
-      >
+      <button class="secondary" onclick="account('register')">
         РЕГИСТРАЦИЯ
       </button>
-
     </div>
 
   </div>
@@ -1025,7 +864,7 @@ footer{
     ></div>
 
     <div class="balance-title">
-      ИГРОВОЙ БАЛАНС
+      ТВОЙ ИГРОВОЙ БАЛАНС
     </div>
 
     <div class="balance">
@@ -1047,10 +886,7 @@ footer{
 
 <!-- TABS -->
 
-<div
-  class="tabs hidden"
-  id="gameTabs"
->
+<div class="tabs hidden" id="gameTabs">
 
   <button
     class="tab active"
@@ -1072,16 +908,13 @@ footer{
 
 <!-- SLOTS -->
 
-<section
-  class="card hidden"
-  id="gameSlots"
->
+<section class="card hidden" id="gameSlots">
 
   <h2>🎰 GOLDEN SLOTS</h2>
 
   <p class="description">
-    Три неоновых барабана. Собери одинаковые символы
-    и получи множитель.
+    Три неоновых барабана. Запусти вращение и попробуй собрать
+    одинаковые символы.
   </p>
 
   <div class="slot-window">
@@ -1122,29 +955,21 @@ footer{
 
 <!-- CRASH -->
 
-<section
-  class="card hidden"
-  id="gameCrash"
->
+<section class="card hidden" id="gameCrash">
 
   <h2>🚀 COSMIC ROCKET</h2>
 
   <p class="description">
-    Ракета ускоряется, коэффициент растёт.
+    Ракета ускоряется, а коэффициент растёт.
     Успей забрать выигрыш до взрыва.
   </p>
 
-  <div
-    class="space-window"
-    id="spaceWindow"
-  >
+  <div class="space-window" id="spaceWindow">
 
     <div class="grid"></div>
 
     <div class="stars"></div>
     <div class="stars two"></div>
-
-    <div class="planet"></div>
 
     <div class="orbit"></div>
 
@@ -1170,14 +995,10 @@ footer{
       <div class="flame"></div>
       <div class="flame inner"></div>
 
-      <div class="engine"></div>
-
       <div class="rocket-fin"></div>
       <div class="rocket-fin top"></div>
 
       <div class="rocket-body"></div>
-
-      <div class="rocket-detail"></div>
 
       <div class="rocket-window"></div>
 
@@ -1226,6 +1047,11 @@ footer{
     id="msgCrash"
   ></div>
 
+  <div class="info">
+    Игра использует только виртуальный баланс.
+    Он не имеет денежной стоимости.
+  </div>
+
 </section>
 
 <!-- LEADERBOARD -->
@@ -1248,7 +1074,7 @@ footer{
 </section>
 
 <footer>
-  ROYAL GOLD © 2026
+  ROYAL GOLD © 2026 · ВИРТУАЛЬНЫЕ ОЧКИ
 </footer>
 
 </main>
@@ -1260,12 +1086,10 @@ footer{
    HELPERS
 ========================================================= */
 
-const $ = id =>
-  document.getElementById(id);
+const $ = id => document.getElementById(id);
 
 const fmt = number =>
-  Math.floor(number)
-    .toLocaleString("ru-RU");
+  Math.floor(number).toLocaleString("ru-RU");
 
 let user = null;
 
@@ -1276,12 +1100,12 @@ let crashFrame = null;
 let crashStart = 0;
 let crashStake = 0;
 let crashMultiplier = 1;
-let crashTarget = 1.10;
+let crashTarget = 1.5;
 let crashRunId = 0;
 
 
 /* =========================================================
-   DATABASE
+   LOCAL STORAGE
 ========================================================= */
 
 const db = {
@@ -1289,17 +1113,13 @@ const db = {
   getUser(name){
 
     try{
-
       return JSON.parse(
         localStorage.getItem(
           "royal_gold_user_" + name
         )
       );
-
     }catch(e){
-
       return null;
-
     }
 
   },
@@ -1317,20 +1137,13 @@ const db = {
 
     const list = [];
 
-    for(
-      let i = 0;
-      i < localStorage.length;
-      i++
-    ){
+    for(let i=0;i<localStorage.length;i++){
 
-      const key =
-        localStorage.key(i);
+      const key = localStorage.key(i);
 
       if(
         key &&
-        key.startsWith(
-          "royal_gold_user_"
-        )
+        key.startsWith("royal_gold_user_")
       ){
 
         try{
@@ -1344,9 +1157,7 @@ const db = {
             data &&
             typeof data.balance === "number"
           ){
-
             list.push(data);
-
           }
 
         }catch(e){}
@@ -1356,12 +1167,8 @@ const db = {
     }
 
     return list
-      .sort(
-        (a,b) =>
-          b.balance - a.balance
-      )
+      .sort((a,b)=>b.balance-a.balance)
       .slice(0,10);
-
   }
 
 };
@@ -1386,7 +1193,6 @@ function account(mode){
     );
 
     return;
-
   }
 
   if(password.length < 8){
@@ -1396,7 +1202,6 @@ function account(mode){
     );
 
     return;
-
   }
 
   let existing =
@@ -1411,13 +1216,14 @@ function account(mode){
       );
 
       return;
-
     }
 
     existing = {
 
       username:name,
+
       password:password,
+
       balance:10000
 
     };
@@ -1436,7 +1242,6 @@ function account(mode){
       );
 
       return;
-
     }
 
   }
@@ -1444,27 +1249,30 @@ function account(mode){
   $("password").value = "";
 
   showUser(existing);
-
 }
 
 
 function logout(){
 
-  if(
-    crashRunning ||
-    slotsBusy
-  ){
+  if(crashRunning){
 
     alert(
-      "Сначала закончи текущую игру."
+      "Сначала закончи раунд ракеты."
     );
 
     return;
+  }
 
+  if(slotsBusy){
+
+    alert(
+      "Дождись окончания вращения."
+    );
+
+    return;
   }
 
   showUser(null);
-
 }
 
 
@@ -1515,7 +1323,6 @@ function showUser(data){
   }
 
   loadBoard();
-
 }
 
 
@@ -1531,12 +1338,10 @@ function updateUI(){
     fmt(user.balance);
 
   $("playSlotsBtn").disabled =
-    slotsBusy ||
-    crashRunning;
+    slotsBusy || crashRunning;
 
   $("playCrashBtn").disabled =
-    slotsBusy ||
-    crashRunning;
+    slotsBusy || crashRunning;
 
 }
 
@@ -1547,9 +1352,7 @@ function switchGame(game){
     slotsBusy ||
     crashRunning
   ){
-
     return;
-
   }
 
   const slots =
@@ -1604,7 +1407,6 @@ function getStake(inputId){
     );
 
     return null;
-
   }
 
   const stake =
@@ -1620,7 +1422,6 @@ function getStake(inputId){
     );
 
     return null;
-
   }
 
   if(stake > user.balance){
@@ -1633,11 +1434,9 @@ function getStake(inputId){
     );
 
     return null;
-
   }
 
   return stake;
-
 }
 
 
@@ -1654,15 +1453,14 @@ const symbols = [
   "🍀"
 ];
 
+
 function randomSymbol(){
 
   return symbols[
     Math.floor(
-      Math.random() *
-      symbols.length
+      Math.random()*symbols.length
     )
   ];
-
 }
 
 
@@ -1673,9 +1471,7 @@ function playSlots(){
     slotsBusy ||
     crashRunning
   ){
-
     return;
-
   }
 
   const stake =
@@ -1688,6 +1484,7 @@ function playSlots(){
   user.balance -= stake;
 
   db.saveUser(user);
+
   updateUI();
 
   const reels = [
@@ -1704,14 +1501,12 @@ function playSlots(){
 
   reels.forEach(
     reel =>
-      reel.classList.add(
-        "spinning"
-      )
+      reel.classList.add("spinning")
   );
 
   /*
-    Шанс одинаков для любой ставки.
-    Размер ставки НЕ меняет вероятность.
+    Фиксированный набор вероятностей.
+    Сумма ставки НЕ влияет на шанс.
   */
 
   const roll =
@@ -1792,6 +1587,10 @@ function playSlots(){
 
   }
 
+  /*
+    Барабаны останавливаются ПО ОЧЕРЕДИ.
+  */
+
   const stopTimes = [
     850,
     1200,
@@ -1815,8 +1614,8 @@ function playSlots(){
       reel => {
 
         if(
-          reel.dataset.stopped !==
-          "true"
+          !reel.dataset.stopped ||
+          reel.dataset.stopped !== "true"
         ){
 
           reel.textContent =
@@ -1830,9 +1629,7 @@ function playSlots(){
     if(elapsed < 1550){
 
       animation =
-        requestAnimationFrame(
-          spin
-        );
+        requestAnimationFrame(spin);
 
     }
 
@@ -1840,14 +1637,11 @@ function playSlots(){
 
   reels.forEach(
     reel =>
-      reel.dataset.stopped =
-        "false"
+      reel.dataset.stopped = "false"
   );
 
   animation =
-    requestAnimationFrame(
-      spin
-    );
+    requestAnimationFrame(spin);
 
   stopTimes.forEach(
     (time,index)=>{
@@ -1856,8 +1650,7 @@ function playSlots(){
 
         reels[index]
           .dataset
-          .stopped =
-          "true";
+          .stopped = "true";
 
         reels[index]
           .classList
@@ -1875,22 +1668,19 @@ function playSlots(){
   setTimeout(()=>{
 
     if(animation){
-
-      cancelAnimationFrame(
-        animation
-      );
-
+      cancelAnimationFrame(animation);
     }
 
     reels.forEach(
       (reel,index)=>{
 
-        reel.classList.remove(
-          "spinning"
-        );
+        reel
+          .classList
+          .remove("spinning");
 
-        reel.dataset.stopped =
-          "true";
+        reel
+          .dataset
+          .stopped = "true";
 
         reel.textContent =
           result[index];
@@ -1918,6 +1708,16 @@ function playSlots(){
       $("msgSlots").className =
         "message " + type;
 
+      if(navigator.vibrate){
+
+        navigator.vibrate(
+          multiplier >= 4
+            ? [80,40,120,40,160]
+            : [70]
+        );
+
+      }
+
     }else{
 
       $("msgSlots").textContent =
@@ -1933,6 +1733,7 @@ function playSlots(){
     slotsBusy = false;
 
     updateUI();
+
     loadBoard();
 
   },1650);
@@ -1941,32 +1742,7 @@ function playSlots(){
 
 
 /* =========================================================
-   CRASH TARGET
-========================================================= */
-
-function generateCrashTarget(){
-
-  /*
-    Любая точка от x1.10 до x5.00.
-    Сумма ставки здесь НЕ используется.
-  */
-
-  const min = 1.10;
-  const max = 5.00;
-
-  return Number(
-    (
-      min +
-      Math.random() *
-      (max - min)
-    ).toFixed(2)
-  );
-
-}
-
-
-/* =========================================================
-   START CRASH
+   CRASH
 ========================================================= */
 
 function startCrash(){
@@ -1976,9 +1752,7 @@ function startCrash(){
     crashRunning ||
     slotsBusy
   ){
-
     return;
-
   }
 
   const stake =
@@ -1991,6 +1765,7 @@ function startCrash(){
   user.balance -= stake;
 
   db.saveUser(user);
+
   updateUI();
 
   crashRunning = true;
@@ -2004,11 +1779,50 @@ function startCrash(){
     ++crashRunId;
 
   /*
-    ВАЖНО:
-    здесь нет проверки размера ставки.
+    Точка взрыва заранее выбирается случайно.
+    Она не зависит от размера ставки.
   */
+
+  const r =
+    Math.random();
+
+  if(r < 0.10){
+
+    crashTarget =
+      1.05 +
+      Math.random()*0.35;
+
+  }else if(r < 0.35){
+
+    crashTarget =
+      1.35 +
+      Math.random()*0.85;
+
+  }else if(r < 0.70){
+
+    crashTarget =
+      2.20 +
+      Math.random()*1.8;
+
+  }else if(r < 0.92){
+
+    crashTarget =
+      4.0 +
+      Math.random()*3;
+
+  }else{
+
+    crashTarget =
+      7.0 +
+      Math.random()*5;
+
+  }
+
   crashTarget =
-    generateCrashTarget();
+    Math.min(
+      12,
+      crashTarget
+    );
 
   const rocket =
     $("rocket");
@@ -2017,23 +1831,14 @@ function startCrash(){
     "crashed"
   );
 
-  rocket.style.transition =
-    "none";
+  rocket.style.opacity = "1";
 
-  rocket.style.opacity =
-    "1";
+  rocket.style.left = "7%";
 
-  rocket.style.left =
-    "7%";
-
-  rocket.style.top =
-    "72%";
-
-  rocket.style.transform =
-    "rotate(-18deg)";
+  rocket.style.top = "72%";
 
   $("flightTrail").style.width =
-    "0";
+    "0px";
 
   $("flightTrail").style.opacity =
     "0";
@@ -2060,7 +1865,7 @@ function startCrash(){
     false;
 
   $("msgCrash").textContent =
-    "🚀 Ракета взлетела!";
+    "🚀 Ракета взлетает!";
 
   $("msgCrash").className =
     "message";
@@ -2073,24 +1878,23 @@ function startCrash(){
 }
 
 
-/* =========================================================
-   ANIMATION
-========================================================= */
-
 function animateCrash(now,id){
 
   if(
     !crashRunning ||
     id !== crashRunId
   ){
-
     return;
-
   }
 
   const elapsed =
-    (now - crashStart) /
-    1000;
+    (now - crashStart) / 1000;
+
+  /*
+    Рост коэффициента.
+    Чем дольше раунд,
+    тем быстрее увеличивается множитель.
+  */
 
   crashMultiplier =
     Math.exp(
@@ -2098,8 +1902,7 @@ function animateCrash(now,id){
     );
 
   if(
-    crashMultiplier >=
-    crashTarget
+    crashMultiplier >= crashTarget
   ){
 
     crashMultiplier =
@@ -2107,12 +1910,11 @@ function animateCrash(now,id){
 
     $("crashMulti").textContent =
       "x" +
-      crashTarget.toFixed(2);
+      crashMultiplier.toFixed(2);
 
     explodeCrash();
 
     return;
-
   }
 
   $("crashMulti").textContent =
@@ -2124,9 +1926,7 @@ function animateCrash(now,id){
     $("crashMulti").style.color =
       "#fff";
 
-  }else if(
-    crashMultiplier < 3.5
-  ){
+  }else if(crashMultiplier < 4){
 
     $("crashMulti").style.color =
       "#00f5a0";
@@ -2138,6 +1938,16 @@ function animateCrash(now,id){
 
   }
 
+  /*
+    Главная исправленная часть:
+    ракета движется через LEFT/TOP,
+    а не через transform.
+
+    Поэтому CSS transform ракеты
+    больше не конфликтует
+    с расчётом движения.
+  */
+
   const box =
     $("spaceWindow");
 
@@ -2147,8 +1957,8 @@ function animateCrash(now,id){
   const height =
     box.clientHeight;
 
-  const rocketWidth = 128;
-  const rocketHeight = 100;
+  const rocketWidth = 112;
+  const rocketHeight = 85;
 
   const startX =
     width * 0.07;
@@ -2156,44 +1966,45 @@ function animateCrash(now,id){
   const startY =
     height * 0.72;
 
-  /*
-    Финальная точка —
-    верхний правый угол.
-  */
-
   const endX =
-    width -
-    rocketWidth -
-    10;
+    width - rocketWidth - 18;
 
-  const endY = 8;
+  const endY =
+    18;
+
+  /*
+    Прогресс зависит от текущего
+    коэффициента.
+  */
 
   const progress =
     Math.min(
       1,
       (crashMultiplier - 1) /
       Math.max(
-        0.01,
+        .01,
         crashTarget - 1
       )
     );
 
+  /*
+    Плавная траектория.
+  */
+
   const eased =
     1 -
     Math.pow(
-      1 - progress,
-      1.55
+      1-progress,
+      1.7
     );
 
   const x =
     startX +
-    (endX - startX) *
-    eased;
+    (endX-startX)*eased;
 
   const y =
     startY +
-    (endY - startY) *
-    eased;
+    (endY-startY)*eased;
 
   const rocket =
     $("rocket");
@@ -2204,26 +2015,39 @@ function animateCrash(now,id){
   rocket.style.top =
     y + "px";
 
+  /*
+    След ракеты.
+  */
+
   const trail =
     $("flightTrail");
 
   trail.style.width =
     Math.max(
-      25,
+      30,
       eased * width * .82
     ) + "px";
 
   trail.style.opacity =
     String(
       Math.min(
-        .95,
-        .18 + progress
+        .9,
+        .2 + progress
       )
     );
 
+  /*
+    Небольшой наклон ракеты
+    по направлению движения.
+  */
+
+  const angle =
+    -18 -
+    progress*9;
+
   rocket.style.transform =
     "rotate(" +
-    (-18 - progress * 12) +
+    angle +
     "deg)";
 
   crashFrame =
@@ -2255,7 +2079,6 @@ function explodeCrash(){
     );
 
     crashFrame = null;
-
   }
 
   const rocket =
@@ -2308,6 +2131,7 @@ function explodeCrash(){
   db.saveUser(user);
 
   updateUI();
+
   loadBoard();
 
   setTimeout(
@@ -2325,9 +2149,7 @@ function explodeCrash(){
 function cashout(){
 
   if(!crashRunning){
-
     return;
-
   }
 
   crashRunning = false;
@@ -2339,7 +2161,6 @@ function cashout(){
     );
 
     crashFrame = null;
-
   }
 
   const multiplier =
@@ -2366,10 +2187,12 @@ function cashout(){
     "#00f5a0";
 
   $("msgCrash").textContent =
-    "✅ Выигрыш: +" +
+    "✅ Успешный вывод! " +
+    "Коэффициент x" +
+    multiplier.toFixed(2) +
+    ". Выигрыш: +" +
     fmt(payout) +
-    " ₽ · x" +
-    multiplier.toFixed(2);
+    " ₽";
 
   $("msgCrash").className =
     "message win";
@@ -2383,6 +2206,7 @@ function cashout(){
   }
 
   updateUI();
+
   loadBoard();
 
   setTimeout(
@@ -2394,7 +2218,7 @@ function cashout(){
 
 
 /* =========================================================
-   RESET
+   RESET CRASH
 ========================================================= */
 
 function resetCrash(){
@@ -2406,7 +2230,6 @@ function resetCrash(){
     );
 
     crashFrame = null;
-
   }
 
   crashRunning = false;
@@ -2434,7 +2257,7 @@ function resetCrash(){
     "rotate(-18deg)";
 
   $("flightTrail").style.width =
-    "0";
+    "0px";
 
   $("flightTrail").style.opacity =
     "0";
@@ -2458,7 +2281,7 @@ function resetCrash(){
     .add("hidden");
 
   $("msgCrash").textContent =
-    "🚀 Готов к следующему полёту";
+    "🚀 Готов к следующему полёту?";
 
   $("msgCrash").className =
     "message";
@@ -2486,7 +2309,6 @@ function loadBoard(){
       "<li>Пока нет игроков.</li>";
 
     return;
-
   }
 
   board.innerHTML = "";
@@ -2510,14 +2332,13 @@ function loadBoard(){
         "rank";
 
       rank.textContent =
-        "#" + (index + 1);
+        "#" + (index+1);
 
       left.appendChild(rank);
 
       left.appendChild(
         document.createTextNode(
-          " " +
-          player.username
+          " " + player.username
         )
       );
 
