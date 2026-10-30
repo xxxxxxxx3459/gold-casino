@@ -1,1878 +1,2372 @@
 <!DOCTYPE html>
+
 <html lang="ru">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<meta name="theme-color" content="#080810">
 
 <title>ROYAL GOLD — Virtual Games</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
+
 :root{
-  --bg:#050509;
-  --panel:#0d0d14;
-  --panel2:#12121b;
+
   --gold:#ffd21c;
+
   --gold2:#ff9d00;
-  --green:#35e38a;
-  --red:#ff4d67;
-  --text:#f5f5f7;
-  --muted:#858392;
-  --line:#ffffff10;
+
+  --bg:#07070d;
+
+  --panel:#15151f;
+
+  --panel2:#101018;
+
+  --text:#fff;
+
+  --muted:#9b9aaa;
+
+  --green:#00f5a0;
+
+  --green2:#00c878;
+
+  --red:#ff315c;
+
+  --purple:#705cff;
+
+  --blue:#35bfff;
+
 }
 
 *{
+
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
 
-html,
-body{
   margin:0;
+
   padding:0;
-  min-height:100%;
-  background:
-    radial-gradient(circle at 50% -10%,#302000 0,#0a0804 22%,#050509 52%);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+
+  -webkit-tap-highlight-color:transparent;
+
+}
+
+html{
+
+  scroll-behavior:smooth;
+
 }
 
 body{
+
   min-height:100vh;
+
+  overflow-x:hidden;
+
+  color:var(--text);
+
+  font-family:Montserrat,Arial,sans-serif;
+
+  background:
+
+    radial-gradient(circle at 50% -10%,#292343 0%,transparent 34%),
+
+    radial-gradient(circle at 100% 30%,#15162c 0%,transparent 30%),
+
+    linear-gradient(180deg,#090910,#050508);
+
 }
 
-button,
-input{
+body:before{
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:-1;
+
+  opacity:.14;
+
+  background-image:
+
+    radial-gradient(circle,#fff 1px,transparent 1px),
+
+    radial-gradient(circle,#9f8cff 1px,transparent 1px);
+
+  background-size:83px 83px,137px 137px;
+
+  background-position:20px 20px,70px 40px;
+
+}
+
+button,input{
+
   font:inherit;
+
 }
 
 button{
-  cursor:pointer;
+
+  border:0;
+
 }
 
-.app{
-  width:100%;
-  max-width:760px;
-  margin:0 auto;
-  padding:18px 14px 40px;
+button:disabled{
+
+  opacity:.45;
+
+  cursor:not-allowed;
+
 }
 
-/* HEADER */
+header{
 
-.header{
-  position:relative;
-  padding:20px;
-  border:1px solid #ffd21c2b;
-  border-radius:24px;
-  background:
-    linear-gradient(145deg,#18140a,#0d0d14 55%,#08080c);
-  box-shadow:
-    0 20px 50px #0008,
-    inset 0 1px #ffffff0b;
-  overflow:hidden;
-}
+  text-align:center;
 
-.header:before{
-  content:"";
-  position:absolute;
-  width:230px;
-  height:230px;
-  right:-110px;
-  top:-120px;
-  background:#ffd21c15;
-  filter:blur(30px);
-  border-radius:50%;
+  padding:30px 15px 20px;
+
 }
 
 .logo{
-  position:relative;
-  text-align:center;
-  font-weight:1000;
-  letter-spacing:4px;
-  font-size:28px;
+
+  font-size:clamp(25px,7vw,38px);
+
+  line-height:1;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
   color:var(--gold);
+
   text-shadow:
-    0 0 12px #ffd21c44,
-    0 0 30px #ff9d001f;
+
+    0 0 10px #ffd21c55,
+
+    0 0 35px #ffd21c22;
+
 }
 
-.logo-sub{
-  position:relative;
-  text-align:center;
-  color:#888692;
-  font-size:10px;
-  letter-spacing:2px;
-  margin-top:5px;
-}
+.subtitle{
 
-.balance-card{
-  position:relative;
-  margin-top:18px;
-  padding:15px;
-  border-radius:18px;
-  background:#08080d99;
-  border:1px solid #ffffff0d;
-  text-align:center;
-}
-
-.balance-label{
-  color:#777582;
-  font-size:10px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-}
-
-.balance{
-  margin-top:5px;
-  color:#fff;
-  font-size:27px;
-  font-weight:1000;
-}
-
-.balance span{
-  color:var(--gold);
-}
-
-/* NAV */
-
-.nav{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:14px;
-}
-
-.nav-btn{
-  border:1px solid #ffffff0d;
-  border-radius:16px;
-  background:#0d0d14;
-  color:#8d8b98;
-  padding:13px 10px;
-  font-size:12px;
-  font-weight:900;
-  transition:.2s;
-}
-
-.nav-btn.active{
-  color:#08080b;
-  background:linear-gradient(135deg,#ffe76b,#ffb000);
-  border-color:#ffd21c;
-  box-shadow:0 8px 25px #ffb00022;
-}
-
-/* SECTIONS */
-
-.section{
-  display:none;
-  margin-top:14px;
-}
-
-.section.active{
-  display:block;
-}
-
-.game-card{
-  position:relative;
-  overflow:hidden;
-  border-radius:24px;
-  border:1px solid #ffffff0d;
-  background:
-    linear-gradient(145deg,#111119,#09090e);
-  box-shadow:
-    0 20px 50px #0007,
-    inset 0 1px #ffffff07;
-  padding:18px;
-}
-
-.game-title{
-  text-align:center;
-  color:var(--gold);
-  font-size:17px;
-  font-weight:1000;
-  letter-spacing:1px;
-}
-
-.game-subtitle{
-  margin-top:5px;
-  text-align:center;
-  color:#777582;
-  font-size:10px;
-}
-
-/* STAKE */
-
-.stake-wrap{
-  margin-top:17px;
-}
-
-.stake-label{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  color:#858392;
-  font-size:10px;
-  margin-bottom:7px;
-}
-
-.stake-label strong{
-  color:var(--gold);
-}
-
-.stake-row{
-  display:flex;
-  gap:8px;
-}
-
-.stake-input{
-  width:100%;
-  min-width:0;
-  height:50px;
-  padding:0 14px;
-  border-radius:14px;
-  border:1px solid #ffffff12;
-  background:#07070b;
-  color:#fff;
-  outline:none;
-  font-size:17px;
-  font-weight:900;
-}
-
-.stake-input:focus{
-  border-color:#ffd21c66;
-  box-shadow:0 0 0 3px #ffd21c0b;
-}
-
-.stake-presets{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin-top:8px;
-}
-
-.stake-preset{
-  border:1px solid #ffffff0c;
-  border-radius:11px;
-  background:#111119;
-  color:#9b99a5;
-  padding:9px 4px;
-  font-size:10px;
-  font-weight:900;
-}
-
-.stake-preset:active{
-  transform:scale(.97);
-}
-
-.stake-preset:hover{
-  color:var(--gold);
-  border-color:#ffd21c33;
-}
-
-/* LIMIT BOX */
-
-.limit-box{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-  margin-top:12px;
-  padding:11px;
-  border-radius:15px;
-  border:1px solid #ffd21c25;
-  background:
-    linear-gradient(135deg,#ffd21c0c,#ff9d0005);
-}
-
-.limit-item{
-  padding:9px;
-  border-radius:11px;
-  background:#07070b88;
-  border:1px solid #ffffff08;
-}
-
-.limit-item-label{
-  color:#777582;
-  font-size:9px;
-  margin-bottom:4px;
-}
-
-.limit-item-value{
-  color:#fff;
-  font-size:12px;
-  font-weight:900;
-}
-
-.limit-item-value.gold{
-  color:var(--gold);
-}
-
-.limit-item-value.green{
-  color:var(--green);
-}
-
-/* BET INFO */
-
-.bet-info{
-  position:relative;
-  overflow:hidden;
-  margin-top:14px;
-  padding:16px 17px;
-  border-radius:18px;
-  border:1px solid #ffd21c55;
-  background:
-    linear-gradient(
-      135deg,
-      #ffd21c12,
-      #ff9d0008 45%,
-      #ffffff03
-    );
-  box-shadow:
-    inset 0 1px #ffffff08,
-    0 8px 25px #0005;
-}
-
-.bet-info:before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width:3px;
-  background:linear-gradient(
-    180deg,
-    #ffe76b,
-    #ff9d00
-  );
-}
-
-.bet-info-title{
-  color:var(--gold);
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:1px;
-  margin-bottom:10px;
-}
-
-.bet-info-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-}
-
-.bet-info-item{
-  padding:11px 10px;
-  border-radius:12px;
-  background:#08080e99;
-  border:1px solid #ffffff0b;
-}
-
-.bet-info-label{
-  display:block;
-  color:#858392;
-  font-size:10px;
-  margin-bottom:4px;
-}
-
-.bet-info-value{
-  display:block;
-  color:#fff;
-  font-size:15px;
-  font-weight:900;
-}
-
-.bet-info-value.gold{
-  color:var(--gold);
-}
-
-.bet-info-value.green{
-  color:var(--green);
-}
-
-.bet-warning{
   margin-top:9px;
-  color:#858392;
+
+  color:#858393;
+
   font-size:10px;
-  line-height:1.55;
+
+  letter-spacing:5px;
+
+  font-weight:600;
+
 }
 
-/* MAIN BUTTON */
+main{
 
-.main-btn{
-  width:100%;
-  min-height:54px;
-  margin-top:14px;
-  border:0;
-  border-radius:16px;
-  background:
-    linear-gradient(135deg,#ffe86b,#ffb000);
-  color:#0b0902;
-  font-weight:1000;
-  font-size:14px;
-  letter-spacing:.5px;
-  box-shadow:
-    0 10px 30px #ffb00022,
-    inset 0 1px #ffffff66;
-  transition:.15s;
+  width:min(760px,100%);
+
+  margin:auto;
+
+  padding:5px 15px 40px;
+
 }
 
-.main-btn:hover{
-  filter:brightness(1.06);
-}
+.card{
 
-.main-btn:active{
-  transform:translateY(1px) scale(.99);
-}
-
-.main-btn:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-/* SLOTS */
-
-.slots-machine{
-  margin-top:18px;
-  padding:15px;
-  border-radius:22px;
-  background:
-    linear-gradient(145deg,#16131b,#09090e);
-  border:1px solid #ffd21c20;
-  box-shadow:
-    inset 0 1px #ffffff09,
-    0 12px 30px #0008;
-}
-
-.reels{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-}
-
-.reel{
-  height:105px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:17px;
-  border:1px solid #ffffff12;
-  background:
-    radial-gradient(circle at 50% 40%,#2b2730,#111118 60%,#08080d);
-  font-size:50px;
-  box-shadow:
-    inset 0 0 20px #0008,
-    0 5px 20px #0006;
-  user-select:none;
-}
-
-.reel.spinning{
-  animation:reelSpin .12s linear infinite;
-}
-
-@keyframes reelSpin{
-  0%{transform:translateY(-2px);}
-  50%{transform:translateY(2px);}
-  100%{transform:translateY(-2px);}
-}
-
-.jackpot{
-  margin-top:11px;
-  text-align:center;
-  color:var(--gold);
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:2px;
-}
-
-/* CRASH */
-
-.crash-screen{
   position:relative;
+
   overflow:hidden;
-  height:260px;
-  margin-top:18px;
-  border-radius:22px;
-  border:1px solid #ffffff0d;
+
+  margin-bottom:20px;
+
+  padding:23px;
+
+  border-radius:25px;
+
+  border:1px solid #ffd21c30;
+
   background:
-    radial-gradient(circle at 50% 80%,#251800 0,#0d0c12 45%,#07070c 100%);
+
+    linear-gradient(145deg,#1b1a25f2,#101018f5);
+
+  box-shadow:
+
+    0 18px 55px #0009,
+
+    inset 0 1px #ffffff08;
+
 }
 
-.crash-grid{
+.card:before{
+
+  content:"";
+
   position:absolute;
-  inset:0;
-  opacity:.2;
-  background-image:
-    linear-gradient(#ffffff08 1px,transparent 1px),
-    linear-gradient(90deg,#ffffff08 1px,transparent 1px);
-  background-size:35px 35px;
+
+  left:10%;
+
+  right:10%;
+
+  top:0;
+
+  height:1px;
+
+  background:linear-gradient(90deg,transparent,#ffd21c55,transparent);
+
 }
 
-.rocket{
-  position:absolute;
-  left:8%;
-  bottom:13%;
-  font-size:44px;
-  filter:drop-shadow(0 0 12px #ffb00055);
-  transform-origin:center;
-  transition:transform .08s linear;
-}
+h2{
 
-.crash-line{
-  position:absolute;
-  left:0;
-  bottom:16%;
-  width:100%;
-  height:2px;
-  background:linear-gradient(90deg,transparent,#ffb000,#ffd21c,transparent);
-  box-shadow:0 0 15px #ffb00055;
-  transform-origin:left;
-  transform:rotate(-8deg);
-}
+  position:relative;
 
-.crash-multiplier{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:48px;
-  font-weight:1000;
-  color:var(--gold);
-  text-shadow:0 0 20px #ffb00044;
   z-index:2;
-}
 
-.crash-status{
-  position:absolute;
-  bottom:13px;
-  left:0;
-  right:0;
-  text-align:center;
-  color:#777582;
-  font-size:10px;
-  z-index:3;
-}
+  margin-bottom:12px;
 
-.crash-screen.running .rocket{
-  animation:rocketMove .8s ease-in-out infinite alternate;
-}
+  color:var(--gold);
 
-@keyframes rocketMove{
-  from{
-    transform:translate(0,0) rotate(-5deg);
-  }
-  to{
-    transform:translate(15px,-10px) rotate(-8deg);
-  }
-}
+  font-size:clamp(19px,5vw,25px);
 
-/* RESULT */
-
-.result{
-  min-height:22px;
-  margin-top:12px;
-  text-align:center;
-  font-size:12px;
   font-weight:900;
+
 }
 
-.result.win{
-  color:var(--green);
+.description{
+
+  position:relative;
+
+  z-index:2;
+
+  margin-bottom:18px;
+
+  color:#a6a4b4;
+
+  font-size:14px;
+
+  line-height:1.8;
+
 }
 
-.result.loss{
-  color:var(--red);
+label{
+
+  display:block;
+
+  margin:17px 0 8px;
+
+  color:#aaa8b8;
+
+  font-size:13px;
+
 }
 
-.result.info{
-  color:var(--muted);
+input{
+
+  width:100%;
+
+  min-width:0;
+
+  outline:none;
+
+  padding:16px 17px;
+
+  border-radius:15px;
+
+  border:1px solid #403f4d;
+
+  color:#fff;
+
+  background:#08080e;
+
+  font-size:17px;
+
+  transition:.2s;
+
 }
 
-/* HISTORY */
+input:focus{
 
-.history{
-  margin-top:15px;
-  padding:14px;
-  border-radius:18px;
-  background:#09090e;
-  border:1px solid #ffffff09;
+  border-color:#ffd21c;
+
+  box-shadow:0 0 20px #ffd21c18;
+
 }
 
-.history-title{
-  color:#777582;
-  font-size:9px;
-  letter-spacing:1.5px;
-  font-weight:900;
-  margin-bottom:9px;
-}
+.row{
 
-.history-list{
   display:flex;
-  flex-wrap:wrap;
-  gap:6px;
+
+  gap:10px;
+
 }
 
-.history-item{
-  min-width:46px;
-  padding:7px 8px;
-  border-radius:9px;
-  text-align:center;
-  font-size:10px;
+.row>*{
+
+  flex:1;
+
+  min-width:0;
+
+}
+
+button{
+
+  min-height:52px;
+
+  border-radius:15px;
+
+  padding:14px 18px;
+
+  cursor:pointer;
+
   font-weight:900;
-  background:#111119;
+
+  transition:
+
+    transform .15s ease,
+
+    filter .15s ease,
+
+    box-shadow .15s ease;
+
+  touch-action:manipulation;
+
 }
 
-.history-item.win{
-  color:var(--green);
-  border:1px solid #35e38a22;
+button:active{
+
+  transform:scale(.97);
+
 }
 
-.history-item.loss{
-  color:var(--red);
-  border:1px solid #ff4d6722;
+.primary{
+
+  color:#1a1300;
+
+  background:linear-gradient(135deg,#ffe76b,#ffb900);
+
+  box-shadow:0 8px 25px #ffbd0022;
+
 }
 
-/* PROFILE */
+.primary:hover{
 
-.profile-card{
-  text-align:center;
+  filter:brightness(1.08);
+
 }
 
-.profile-icon{
-  width:75px;
-  height:75px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:
-    linear-gradient(145deg,#ffe76b,#ff9d00);
-  color:#100c00;
-  font-size:30px;
-  box-shadow:0 10px 35px #ffb00025;
+.secondary{
+
+  color:var(--gold);
+
+  background:#23222c;
+
+  border:1px solid #63531b;
+
+}
+
+.danger{
+
+  color:#fff;
+
+  background:linear-gradient(135deg,#ff4164,#ef084b);
+
+  box-shadow:0 10px 30px #ff174d22;
+
+}
+
+.success{
+
+  color:#02170f;
+
+  background:linear-gradient(135deg,#12ffc0,#00bd78);
+
+  box-shadow:0 10px 30px #00f5a033;
+
+}
+
+.hidden{
+
+  display:none!important;
+
 }
 
 .profile-name{
-  margin-top:12px;
-  font-size:20px;
-  font-weight:1000;
-}
 
-.profile-id{
-  margin-top:4px;
-  color:#777582;
-  font-size:10px;
-}
-
-.profile-stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-  margin-top:18px;
-}
-
-.stat{
-  padding:15px;
-  border-radius:15px;
-  background:#09090f;
-  border:1px solid #ffffff09;
-}
-
-.stat-value{
-  color:var(--gold);
-  font-size:18px;
-  font-weight:1000;
-}
-
-.stat-label{
-  margin-top:4px;
-  color:#777582;
-  font-size:9px;
-}
-
-/* FOOTER */
-
-.footer{
-  margin-top:18px;
   text-align:center;
-  color:#55535f;
-  font-size:9px;
-  line-height:1.6;
-}
 
-.demo-badge{
-  display:inline-block;
-  margin-bottom:7px;
-  padding:5px 9px;
-  border-radius:999px;
-  color:#ffd21c;
-  border:1px solid #ffd21c22;
-  background:#ffd21c08;
+  color:var(--gold);
+
+  font-size:23px;
+
   font-weight:900;
-  letter-spacing:1px;
+
 }
 
-/* MODAL */
+.balance-caption{
 
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:#000b;
-  backdrop-filter:blur(8px);
-}
+  margin-top:13px;
 
-.modal.show{
-  display:flex;
-}
+  color:#8d8b9a;
 
-.modal-box{
-  width:100%;
-  max-width:400px;
-  padding:22px;
-  border-radius:24px;
-  border:1px solid #ffd21c33;
-  background:#101017;
-  box-shadow:0 30px 80px #000;
-}
-
-.modal-title{
-  color:var(--gold);
-  font-size:19px;
-  font-weight:1000;
   text-align:center;
-}
 
-.modal-text{
-  margin-top:12px;
-  color:#9a98a4;
-  font-size:12px;
-  line-height:1.7;
-  text-align:center;
-}
-
-.modal-close{
-  width:100%;
-  margin-top:17px;
-  height:48px;
-  border:0;
-  border-radius:14px;
-  background:linear-gradient(135deg,#ffe76b,#ffb000);
-  color:#080700;
-  font-weight:1000;
-}
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:22px;
-  z-index:200;
-  transform:translate(-50%,20px);
-  opacity:0;
-  pointer-events:none;
-  padding:12px 16px;
-  border-radius:13px;
-  background:#16161f;
-  border:1px solid #ffffff12;
-  color:#fff;
   font-size:11px;
+
+  letter-spacing:2px;
+
+}
+
+.balance{
+
+  margin:7px 0 17px;
+
+  text-align:center;
+
+  color:#fff;
+
+  font-size:clamp(32px,9vw,48px);
+
   font-weight:900;
-  box-shadow:0 15px 40px #0009;
-  transition:.25s;
+
+  text-shadow:0 0 25px #fff2;
+
 }
 
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
+.balance small{
+
+  color:var(--gold);
+
+  font-size:21px;
+
 }
 
-/* RESPONSIVE */
+.tabs{
+
+  display:flex;
+
+  gap:10px;
+
+  margin-bottom:18px;
+
+}
+
+.tab-btn{
+
+  flex:1;
+
+  min-height:65px;
+
+  color:#898795;
+
+  background:#171720;
+
+  border:1px solid #363541;
+
+  font-size:16px;
+
+}
+
+.tab-btn.active{
+
+  color:var(--gold);
+
+  border-color:var(--gold);
+
+  background:linear-gradient(135deg,#ffd21c12,#ff9d0008);
+
+  box-shadow:0 0 25px #ffd21c0d;
+
+}
+
+/* ================= SLOTS ================= */
+
+.slot-window{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:9px;
+
+  padding:15px 9px;
+
+  margin:20px 0;
+
+  border-radius:21px;
+
+  border:1px solid #45434f;
+
+  background:
+
+    radial-gradient(circle at 50% 0%,#373342,#0b0b10 65%);
+
+  box-shadow:
+
+    inset 0 0 35px #000b,
+
+    0 10px 30px #0005;
+
+}
+
+.reel{
+
+  flex:1;
+
+  max-width:170px;
+
+  aspect-ratio:1/1.05;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+  border-radius:17px;
+
+  border:1px solid #514e5d;
+
+  background:linear-gradient(145deg,#302e39,#111117);
+
+  box-shadow:
+
+    inset 0 0 25px #000a,
+
+    0 0 15px #0008;
+
+  font-size:clamp(42px,12vw,68px);
+
+  user-select:none;
+
+}
+
+.reel.spinning{
+
+  animation:
+
+    reelShake .09s linear infinite;
+
+  filter:blur(1.2px);
+
+}
+
+@keyframes reelShake{
+
+  0%{transform:translateY(-4px)}
+
+  50%{transform:translateY(5px)}
+
+  100%{transform:translateY(-4px)}
+
+}
+
+.reel.win{
+
+  animation:reelWin .6s ease;
+
+}
+
+@keyframes reelWin{
+
+  0%{transform:scale(1)}
+
+  40%{transform:scale(1.1);box-shadow:0 0 35px #ffd21c88}
+
+  100%{transform:scale(1)}
+
+}
+
+/* ================= CRASH ================= */
+
+.space-window{
+
+  position:relative;
+
+  width:100%;
+
+  height:clamp(340px,72vw,520px);
+
+  overflow:hidden;
+
+  isolation:isolate;
+
+  border-radius:26px;
+
+  border:1px solid #7865ff;
+
+  background:
+
+    radial-gradient(circle at 25% 80%,#7040ff45,transparent 38%),
+
+    radial-gradient(circle at 85% 15%,#00aaff22,transparent 35%),
+
+    radial-gradient(circle at 50% 55%,#171743 0%,#090c1f 52%,#02030a 100%);
+
+  box-shadow:
+
+    inset 0 0 65px #000d,
+
+    0 0 30px #614dff18;
+
+}
+
+/* сетка */
+
+.space-grid{
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:0;
+
+  opacity:.55;
+
+  background:
+
+    repeating-linear-gradient(
+
+      to bottom,
+
+      transparent 0,
+
+      transparent 48px,
+
+      #9c91ff13 49px,
+
+      #9c91ff13 50px
+
+    ),
+
+    repeating-linear-gradient(
+
+      to right,
+
+      transparent 0,
+
+      transparent 74px,
+
+      #7b73ff09 75px,
+
+      #7b73ff09 76px
+
+    );
+
+}
+
+/* звёзды */
+
+.stars,
+
+.stars2{
+
+  position:absolute;
+
+  inset:-100% 0 0;
+
+  z-index:1;
+
+  pointer-events:none;
+
+  background-image:
+
+    radial-gradient(circle at 20px 40px,#fff 0 1.5px,transparent 2px),
+
+    radial-gradient(circle at 90px 120px,#c9d8ff 0 1px,transparent 2px),
+
+    radial-gradient(circle at 170px 70px,#7ceaff 0 1.5px,transparent 2px),
+
+    radial-gradient(circle at 210px 180px,#fff 0 1px,transparent 2px),
+
+    radial-gradient(circle at 130px 220px,#b9aaff 0 1.5px,transparent 2px);
+
+  background-size:230px 250px;
+
+  animation:starsMove 7s linear infinite;
+
+  opacity:.7;
+
+}
+
+.stars2{
+
+  background-size:170px 190px;
+
+  animation-duration:11s;
+
+  opacity:.35;
+
+  transform:scale(1.2);
+
+}
+
+@keyframes starsMove{
+
+  to{
+
+    background-position:0 500px;
+
+  }
+
+}
+
+/* центральное свечение */
+
+.space-glow{
+
+  position:absolute;
+
+  z-index:1;
+
+  left:50%;
+
+  top:48%;
+
+  width:230px;
+
+  height:180px;
+
+  transform:translate(-50%,-50%);
+
+  border-radius:50%;
+
+  background:#6555ff20;
+
+  filter:blur(35px);
+
+  pointer-events:none;
+
+}
+
+/* коэффициент */
+
+.multiplier-display{
+
+  position:absolute;
+
+  z-index:6;
+
+  left:50%;
+
+  top:42%;
+
+  transform:translate(-50%,-50%);
+
+  white-space:nowrap;
+
+  font-size:clamp(45px,13vw,82px);
+
+  line-height:1;
+
+  font-weight:900;
+
+  font-variant-numeric:tabular-nums;
+
+  color:#fff;
+
+  text-shadow:
+
+    0 0 12px #fff,
+
+    0 0 35px #8e7bff,
+
+    0 0 65px #654eff77;
+
+  pointer-events:none;
+
+}
+
+.multiplier-display.hot{
+
+  animation:multiPulse .35s ease infinite alternate;
+
+}
+
+@keyframes multiPulse{
+
+  to{
+
+    transform:translate(-50%,-50%) scale(1.035);
+
+  }
+
+}
+
+/* траектория */
+
+.flight-path{
+
+  position:absolute;
+
+  z-index:2;
+
+  left:7%;
+
+  bottom:13%;
+
+  width:86%;
+
+  height:74%;
+
+  pointer-events:none;
+
+}
+
+.flight-path svg{
+
+  width:100%;
+
+  height:100%;
+
+  overflow:visible;
+
+}
+
+.path-glow{
+
+  fill:none;
+
+  stroke:#694dff;
+
+  stroke-width:4;
+
+  opacity:.14;
+
+  filter:blur(7px);
+
+}
+
+.path-line{
+
+  fill:none;
+
+  stroke:url(#pathGradient);
+
+  stroke-width:2;
+
+  stroke-dasharray:8 9;
+
+  opacity:0;
+
+  transition:opacity .2s;
+
+}
+
+.path-line.active{
+
+  opacity:.85;
+
+  animation:pathDash .45s linear infinite;
+
+}
+
+@keyframes pathDash{
+
+  to{
+
+    stroke-dashoffset:-34;
+
+  }
+
+}
+
+/* РАКЕТА */
+
+.rocket{
+
+  position:absolute;
+
+  z-index:8;
+
+  left:5%;
+
+  bottom:8%;
+
+  width:104px;
+
+  height:92px;
+
+  pointer-events:none;
+
+  will-change:transform;
+
+  transform-origin:50% 50%;
+
+}
+
+.rocket-inner{
+
+  position:absolute;
+
+  inset:0;
+
+  transform:rotate(-30deg);
+
+}
+
+/* корпус */
+
+.rocket-body{
+
+  position:absolute;
+
+  left:29px;
+
+  top:26px;
+
+  width:61px;
+
+  height:31px;
+
+  border-radius:58% 52% 50% 58%;
+
+  background:
+
+    linear-gradient(
+
+      180deg,
+
+      #ffffff 0%,
+
+      #d8edff 28%,
+
+      #78b8ed 55%,
+
+      #376a9e 72%,
+
+      #d9edff 100%
+
+    );
+
+  box-shadow:
+
+    0 0 14px #54cfff,
+
+    0 0 32px #168cff44,
+
+    inset 0 -5px 7px #193f6b;
+
+}
+
+/* нос */
+
+.rocket-nose{
+
+  position:absolute;
+
+  right:-17px;
+
+  top:0;
+
+  width:0;
+
+  height:0;
+
+  border-top:16px solid transparent;
+
+  border-bottom:16px solid transparent;
+
+  border-left:22px solid #eaf7ff;
+
+  filter:drop-shadow(0 0 5px #8be8ff);
+
+}
+
+/* иллюминатор */
+
+.rocket-window{
+
+  position:absolute;
+
+  right:12px;
+
+  top:6px;
+
+  width:18px;
+
+  height:18px;
+
+  border-radius:50%;
+
+  border:3px solid #f1fbff;
+
+  background:
+
+    radial-gradient(circle at 32% 28%,#c8ffff 0 8%,#39cce8 18%,#123967 68%);
+
+  box-shadow:0 0 9px #58edff;
+
+}
+
+/* крылья */
+
+.rocket-fin{
+
+  position:absolute;
+
+  width:25px;
+
+  height:27px;
+
+  background:linear-gradient(135deg,#ffdd22,#ff6a1f);
+
+  clip-path:polygon(0 0,100% 15%,55% 100%,15% 65%);
+
+}
+
+.rocket-fin.bottom{
+
+  left:35px;
+
+  top:45px;
+
+  transform:rotate(12deg);
+
+}
+
+.rocket-fin.top{
+
+  left:35px;
+
+  top:11px;
+
+  transform:rotate(190deg);
+
+}
+
+/* пламя */
+
+.rocket-flame{
+
+  position:absolute;
+
+  left:-18px;
+
+  top:31px;
+
+  width:43px;
+
+  height:17px;
+
+  background:
+
+    linear-gradient(
+
+      90deg,
+
+      transparent,
+
+      #ff3518 30%,
+
+      #ff9e19 68%,
+
+      #fff 100%
+
+    );
+
+  clip-path:polygon(0 50%,32% 4%,100% 50%,32% 96%);
+
+  filter:
+
+    drop-shadow(0 0 5px #ff4c18)
+
+    drop-shadow(0 0 14px #ff7c18);
+
+  animation:flame .09s ease-in-out infinite alternate;
+
+}
+
+.rocket-flame2{
+
+  position:absolute;
+
+  left:-38px;
+
+  top:34px;
+
+  width:38px;
+
+  height:10px;
+
+  background:linear-gradient(90deg,transparent,#ff3518,#ffb72a);
+
+  clip-path:polygon(0 50%,100% 0,75% 50%,100% 100%);
+
+  filter:blur(1px);
+
+}
+
+@keyframes flame{
+
+  from{transform:scaleX(.78) scaleY(.9)}
+
+  to{transform:scaleX(1.18) scaleY(1.25)}
+
+}
+
+/* след */
+
+.rocket-trail{
+
+  position:absolute;
+
+  left:-70px;
+
+  top:39px;
+
+  width:72px;
+
+  height:13px;
+
+  border-radius:50%;
+
+  background:linear-gradient(90deg,transparent,#ff401955,#ffab2466);
+
+  filter:blur(8px);
+
+}
+
+/* движение ракеты */
+
+.rocket.flying .rocket-inner{
+
+  animation:rocketTilt .7s ease-in-out infinite alternate;
+
+}
+
+@keyframes rocketTilt{
+
+  from{transform:rotate(-29deg)}
+
+  to{transform:rotate(-33deg)}
+
+}
+
+/* взрыв */
+
+.explosion{
+
+  position:absolute;
+
+  z-index:15;
+
+  left:50%;
+
+  top:50%;
+
+  transform:translate(-50%,-50%) scale(.1);
+
+  opacity:0;
+
+  font-size:70px;
+
+  pointer-events:none;
+
+}
+
+.explosion.active{
+
+  animation:boom .75s ease-out forwards;
+
+}
+
+@keyframes boom{
+
+  0%{
+
+    opacity:1;
+
+    transform:translate(-50%,-50%) scale(.2);
+
+  }
+
+  35%{
+
+    opacity:1;
+
+    transform:translate(-50%,-50%) scale(1.25);
+
+    filter:brightness(2);
+
+  }
+
+  100%{
+
+    opacity:0;
+
+    transform:translate(-50%,-50%) scale(2.8);
+
+    filter:blur(10px);
+
+  }
+
+}
+
+.crashed{
+
+  animation:crashedRocket .55s ease-out forwards;
+
+}
+
+@keyframes crashedRocket{
+
+  0%{opacity:1}
+
+  100%{
+
+    opacity:0;
+
+    transform:scale(1.7) rotate(25deg);
+
+  }
+
+}
+
+/* статус */
+
+.result-msg{
+
+  min-height:30px;
+
+  margin-top:17px;
+
+  text-align:center;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  line-height:1.65;
+
+}
+
+.win{
+
+  color:var(--green);
+
+  text-shadow:0 0 15px #00f5a033;
+
+}
+
+.lose{
+
+  color:var(--red);
+
+}
+
+.jackpot{
+
+  color:var(--gold);
+
+}
+
+.note{
+
+  margin-top:14px;
+
+  color:#777582;
+
+  text-align:center;
+
+  font-size:11px;
+
+  line-height:1.7;
+
+}
+
+/* рейтинг */
+
+.leaderboard{
+
+  list-style:none;
+
+}
+
+.leaderboard li{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  padding:15px 0;
+
+  border-bottom:1px solid #ffffff0d;
+
+  color:#d8d6df;
+
+  font-size:13px;
+
+}
+
+.leaderboard li:last-child{
+
+  border-bottom:0;
+
+}
+
+.rank{
+
+  margin-right:8px;
+
+  color:var(--gold);
+
+  font-weight:900;
+
+}
+
+.score{
+
+  color:var(--gold);
+
+  font-weight:800;
+
+  text-align:right;
+
+}
+
+footer{
+
+  padding:22px 10px;
+
+  color:#656371;
+
+  text-align:center;
+
+  font-size:10px;
+
+  line-height:1.8;
+
+}
+
+/* мобильная адаптация */
 
 @media(max-width:500px){
 
-  .app{
-    padding:10px 9px 30px;
+  header{
+
+    padding-top:24px;
+
   }
 
-  .header{
-    padding:17px;
-    border-radius:21px;
+  main{
+
+    padding-left:13px;
+
+    padding-right:13px;
+
   }
 
-  .logo{
-    font-size:24px;
+  .card{
+
+    padding:18px;
+
+    border-radius:22px;
+
   }
 
-  .game-card{
-    padding:14px;
+  .row{
+
+    gap:8px;
+
+  }
+
+  .row button{
+
+    padding-left:8px;
+
+    padding-right:8px;
+
+    font-size:12px;
+
+  }
+
+  .tab-btn{
+
+    min-height:60px;
+
+    font-size:14px;
+
+  }
+
+  .space-window{
+
+    height:390px;
+
+  }
+
+  .rocket{
+
+    width:96px;
+
+    height:86px;
+
+  }
+
+  .multiplier-display{
+
+    top:39%;
+
+  }
+
+}
+
+@media(max-width:360px){
+
+  .card{
+
+    padding:15px;
+
+  }
+
+  .slot-window{
+
+    gap:5px;
+
+    padding:10px 5px;
+
   }
 
   .reel{
-    height:90px;
-    font-size:43px;
+
+    font-size:39px;
+
   }
 
-  .crash-screen{
-    height:235px;
+  .space-window{
+
+    height:360px;
+
   }
 
-  .crash-multiplier{
-    font-size:42px;
-  }
-
-  .bet-info{
-    padding:14px;
-  }
-
-  .bet-info-value{
-    font-size:13px;
-  }
-
-  .stake-presets{
-    grid-template-columns:repeat(4,1fr);
-  }
 }
+
 </style>
+
 </head>
 
 <body>
 
-<div class="app">
+<header>
 
-  <header class="header">
+  <div class="logo">♛ ROYAL GOLD ♛</div>
 
-    <div class="logo">
-      ROYAL GOLD
-    </div>
+  <div class="subtitle">PREMIUM VIRTUAL CASINO</div>
 
-    <div class="logo-sub">
-      VIRTUAL GAMES
-    </div>
+</header>
 
-    <div class="balance-card">
-      <div class="balance-label">
-        Виртуальный баланс
-      </div>
+<main>
 
-      <div class="balance">
-        <span id="balance">100 000</span> ₽
-      </div>
-    </div>
+<!-- ================= AUTH ================= -->
 
-  </header>
+<section class="card" id="authCard">
 
-  <nav class="nav">
+  <h2>👤 Вход в клуб</h2>
 
-    <button
-      class="nav-btn active"
-      id="slotsTab"
-      onclick="showSection('slots')"
+  <div id="authForm">
+
+    <label>Никнейм</label>
+
+    <input
+
+      id="nick"
+
+      type="text"
+
+      minlength="3"
+
+      maxlength="15"
+
+      autocomplete="username"
+
+      placeholder="Твой ник"
+
     >
-      🎰 СЛОТЫ
-    </button>
 
-    <button
-      class="nav-btn"
-      id="crashTab"
-      onclick="showSection('crash')"
+    <label>Пароль</label>
+
+    <input
+
+      id="password"
+
+      type="password"
+
+      minlength="8"
+
+      autocomplete="current-password"
+
+      placeholder="Минимум 8 символов"
+
     >
-      🚀 ROCKET
-    </button>
 
-  </nav>
+    <div class="row">
 
-  <!-- SLOTS -->
+      <button class="primary" onclick="account('login')">
 
-  <section
-    class="section active"
-    id="slotsSection"
-  >
+        Войти
 
-    <div class="game-card">
-
-      <div class="game-title">
-        🎰 GOLDEN 777
-      </div>
-
-      <div class="game-subtitle">
-        Виртуальный слот
-      </div>
-
-      <div class="slots-machine">
-
-        <div class="reels">
-
-          <div class="reel" id="reel1">
-            🍋
-          </div>
-
-          <div class="reel" id="reel2">
-            🍒
-          </div>
-
-          <div class="reel" id="reel3">
-            💎
-          </div>
-
-        </div>
-
-        <div class="jackpot">
-          ★ РЕДКИЙ 777 JACKPOT ★
-        </div>
-
-      </div>
-
-      <div class="stake-wrap">
-
-        <div class="stake-label">
-          <span>Размер ставки</span>
-          <strong>50 — 50 000 ₽</strong>
-        </div>
-
-        <div class="stake-row">
-
-          <input
-            class="stake-input"
-            id="slotsStake"
-            type="number"
-            min="50"
-            max="50000"
-            step="50"
-            value="50"
-            inputmode="numeric"
-          >
-
-        </div>
-
-        <div class="stake-presets">
-
-          <button class="stake-preset" onclick="setStake('slotsStake',50)">
-            50
-          </button>
-
-          <button class="stake-preset" onclick="setStake('slotsStake',500)">
-            500
-          </button>
-
-          <button class="stake-preset" onclick="setStake('slotsStake',5000)">
-            5K
-          </button>
-
-          <button class="stake-preset" onclick="setStake('slotsStake',50000)">
-            50K
-          </button>
-
-        </div>
-
-      </div>
-
-      <div class="limit-box">
-
-        <div class="limit-item">
-
-          <div class="limit-item-label">
-            МИНИМАЛЬНАЯ СТАВКА
-          </div>
-
-          <div class="limit-item-value">
-            50 ₽
-          </div>
-
-        </div>
-
-        <div class="limit-item">
-
-          <div class="limit-item-label">
-            МАКСИМАЛЬНАЯ СТАВКА
-          </div>
-
-          <div class="limit-item-value gold">
-            50 000 ₽
-          </div>
-
-        </div>
-
-        <div class="limit-item">
-
-          <div class="limit-item-label">
-            МАКС. ЧИСТЫЙ ВЫИГРЫШ
-          </div>
-
-          <div class="limit-item-value green">
-            +30 000 ₽
-          </div>
-
-        </div>
-
-        <div class="limit-item">
-
-          <div class="limit-item-label">
-            МАКС. ВОЗВРАТ
-          </div>
-
-          <div class="limit-item-value gold">
-            80 000 ₽
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="bet-info">
-
-        <div class="bet-info-title">
-          ЛИМИТЫ И МЕХАНИКА ДЕМО-ИГРЫ
-        </div>
-
-        <div class="bet-info-grid">
-
-          <div class="bet-info-item">
-            <span class="bet-info-label">
-              Ставка
-            </span>
-
-            <span class="bet-info-value">
-              50 — 50 000 ₽
-            </span>
-          </div>
-
-          <div class="bet-info-item">
-            <span class="bet-info-label">
-              Потенциальный возврат
-            </span>
-
-            <span class="bet-info-value gold">
-              до 80 000 ₽
-            </span>
-          </div>
-
-          <div class="bet-info-item">
-            <span class="bet-info-label">
-              Чистый выигрыш
-            </span>
-
-            <span class="bet-info-value green">
-              до +30 000 ₽
-            </span>
-          </div>
-
-          <div class="bet-info-item">
-            <span class="bet-info-label">
-              Вероятность выигрыша
-            </span>
-
-            <span class="bet-info-value">
-              42,5%
-            </span>
-          </div>
-
-        </div>
-
-        <div class="bet-warning">
-          Это виртуальная демонстрационная игра. Денежные депозиты,
-          вывод средств и реальные ставки отсутствуют. В каждом раунде
-          используется одинаковая заявленная вероятность исхода,
-          независимо от размера ставки.
-        </div>
-
-      </div>
-
-      <button
-        class="main-btn"
-        id="slotsButton"
-        onclick="spinSlots()"
-      >
-        🎰 КРУТИТЬ
       </button>
 
-      <div
-        class="result info"
-        id="slotsResult"
-      ></div>
+      <button class="secondary" onclick="account('register')">
 
-      <div class="history">
+        Регистрация
 
-        <div class="history-title">
-          ПОСЛЕДНИЕ РАУНДЫ
-        </div>
-
-        <div
-          class="history-list"
-          id="slotsHistory"
-        ></div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- CRASH -->
-
-  <section
-    class="section"
-    id="crashSection"
-  >
-
-    <div class="game-card">
-
-      <div class="game-title">
-        🚀 ROYAL ROCKET
-      </div>
-
-      <div class="game-subtitle">
-        Забери выигрыш до падения ракеты
-      </div>
-
-      <div class="crash-screen" id="crashScreen">
-
-        <div class="crash-grid"></div>
-
-        <div class="crash-line"></div>
-
-        <div
-          class="rocket"
-          id="rocket"
-        >
-          🚀
-        </div>
-
-        <div
-          class="crash-multiplier"
-          id="crashMultiplier"
-        >
-          x1.00
-        </div>
-
-        <div
-          class="crash-status"
-          id="crashStatus"
-        >
-          Готово к запуску
-        </div>
-
-      </div>
-
-      <div class="stake-wrap">
-
-        <div class="stake-label">
-          <span>Размер ставки</span>
-          <strong>50 — 50 000 ₽</strong>
-        </div>
-
-        <div class="stake-row">
-
-          <input
-            class="stake-input"
-            id="crashStake"
-            type="number"
-            min="50"
-            max="50000"
-            step="50"
-            value="50"
-            inputmode="numeric"
-          >
-
-        </div>
-
-        <div class="stake-presets">
-
-          <button class="stake-preset" onclick="setStake('crashStake',50)">
-            50
-          </button>
-
-          <button class="stake-preset" onclick="setStake('crashStake',500)">
-            500
-          </button>
-
-          <button class="stake-preset" onclick="setStake('crashStake',5000)">
-            5K
-          </button>
-
-          <button class="stake-preset" onclick="setStake('crashStake',50000)">
-            50K
-          </button>
-
-        </div>
-
-      </div>
-
-      <div class="limit-box">
-
-        <div class="limit-item">
-
-          <div class="limit-item-label">
-            МИНИМАЛЬНАЯ СТАВКА
-          </div>
-
-          <div class="limit-item-value">
-            50 ₽
-          </div>
-
-        </div>
-
-        <div class="limit-item">
-
-          <div class="limit-item-label">
-            МАКСИМАЛЬНАЯ СТАВКА
-          </div>
-
-          <div class="limit-item-value gold">
-            50 000 ₽
-          </div>
-
-        </div>
-
-        <div class="limit-item">
-
-          <div class="limit-item-label">
-            МАКС. ЧИСТЫЙ ВЫИГРЫШ
-          </div>
-
-          <div class="limit-item-value green">
-            +30 000 ₽
-          </div>
-
-        </div>
-
-        <div class="limit-item">
-
-          <div class="limit-item-label">
-            МАКС. ВОЗВРАТ
-          </div>
-
-          <div class="limit-item-value gold">
-            80 000 ₽
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="bet-info">
-
-        <div class="bet-info-title">
-          ЛИМИТЫ И МЕХАНИКА ДЕМО-ИГРЫ
-        </div>
-
-        <div class="bet-info-grid">
-
-          <div class="bet-info-item">
-            <span class="bet-info-label">
-              Ставка
-            </span>
-
-            <span class="bet-info-value">
-              50 — 50 000 ₽
-            </span>
-          </div>
-
-          <div class="bet-info-item">
-            <span class="bet-info-label">
-              Максимальный возврат
-            </span>
-
-            <span class="bet-info-value gold">
-              80 000 ₽
-            </span>
-          </div>
-
-          <div class="bet-info-item">
-            <span class="bet-info-label">
-              Чистый выигрыш
-            </span>
-
-            <span class="bet-info-value green">
-              до +30 000 ₽
-            </span>
-          </div>
-
-          <div class="bet-info-item">
-            <span class="bet-info-label">
-              Выигрышные раунды
-            </span>
-
-            <span class="bet-info-value">
-              42,5%
-            </span>
-          </div>
-
-        </div>
-
-        <div class="bet-warning">
-          Это виртуальная демонстрационная игра. Реальных денежных операций
-          нет. Примерная демо-механика: 57,5% раундов завершаются неудачей
-          и 42,5% позволяют получить выигрыш. Максимальный чистый выигрыш
-          зависит от размера ставки и не превышает установленный лимит.
-        </div>
-
-      </div>
-
-      <button
-        class="main-btn"
-        id="crashButton"
-        onclick="startCrash()"
-      >
-        🚀 ЗАПУСТИТЬ
-      </button>
-
-      <div
-        class="result info"
-        id="crashResult"
-      ></div>
-
-      <div class="history">
-
-        <div class="history-title">
-          ПОСЛЕДНИЕ РАУНДЫ
-        </div>
-
-        <div
-          class="history-list"
-          id="crashHistory"
-        ></div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- PROFILE -->
-
-  <section
-    class="section"
-    id="profileSection"
-  >
-
-    <div class="game-card profile-card">
-
-      <div class="profile-icon">
-        👑
-      </div>
-
-      <div
-        class="profile-name"
-        id="profileName"
-      >
-        Royal Player
-      </div>
-
-      <div
-        class="profile-id"
-        id="profileId"
-      >
-        DEMO PLAYER
-      </div>
-
-      <div class="profile-stats">
-
-        <div class="stat">
-
-          <div
-            class="stat-value"
-            id="totalRounds"
-          >
-            0
-          </div>
-
-          <div class="stat-label">
-            РАУНДОВ
-          </div>
-
-        </div>
-
-        <div class="stat">
-
-          <div
-            class="stat-value"
-            id="totalWins"
-          >
-            0
-          </div>
-
-          <div class="stat-label">
-            ВЫИГРЫШЕЙ
-          </div>
-
-        </div>
-
-        <div class="stat">
-
-          <div
-            class="stat-value"
-            id="totalLosses"
-          >
-            0
-          </div>
-
-          <div class="stat-label">
-            ПРОИГРЫШЕЙ
-          </div>
-
-        </div>
-
-        <div class="stat">
-
-          <div
-            class="stat-value"
-            id="totalProfit"
-          >
-            0 ₽
-          </div>
-
-          <div class="stat-label">
-            ЧИСТЫЙ РЕЗУЛЬТАТ
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="bet-info">
-
-        <div class="bet-info-title">
-          DEMO ONLY
-        </div>
-
-        <div class="bet-warning">
-          Баланс и результаты являются виртуальными. Сайт не принимает
-          реальные ставки и не осуществляет реальные выплаты.
-        </div>
-
-      </div>
-
-      <button
-        class="main-btn"
-        onclick="resetDemo()"
-      >
-        🔄 СБРОСИТЬ ДЕМО
       </button>
 
     </div>
-
-  </section>
-
-  <div class="footer">
-
-    <div class="demo-badge">
-      VIRTUAL / DEMO
-    </div>
-
-    ROYAL GOLD — демонстрационная игровая система.<br>
-    Все значения виртуальные. Реальные денежные операции отсутствуют.
 
   </div>
 
-</div>
+  <div id="profile" class="hidden">
 
-<!-- MODAL -->
+    <div class="profile-name" id="playerName"></div>
 
-<div
-  class="modal"
-  id="modal"
->
+    <div class="balance-caption">
 
-  <div class="modal-box">
+      ТВОЙ ВИРТУАЛЬНЫЙ БАЛАНС
 
-    <div
-      class="modal-title"
-      id="modalTitle"
-    >
-      Результат
     </div>
 
-    <div
-      class="modal-text"
-      id="modalText"
-    ></div>
+    <div class="balance">
+
+      <span id="balance">0</span>
+
+      <small>₽</small>
+
+    </div>
 
     <button
-      class="modal-close"
-      onclick="closeModal()"
+
+      class="secondary"
+
+      style="width:100%"
+
+      onclick="logout()"
+
     >
-      ПОНЯТНО
+
+      Выйти из аккаунта
+
     </button>
 
   </div>
 
+</section>
+
+<!-- ================= TABS ================= -->
+
+<div class="tabs hidden" id="gameTabs">
+
+  <button
+
+    class="tab-btn active"
+
+    id="tabSlots"
+
+    onclick="switchGame('slots')"
+
+  >
+
+    🎰 Слоты
+
+  </button>
+
+  <button
+
+    class="tab-btn"
+
+    id="tabCrash"
+
+    onclick="switchGame('crash')"
+
+  >
+
+    🚀 Ракетка
+
+  </button>
+
 </div>
 
-<div
-  class="toast"
-  id="toast"
-></div>
+<!-- ================= SLOTS ================= -->
+
+<section class="card hidden" id="gameSlots">
+
+  <h2>🎰 GOLDEN SLOTS</h2>
+
+  <p class="description">
+
+    Три барабана, несколько комбинаций и виртуальные выигрыши.
+
+    Чем больше ставка относительно баланса — тем ниже шанс успешной комбинации.
+
+  </p>
+
+  <div class="slot-window">
+
+    <div class="reel" id="r1">💎</div>
+
+    <div class="reel" id="r2">7️⃣</div>
+
+    <div class="reel" id="r3">💎</div>
+
+  </div>
+
+  <label>
+
+    Ставка — минимум 50 ₽, максимум весь баланс
+
+  </label>
+
+  <input
+
+    id="stakeSlots"
+
+    type="number"
+
+    min="50"
+
+    step="1"
+
+    value="50"
+
+    inputmode="numeric"
+
+  >
+
+  <button
+
+    class="primary"
+
+    id="playSlotsBtn"
+
+    onclick="playSlots()"
+
+    style="width:100%;margin-top:16px"
+
+  >
+
+    🎰 ВРАЩАТЬ БАРАБАНЫ
+
+  </button>
+
+  <div
+
+    class="result-msg"
+
+    id="msgSlots"
+
+  ></div>
+
+</section>
+
+<!-- ================= ROCKET ================= -->
+
+<section class="card hidden" id="gameCrash">
+
+  <h2>🚀 КОСМИЧЕСКАЯ РАКЕТКА</h2>
+
+  <p class="description">
+
+    Запускай ракету и следи за коэффициентом.
+
+    Забери виртуальный выигрыш до того, как ракета достигнет точки взрыва.
+
+  </p>
+
+  <div class="space-window" id="spaceWindow">
+
+    <div class="space-grid"></div>
+
+    <div class="stars"></div>
+
+    <div class="stars2"></div>
+
+    <div class="space-glow"></div>
+
+    <!-- Траектория -->
+
+    <div class="flight-path">
+
+      <svg
+
+        viewBox="0 0 100 100"
+
+        preserveAspectRatio="none"
+
+      >
+
+        <defs>
+
+          <linearGradient
+
+            id="pathGradient"
+
+            x1="0%"
+
+            y1="100%"
+
+            x2="100%"
+
+            y2="0%"
+
+          >
+
+            <stop offset="0%" stop-color="#5e3dff"/>
+
+            <stop offset="50%" stop-color="#8e75ff"/>
+
+            <stop offset="100%" stop-color="#49d9ff"/>
+
+          </linearGradient>
+
+        </defs>
+
+        <path
+
+          class="path-glow"
+
+          d="M 2 94 Q 28 88 48 60 T 98 3"
+
+        />
+
+        <path
+
+          id="flightPathLine"
+
+          class="path-line"
+
+          d="M 2 94 Q 28 88 48 60 T 98 3"
+
+        />
+
+      </svg>
+
+    </div>
+
+    <!-- Коэффициент -->
+
+    <div
+
+      class="multiplier-display"
+
+      id="crashMulti"
+
+    >
+
+      x1.00
+
+    </div>
+
+    <!-- Ракета -->
+
+    <div
+
+      class="rocket"
+
+      id="rocketContainer"
+
+    >
+
+      <div class="rocket-inner">
+
+        <div class="rocket-trail"></div>
+
+        <div class="rocket-flame2"></div>
+
+        <div class="rocket-flame"></div>
+
+        <div class="rocket-fin top"></div>
+
+        <div class="rocket-fin bottom"></div>
+
+        <div class="rocket-body">
+
+          <div class="rocket-window"></div>
+
+          <div class="rocket-nose"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+
+      class="explosion"
+
+      id="explosion"
+
+    >
+
+      💥
+
+    </div>
+
+  </div>
+
+  <label>
+
+    Ставка — минимум 50 ₽, максимум весь баланс
+
+  </label>
+
+  <input
+
+    id="stakeCrash"
+
+    type="number"
+
+    min="50"
+
+    step="1"
+
+    value="50"
+
+    inputmode="numeric"
+
+  >
+
+  <button
+
+    class="danger"
+
+    id="playCrashBtn"
+
+    onclick="startCrash()"
+
+    style="width:100%;margin-top:16px"
+
+  >
+
+    🚀 ЗАПУСТИТЬ РАКЕТУ
+
+  </button>
+
+  <button
+
+    class="success hidden"
+
+    id="cashoutBtn"
+
+    onclick="cashout()"
+
+    style="width:100%;margin-top:16px"
+
+  >
+
+    ЗАБРАТЬ ВЫИГРЫШ
+
+  </button>
+
+  <div
+
+    class="result-msg"
+
+    id="msgCrash"
+
+  ></div>
+
+  <div class="note">
+
+    Демо-игра на виртуальные очки.
+
+    Баланс не имеет денежной стоимости.
+
+  </div>
+
+</section>
+
+<!-- ================= LEADERBOARD ================= -->
+
+<section class="card">
+
+  <h2>🏆 Зал славы</h2>
+
+  <p class="description">
+
+    Локальный рейтинг игроков этого браузера.
+
+  </p>
+
+  <ul
+
+    class="leaderboard"
+
+    id="leaderboard"
+
+  >
+
+    <li>Пока нет игроков.</li>
+
+  </ul>
+
+</section>
+
+<footer>
+
+  ROYAL GOLD © 2026 · ВИРТУАЛЬНЫЕ ₽ ·
+
+  ПОПОЛНЕНИЕ И ВЫВОД СРЕДСТВ ОТКЛЮЧЕНЫ
+
+</footer>
+
+</main>
 
 <script>
-'use strict';
 
-/* =========================
-   ОСНОВНЫЕ НАСТРОЙКИ
-========================= */
+"use strict";
 
-const MAX_BET = 50000;
-const MIN_BET = 50;
-const MAX_PROFIT = 30000;
+/* =========================================================
 
-/*
-  Прозрачная демо-механика:
+   BASIC HELPERS
 
-  42.5% — выигрышный раунд
-  57.5% — проигрышный раунд
+========================================================= */
 
-  Эти значения одинаковы для размеров ставки.
-*/
-const WIN_RATE = 0.425;
-const LOSS_RATE = 0.575;
+const $ = id => document.getElementById(id);
 
-const STORAGE_KEY = 'royal_gold_virtual_demo';
+const fmt = n =>
 
-/* =========================
-   DOM
-========================= */
+  Math.floor(n).toLocaleString("ru-RU");
 
-function $(id){
-  return document.getElementById(id);
-}
+let user = null;
 
-/* =========================
-   ПОЛЬЗОВАТЕЛЬ
-========================= */
+let isSlotsBusy = false;
 
-let user = {
-  name: 'Royal Player',
-  id: 'DEMO PLAYER',
-  balance: 100000,
+let isCrashRunning = false;
 
-  totalRounds: 0,
-  totalWins: 0,
-  totalLosses: 0,
-  totalProfit: 0,
+let crashFrame = null;
 
-  slotsHistory: [],
-  crashHistory: []
-};
+let crashStart = 0;
 
-/* =========================
-   СОХРАНЕНИЕ
-========================= */
+let crashMulti = 1;
 
-function saveUser(){
+let crashTarget = 2;
 
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(user)
-  );
+let crashStake = 0;
 
-}
+let crashRunId = 0;
 
-function loadUser(){
+/* =========================================================
 
-  try{
+   LOCAL DATABASE
 
-    const saved =
-      localStorage.getItem(STORAGE_KEY);
+========================================================= */
 
-    if(saved){
+const db = {
 
-      const parsed =
-        JSON.parse(saved);
+  getUser(name){
 
-      user = {
-        ...user,
-        ...parsed
-      };
+    try{
+
+      return JSON.parse(
+
+        localStorage.getItem(
+
+          "royal_gold_user_" + name
+
+        )
+
+      );
+
+    }catch(e){
+
+      return null;
 
     }
 
-  }catch(error){
+  },
 
-    console.log(
-      'Не удалось загрузить сохранение',
-      error
+  saveUser(u){
+
+    localStorage.setItem(
+
+      "royal_gold_user_" + u.username,
+
+      JSON.stringify(u)
+
+    );
+
+  },
+
+  getBoard(){
+
+    const list = [];
+
+    for(let i=0;i<localStorage.length;i++){
+
+      const key = localStorage.key(i);
+
+      if(
+
+        key &&
+
+        key.startsWith("royal_gold_user_")
+
+      ){
+
+        try{
+
+          const x = JSON.parse(
+
+            localStorage.getItem(key)
+
+          );
+
+          if(
+
+            x &&
+
+            typeof x.balance === "number"
+
+          ){
+
+            list.push(x);
+
+          }
+
+        }catch(e){}
+
+      }
+
+    }
+
+    return list
+
+      .sort((a,b)=>b.balance-a.balance)
+
+      .slice(0,10);
+
+  }
+
+};
+
+/* =========================================================
+
+   UI
+
+========================================================= */
+
+function showUser(u){
+
+  user = u;
+
+  $("authForm").classList.toggle(
+
+    "hidden",
+
+    !!u
+
+  );
+
+  $("profile").classList.toggle(
+
+    "hidden",
+
+    !u
+
+  );
+
+  $("gameTabs").classList.toggle(
+
+    "hidden",
+
+    !u
+
+  );
+
+  if(u){
+
+    $("playerName").textContent =
+
+      u.username;
+
+    updateUI();
+
+    switchGame("slots");
+
+  }else{
+
+    $("gameSlots").classList.add(
+
+      "hidden"
+
+    );
+
+    $("gameCrash").classList.add(
+
+      "hidden"
+
     );
 
   }
 
-}
-
-/* =========================
-   ФОРМАТИРОВАНИЕ
-========================= */
-
-function formatMoney(value){
-
-  return Math.floor(Number(value) || 0)
-    .toLocaleString('ru-RU');
+  loadBoard();
 
 }
-
-function randomInt(min,max){
-
-  min = Math.ceil(min);
-  max = Math.floor(max);
-
-  return Math.floor(
-    Math.random() * (max - min + 1)
-  ) + min;
-
-}
-
-/* =========================
-   UI
-========================= */
 
 function updateUI(){
 
-  $('balance').textContent =
-    formatMoney(user.balance);
+  if(!user) return;
 
-  $('profileName').textContent =
-    user.name;
+  $("balance").textContent =
 
-  $('profileId').textContent =
-    user.id;
+    fmt(user.balance);
 
-  $('totalRounds').textContent =
-    user.totalRounds;
+  $("playSlotsBtn").disabled =
 
-  $('totalWins').textContent =
-    user.totalWins;
+    isSlotsBusy ||
 
-  $('totalLosses').textContent =
-    user.totalLosses;
+    isCrashRunning;
 
-  const sign =
-    user.totalProfit > 0 ? '+' : '';
+  $("playCrashBtn").disabled =
 
-  $('totalProfit').textContent =
-    sign +
-    formatMoney(user.totalProfit) +
-    ' ₽';
+    isCrashRunning ||
 
-  renderHistory(
-    'slotsHistory',
-    user.slotsHistory
-  );
-
-  renderHistory(
-    'crashHistory',
-    user.crashHistory
-  );
+    isSlotsBusy;
 
 }
 
-/* =========================
-   ИСТОРИЯ
-========================= */
+/* =========================================================
 
-function renderHistory(id,history){
+   AUTH
 
-  const box = $(id);
+========================================================= */
 
-  if(!box) return;
+function account(mode){
 
-  box.innerHTML = '';
+  const name =
 
-  history
-    .slice(-12)
-    .reverse()
-    .forEach(item => {
+    $("nick").value.trim();
 
-      const div =
-        document.createElement('div');
+  const pass =
 
-      div.className =
-        'history-item ' +
-        (item.win ? 'win' : 'loss');
+    $("password").value;
 
-      div.textContent =
-        item.text;
+  if(name.length < 3){
 
-      box.appendChild(div);
+    alert(
 
-    });
+      "Никнейм должен содержать минимум 3 символа."
 
-}
-
-/* =========================
-   НАВИГАЦИЯ
-========================= */
-
-function showSection(section){
-
-  document
-    .querySelectorAll('.section')
-    .forEach(el => {
-
-      el.classList.remove('active');
-
-    });
-
-  document
-    .querySelectorAll('.nav-btn')
-    .forEach(el => {
-
-      el.classList.remove('active');
-
-    });
-
-  if(section === 'slots'){
-
-    $('slotsSection')
-      .classList.add('active');
-
-    $('slotsTab')
-      .classList.add('active');
-
-  }
-
-  if(section === 'crash'){
-
-    $('crashSection')
-      .classList.add('active');
-
-    $('crashTab')
-      .classList.add('active');
-
-  }
-
-  if(section === 'profile'){
-
-    $('profileSection')
-      .classList.add('active');
-
-  }
-
-}
-
-/* =========================
-   СТАВКА
-========================= */
-
-function setStake(inputId,value){
-
-  const input = $(inputId);
-
-  if(!input) return;
-
-  input.value =
-    Math.max(
-      MIN_BET,
-      Math.min(
-        MAX_BET,
-        value
-      )
     );
 
-}
+    return;
 
-function setupStakeInput(input){
+  }
 
-  input.addEventListener(
-    'input',
-    function(){
+  if(pass.length < 8){
 
-      let value =
-        Number(this.value);
+    alert(
 
-      if(!Number.isFinite(value)){
-        return;
-      }
+      "Пароль должен содержать минимум 8 символов."
 
-      if(value > MAX_BET){
+    );
 
-        this.value =
-          MAX_BET;
+    return;
 
-      }
+  }
+
+  let existing =
+
+    db.getUser(name);
+
+  if(mode === "register"){
+
+    if(existing){
+
+      alert(
+
+        "Такой ник уже зарегистрирован."
+
+      );
+
+      return;
 
     }
-  );
 
-  input.addEventListener(
-    'blur',
-    function(){
+    existing = {
 
-      let value =
-        Number(this.value);
+      username:name,
 
-      if(!Number.isFinite(value) ||
-         value < MIN_BET){
+      password:pass,
 
-        this.value =
-          MIN_BET;
+      balance:10000
 
-      }
+    };
 
-      if(value > MAX_BET){
+    db.saveUser(existing);
 
-        this.value =
-          MAX_BET;
+  }else{
 
-      }
+    if(
+
+      !existing ||
+
+      existing.password !== pass
+
+    ){
+
+      alert(
+
+        "Неверный ник или пароль."
+
+      );
+
+      return;
 
     }
+
+  }
+
+  $("password").value = "";
+
+  showUser(existing);
+
+}
+
+function logout(){
+
+  if(isCrashRunning){
+
+    alert(
+
+      "Сначала заверши раунд ракетки."
+
+    );
+
+    return;
+
+  }
+
+  if(isSlotsBusy){
+
+    alert(
+
+      "Дождись окончания вращения."
+
+    );
+
+    return;
+
+  }
+
+  showUser(null);
+
+}
+
+/* =========================================================
+
+   TABS
+
+========================================================= */
+
+function switchGame(game){
+
+  if(
+
+    isCrashRunning ||
+
+    isSlotsBusy
+
+  ){
+
+    return;
+
+  }
+
+  $("gameSlots").classList.toggle(
+
+    "hidden",
+
+    game !== "slots"
+
+  );
+
+  $("gameCrash").classList.toggle(
+
+    "hidden",
+
+    game !== "crash"
+
+  );
+
+  $("tabSlots").classList.toggle(
+
+    "active",
+
+    game === "slots"
+
+  );
+
+  $("tabCrash").classList.toggle(
+
+    "active",
+
+    game === "crash"
+
   );
 
 }
 
-/* =========================
-   ПОЛУЧИТЬ СТАВКУ
-========================= */
+/* =========================================================
 
-function getStake(inputId){
+   STAKE
 
-  const input =
-    $(inputId);
+========================================================= */
 
-  if(!input){
+function getStake(id){
 
-    return null;
+  if(!user) return null;
 
-  }
+  const raw =
 
-  let stake =
-    Number(input.value);
+    $(id).value.trim();
 
-  if(!Number.isFinite(stake)){
+  if(raw === ""){
 
-    showToast(
-      'Введите корректную ставку'
+    alert(
+
+      "Введи сумму ставки."
+
     );
 
     return null;
 
   }
 
-  stake =
-    Math.floor(stake);
+  const stake =
 
-  if(stake < MIN_BET){
+    Number(raw);
 
-    showToast(
-      'Минимальная ставка — 50 ₽'
+  if(
+
+    !Number.isSafeInteger(stake) ||
+
+    stake < 50
+
+  ){
+
+    alert(
+
+      "Минимальная ставка — 50 ₽."
+
     );
-
-    input.value =
-      MIN_BET;
-
-    return null;
-
-  }
-
-  if(stake > MAX_BET){
-
-    showToast(
-      'Максимальная ставка — 50 000 ₽'
-    );
-
-    input.value =
-      MAX_BET;
 
     return null;
 
@@ -1880,8 +2374,10 @@ function getStake(inputId){
 
   if(stake > user.balance){
 
-    showToast(
-      'Недостаточно виртуального баланса'
+    alert(
+
+      "Недостаточно виртуальных средств."
+
     );
 
     return null;
@@ -1892,1123 +2388,1534 @@ function getStake(inputId){
 
 }
 
-/* =========================
-   ЛИМИТ ВЫИГРЫША
-========================= */
+/* =========================================================
 
-function getMaxProfit(stake){
+   CHANCE BY STAKE
 
-  stake =
-    Number(stake);
+=========================================================
+
+   Чем больше ставка относительно баланса,
+
+   тем меньше вероятность успешного результата.
+
+   Это только виртуальная демо-механика.
+
+========================================================= */
+
+function getStakeFactor(stake){
+
+  const ratio =
+
+    stake / Math.max(1,user.balance);
 
   /*
-    Таблица масштабирования:
 
-    50     → +50
-    100    → +100
-    500    → +500
-    1000   → +1000
-    5000   → +5000
-    10000  → +10000
-    20000  → +15000
-    30000  → +20000
-    40000  → +25000
-    50000  → +30000
+    Маленькая ставка:
+
+    около 90% от базового шанса.
+
+    Большая:
+
+    заметно ниже.
+
+    Но никогда не делаем вероятность
+
+    буквально нулевой.
+
   */
 
-  if(stake <= 10000){
+  return Math.max(
 
-    return Math.floor(
-      stake
-    );
+    0.20,
 
-  }
+    1 - ratio * 0.75
 
-  return Math.min(
-    MAX_PROFIT,
-    Math.floor(
-      stake * 0.5 + 5000
-    )
   );
 
 }
 
-/* =========================
-   ВЫИГРЫШ
-========================= */
+/* =========================================================
 
-function getWinProfit(
-  stake,
-  jackpot = false
-){
+   SLOTS
 
-  stake =
-    Number(stake);
+========================================================= */
 
-  const maxProfit =
-    getMaxProfit(stake);
+function playSlots(){
 
-  if(maxProfit <= 0){
+  if(
 
-    return 0;
+    !user ||
 
-  }
+    isSlotsBusy ||
 
-  /*
-    777 получает максимальный
-    допустимый выигрыш.
-  */
+    isCrashRunning
 
-  if(jackpot){
-
-    return maxProfit;
-
-  }
-
-  /*
-    Обычный выигрыш находится
-    в диапазоне от 10% до 100%
-    допустимого выигрыша.
-  */
-
-  const minProfit =
-    Math.max(
-      1,
-      Math.floor(
-        maxProfit * 0.10
-      )
-    );
-
-  return randomInt(
-    minProfit,
-    maxProfit
-  );
-
-}
-
-/* =========================
-   ОБЩАЯ СТАТИСТИКА
-========================= */
-
-function registerWin(profit){
-
-  user.totalRounds++;
-  user.totalWins++;
-  user.totalProfit +=
-    profit;
-
-}
-
-function registerLoss(stake){
-
-  user.totalRounds++;
-  user.totalLosses++;
-  user.totalProfit -=
-    stake;
-
-}
-
-/* =========================
-   СЛОТЫ
-========================= */
-
-const slotSymbols = [
-  '🍒',
-  '🍋',
-  '🍊',
-  '🍇',
-  '🔔',
-  '💎'
-];
-
-let slotsRunning = false;
-
-function randomSlotSymbol(){
-
-  return slotSymbols[
-    randomInt(
-      0,
-      slotSymbols.length - 1
-    )
-  ];
-
-}
-
-function setReels(a,b,c){
-
-  $('reel1').textContent =
-    a;
-
-  $('reel2').textContent =
-    b;
-
-  $('reel3').textContent =
-    c;
-
-}
-
-function spinSlots(){
-
-  if(slotsRunning){
+  ){
 
     return;
 
   }
 
   const stake =
-    getStake(
-      'slotsStake'
-    );
 
-  if(stake === null){
+    getStake("stakeSlots");
 
-    return;
+  if(stake === null) return;
 
-  }
+  isSlotsBusy = true;
 
-  slotsRunning = true;
+  user.balance -= stake;
 
-  $('slotsButton').disabled =
-    true;
+  db.saveUser(user);
 
-  $('slotsResult').className =
-    'result info';
-
-  $('slotsResult').textContent =
-    'Крутим...';
+  updateUI();
 
   const reels = [
-    $('reel1'),
-    $('reel2'),
-    $('reel3')
+
+    $("r1"),
+
+    $("r2"),
+
+    $("r3")
+
   ];
 
-  reels.forEach(reel => {
+  const symbols = [
 
-    reel.classList.add(
-      'spinning'
-    );
+    "🍒",
+
+    "🍋",
+
+    "🔔",
+
+    "💎",
+
+    "7️⃣",
+
+    "🍀"
+
+  ];
+
+  $("msgSlots").textContent =
+
+    "🎰 Барабаны вращаются...";
+
+  $("msgSlots").className =
+
+    "result-msg";
+
+  reels.forEach(r=>{
+
+    r.classList.remove("win");
+
+    r.classList.add("spinning");
 
   });
 
-  let tick = 0;
+  /*
 
-  const animation =
-    setInterval(() => {
+    Базовый шанс уменьшается
 
-      reels.forEach(reel => {
+    при увеличении ставки.
 
-        reel.textContent =
-          randomSlotSymbol();
+  */
+
+  const factor =
+
+    getStakeFactor(stake);
+
+  /*
+
+    Шанс любой выигрышной
+
+    комбинации.
+
+    Максимально ограничен,
+
+    чтобы игра не превращалась
+
+    в гарантированный выигрыш.
+
+  */
+
+  const winChance =
+
+    0.31 * factor;
+
+  const roll =
+
+    Math.random();
+
+  let result;
+
+  let payout = 0;
+
+  let msg = "";
+
+  let type = "win";
+
+  if(roll < winChance * 0.06){
+
+    result = [
+
+      "7️⃣",
+
+      "7️⃣",
+
+      "7️⃣"
+
+    ];
+
+    payout =
+
+      stake * 10;
+
+    msg =
+
+      "👑 ДЖЕКПОТ! x10!";
+
+    type =
+
+      "jackpot";
+
+  }else if(
+
+    roll < winChance * 0.24
+
+  ){
+
+    result = [
+
+      "💎",
+
+      "💎",
+
+      "💎"
+
+    ];
+
+    payout =
+
+      stake * 4;
+
+    msg =
+
+      "💎 ТРИ БРИЛЛИАНТА! x4!";
+
+  }else if(
+
+    roll < winChance * 0.58
+
+  ){
+
+    result = [
+
+      "🍒",
+
+      "🍒",
+
+      "🍒"
+
+    ];
+
+    payout =
+
+      stake * 2;
+
+    msg =
+
+      "🍒 ТРИ ВИШНИ! x2!";
+
+  }else if(
+
+    roll < winChance
+
+  ){
+
+    result = [
+
+      "🔔",
+
+      "🔔",
+
+      "🔔"
+
+    ];
+
+    payout =
+
+      Math.floor(
+
+        stake * 1.5
+
+      );
+
+    msg =
+
+      "🔔 УДАЧНАЯ КОМБИНАЦИЯ!";
+
+  }else{
+
+    result = [
+
+      symbols[
+
+        Math.floor(
+
+          Math.random()*symbols.length
+
+        )
+
+      ],
+
+      symbols[
+
+        Math.floor(
+
+          Math.random()*symbols.length
+
+        )
+
+      ],
+
+      symbols[
+
+        Math.floor(
+
+          Math.random()*symbols.length
+
+        )
+
+      ]
+
+    ];
+
+  }
+
+  let count = 0;
+
+  const timer =
+
+    setInterval(()=>{
+
+      reels.forEach(r=>{
+
+        r.textContent =
+
+          symbols[
+
+            Math.floor(
+
+              Math.random()*symbols.length
+
+            )
+
+          ];
 
       });
 
-      tick++;
+      count++;
 
-      if(tick >= 15){
+      if(count >= 20){
 
-        clearInterval(
-          animation
-        );
+        clearInterval(timer);
 
-        finishSlots(
-          stake
-        );
+        reels.forEach((r,i)=>{
+
+          r.classList.remove(
+
+            "spinning"
+
+          );
+
+          r.textContent =
+
+            result[i];
+
+        });
+
+        if(payout > 0){
+
+          user.balance += payout;
+
+          db.saveUser(user);
+
+          $("msgSlots").textContent =
+
+            msg +
+
+            " Выигрыш: +" +
+
+            fmt(payout) +
+
+            " ₽";
+
+          $("msgSlots").className =
+
+            "result-msg " + type;
+
+          reels.forEach(r=>{
+
+            r.classList.add("win");
+
+            setTimeout(()=>{
+
+              r.classList.remove("win");
+
+            },700);
+
+          });
+
+          if(navigator.vibrate){
+
+            navigator.vibrate([
+
+              70,40,90
+
+            ]);
+
+          }
+
+        }else{
+
+          $("msgSlots").textContent =
+
+            "😔 Не повезло. Попробуй ещё раз.";
+
+          $("msgSlots").className =
+
+            "result-msg lose";
+
+        }
+
+        isSlotsBusy = false;
+
+        updateUI();
+
+        loadBoard();
 
       }
 
-    },90);
+    },75);
 
 }
 
-/* =========================
-   ФИНИШ СЛОТОВ
-========================= */
+/* =========================================================
 
-function finishSlots(stake){
+   CRASH TARGET
 
-  const isWin =
-    Math.random() < WIN_RATE;
+========================================================= */
 
-  const isJackpot =
-    isWin &&
-    Math.random() < 0.015;
-
-  reelsStop();
+function generateCrashTarget(stake){
 
   /*
-    ПРОИГРЫШ
+
+    Сначала определяем вероятность
+
+    безопасного раунда.
+
+    Большая ставка относительно баланса
+
+    уменьшает шанс.
+
   */
 
-  if(!isWin){
+  const factor =
 
-    setReels(
-      randomSlotSymbol(),
-      randomSlotSymbol(),
-      randomSlotSymbol()
+    getStakeFactor(stake);
+
+  /*
+
+    Минимум не меньше 1.25,
+
+    чтобы игра никогда не выглядела
+
+    как мгновенный x1.00 cashout.
+
+    В демо есть достаточно времени
+
+    нажать кнопку.
+
+  */
+
+  const baseSafeChance =
+
+    0.72 * factor;
+
+  /*
+
+    Если раунд "безопасный",
+
+    точка взрыва будет выше.
+
+    Иначе — ниже.
+
+  */
+
+  if(Math.random() < baseSafeChance){
+
+    /*
+
+      От 1.45 до примерно 6+
+
+    */
+
+    const r = Math.random();
+
+    return Math.min(
+
+      7.5,
+
+      1.45 +
+
+      Math.pow(r,0.72)*5.8
+
     );
-
-    user.balance -=
-      stake;
-
-    registerLoss(
-      stake
-    );
-
-    user.slotsHistory.push({
-      win:false,
-      text:'−' +
-        formatMoney(stake)
-    });
-
-    $('slotsResult').className =
-      'result loss';
-
-    $('slotsResult').textContent =
-      '❌ Неудача −' +
-      formatMoney(stake) +
-      ' ₽';
-
-    saveUser();
-    updateUI();
-
-    setTimeout(() => {
-
-      slotsRunning =
-        false;
-
-      $('slotsButton').disabled =
-        false;
-
-    },300);
-
-    return;
 
   }
 
   /*
-    JACKPOT 777
+
+    Неудачный раунд:
+
+    всё равно не взрываем
+
+    прямо на старте.
+
   */
-
-  if(isJackpot){
-
-    setReels(
-      '7️⃣',
-      '7️⃣',
-      '7️⃣'
-    );
-
-    const profit =
-      getWinProfit(
-        stake,
-        true
-      );
-
-    const totalReturn =
-      stake +
-      profit;
-
-    user.balance +=
-      totalReturn;
-
-    registerWin(
-      profit
-    );
-
-    user.slotsHistory.push({
-      win:true,
-      text:'777 +' +
-        formatMoney(profit)
-    });
-
-    $('slotsResult').className =
-      'result win';
-
-    $('slotsResult').textContent =
-      '👑 JACKPOT 777! +' +
-      formatMoney(profit) +
-      ' ₽';
-
-    showModal(
-      '👑 JACKPOT 777',
-      'Чистый выигрыш: +' +
-      formatMoney(profit) +
-      ' ₽'
-    );
-
-    saveUser();
-    updateUI();
-
-    setTimeout(() => {
-
-      slotsRunning =
-        false;
-
-      $('slotsButton').disabled =
-        false;
-
-    },500);
-
-    return;
-
-  }
-
-  /*
-    ОБЫЧНЫЙ ВЫИГРЫШ
-
-    Три одинаковых символа.
-  */
-
-  const symbol =
-    slotSymbols[
-      randomInt(
-        0,
-        slotSymbols.length - 1
-      )
-    ];
-
-  setReels(
-    symbol,
-    symbol,
-    symbol
-  );
-
-  const profit =
-    getWinProfit(
-      stake,
-      false
-    );
-
-  const totalReturn =
-    stake +
-    profit;
-
-  user.balance +=
-    totalReturn;
-
-  registerWin(
-    profit
-  );
-
-  user.slotsHistory.push({
-    win:true,
-    text:'+' +
-      formatMoney(profit)
-  });
-
-  $('slotsResult').className =
-    'result win';
-
-  $('slotsResult').textContent =
-    '🎉 Выигрыш +' +
-    formatMoney(profit) +
-    ' ₽';
-
-  saveUser();
-  updateUI();
-
-  setTimeout(() => {
-
-    slotsRunning =
-      false;
-
-    $('slotsButton').disabled =
-      false;
-
-  },400);
-
-}
-
-function reelsStop(){
-
-  [
-    $('reel1'),
-    $('reel2'),
-    $('reel3')
-  ].forEach(reel => {
-
-    reel.classList.remove(
-      'spinning'
-    );
-
-  });
-
-}
-
-/* =========================
-   CRASH
-========================= */
-
-let crashRunning = false;
-let crashCashedOut = false;
-let crashStake = 0;
-let crashMultiplier = 1;
-let crashTarget = 0;
-let crashTimer = null;
-let crashStartedAt = 0;
-
-/* =========================
-   ГЕНЕРАЦИЯ CRASH
-========================= */
-
-function generateCrashTarget(){
-
-  /*
-    Прозрачная демо-механика:
-
-    57.5% — проигрышный раунд.
-
-    Такие раунды завершаются
-    примерно в диапазоне 1.05–1.60x.
-
-    42.5% — раунд, где можно
-    забрать выигрыш.
-
-    Выигрышные цели распределены
-    по более широкому диапазону.
-  */
-
-  const loseChance =
-    LOSS_RATE;
-
-  if(Math.random() < loseChance){
-
-    return (
-      1.05 +
-      Math.random() * 0.55
-    );
-
-  }
 
   return (
-    1.60 +
-    Math.pow(
-      Math.random(),
-      0.75
-    ) * 3.90
+
+    1.65 +
+
+    Math.random()*1.15
+
   );
 
 }
 
-/* =========================
-   CRASH PROFIT
-========================= */
+/* =========================================================
 
-function calculateCrashProfit(
-  stake,
-  multiplier
-){
+   START ROCKET
 
-  const rawProfit =
-    Math.floor(
-      stake *
-      (multiplier - 1)
-    );
-
-  const maxProfit =
-    getMaxProfit(
-      stake
-    );
-
-  return Math.max(
-    0,
-    Math.min(
-      rawProfit,
-      maxProfit
-    )
-  );
-
-}
-
-/* =========================
-   START CRASH
-========================= */
+========================================================= */
 
 function startCrash(){
 
-  if(crashRunning){
+  if(
+
+    !user ||
+
+    isCrashRunning ||
+
+    isSlotsBusy
+
+  ){
 
     return;
 
   }
 
   const stake =
-    getStake(
-      'crashStake'
-    );
 
-  if(stake === null){
+    getStake("stakeCrash");
 
-    return;
-
-  }
+  if(stake === null) return;
 
   crashStake =
+
     stake;
-
-  crashRunning =
-    true;
-
-  crashCashedOut =
-    false;
-
-  crashMultiplier =
-    1;
-
-  crashTarget =
-    generateCrashTarget();
-
-  crashStartedAt =
-    Date.now();
 
   user.balance -=
+
     stake;
 
-  $('crashButton').textContent =
-    '💰 ЗАБРАТЬ ВЫИГРЫШ';
+  db.saveUser(user);
 
-  $('crashButton').onclick =
-    cashout;
-
-  $('crashButton').disabled =
-    false;
-
-  $('crashScreen')
-    .classList.add('running');
-
-  $('crashResult').className =
-    'result info';
-
-  $('crashResult').textContent =
-    '';
-
-  $('crashStatus').textContent =
-    'Ракета летит...';
-
-  $('crashMultiplier').textContent =
-    'x1.00';
-
-  saveUser();
   updateUI();
 
-  clearInterval(
-    crashTimer
+  isCrashRunning =
+
+    true;
+
+  crashMulti =
+
+    1;
+
+  crashStart =
+
+    performance.now();
+
+  const id =
+
+    ++crashRunId;
+
+  /*
+
+    ВАЖНО:
+
+    точка взрыва рассчитывается
+
+    ДО запуска анимации.
+
+  */
+
+  crashTarget =
+
+    generateCrashTarget(stake);
+
+  /*
+
+    Сбрасываем визуальное состояние.
+
+  */
+
+  const rocket =
+
+    $("rocketContainer");
+
+  rocket.classList.remove(
+
+    "crashed"
+
   );
 
-  crashTimer =
-    setInterval(
-      updateCrash,
-      50
+  rocket.classList.add(
+
+    "flying"
+
+  );
+
+  rocket.style.opacity =
+
+    "1";
+
+  rocket.style.left =
+
+    "5%";
+
+  rocket.style.bottom =
+
+    "8%";
+
+  rocket.style.transform =
+
+    "translate(0,0)";
+
+  $("explosion")
+
+    .classList.remove(
+
+      "active"
+
     );
+
+  $("flightPathLine")
+
+    .classList.add(
+
+      "active"
+
+    );
+
+  $("crashMulti").textContent =
+
+    "x1.00";
+
+  $("crashMulti")
+
+    .style.color =
+
+    "#fff";
+
+  $("crashMulti")
+
+    .classList.remove(
+
+      "hot"
+
+    );
+
+  $("playCrashBtn")
+
+    .classList.add(
+
+      "hidden"
+
+    );
+
+  $("cashoutBtn")
+
+    .classList.remove(
+
+      "hidden"
+
+    );
+
+  $("cashoutBtn")
+
+    .disabled =
+
+    false;
+
+  $("msgCrash").textContent =
+
+    "🚀 Ракета взлетела! Успей забрать выигрыш.";
+
+  $("msgCrash").className =
+
+    "result-msg";
+
+  animateCrash(
+
+    crashStart,
+
+    id
+
+  );
 
 }
 
-/* =========================
-   UPDATE CRASH
-========================= */
+/* =========================================================
 
-function updateCrash(){
+   ROCKET ANIMATION
 
-  if(!crashRunning){
+========================================================= */
+
+function animateCrash(now,id){
+
+  if(
+
+    !isCrashRunning ||
+
+    id !== crashRunId
+
+  ){
 
     return;
 
   }
 
   const elapsed =
-    Date.now() -
-    crashStartedAt;
+
+    (now - crashStart) / 1000;
 
   /*
-    Плавный рост.
+
+    Коэффициент растёт плавно.
+
+    Никакого мгновенного x1.00.
+
   */
 
-  crashMultiplier =
-    1 +
-    (
-      elapsed /
-      10000
-    ) *
-    0.85;
+  crashMulti =
 
-  /*
-    Небольшое ускорение
-    после первых секунд.
-  */
+    Math.min(
 
-  if(crashMultiplier > 2){
+      crashTarget,
 
-    crashMultiplier =
-      2 +
-      Math.pow(
-        (elapsed - 11765) /
-        7000,
-        1.25
-      );
+      Math.exp(
 
-  }
+        elapsed * 0.30
+
+      )
+
+    );
 
   if(
-    !Number.isFinite(
-      crashMultiplier
-    )
+
+    crashMulti >=
+
+    crashTarget
+
   ){
 
-    crashMultiplier =
-      1;
+    crashMulti =
+
+      crashTarget;
+
+    $("crashMulti")
+
+      .textContent =
+
+      "x" +
+
+      crashMulti.toFixed(2);
+
+    explodeCrash();
+
+    return;
 
   }
 
-  crashMultiplier =
+  $("crashMulti")
+
+    .textContent =
+
+    "x" +
+
+    crashMulti.toFixed(2);
+
+  if(crashMulti >= 4){
+
+    $("crashMulti")
+
+      .style.color =
+
+      "#ffd21c";
+
+    $("crashMulti")
+
+      .classList.add(
+
+        "hot"
+
+      );
+
+  }else if(crashMulti >= 2){
+
+    $("crashMulti")
+
+      .style.color =
+
+      "#00f5a0";
+
+  }else{
+
+    $("crashMulti")
+
+      .style.color =
+
+      "#fff";
+
+  }
+
+  /*
+
+    Полёт от нижнего левого
+
+    к верхнему правому.
+
+    Используем кривую,
+
+    чтобы движение было
+
+    красивым, а не просто
+
+    диагональным.
+
+  */
+
+  const duration =
+
     Math.max(
+
       1,
-      crashMultiplier
+
+      Math.min(
+
+        12,
+
+        crashTarget * 0.85
+
+      )
+
     );
-
-  /*
-    Лимит визуального множителя
-    по возможному выигрышу.
-  */
-
-  const maxMultiplier =
-    1 +
-    (
-      getMaxProfit(
-        crashStake
-      ) /
-      crashStake
-    );
-
-  crashMultiplier =
-    Math.min(
-      crashMultiplier,
-      maxMultiplier
-    );
-
-  $('crashMultiplier').textContent =
-    'x' +
-    crashMultiplier.toFixed(2);
-
-  /*
-    Движение ракеты.
-  */
 
   const progress =
+
     Math.min(
+
       1,
-      (crashMultiplier - 1) /
-      Math.max(
-        0.01,
-        maxMultiplier - 1
-      )
+
+      elapsed / duration
+
     );
 
-  const x =
-    8 +
-    progress * 76;
-
-  const y =
-    13 +
-    progress * 60;
-
-  $('rocket').style.left =
-    x + '%';
-
-  $('rocket').style.bottom =
-    y + '%';
-
   /*
-    Crash.
+
+    Плавность.
+
   */
 
-  if(
-    crashMultiplier >=
-    crashTarget
-  ){
+  const eased =
 
-    crashMultiplier =
+    1 -
+
+    Math.pow(
+
+      1-progress,
+
+      2.25
+
+    );
+
+  const box =
+
+    $("spaceWindow");
+
+  const rocket =
+
+    $("rocketContainer");
+
+  const rocketWidth =
+
+    rocket.offsetWidth || 100;
+
+  const rocketHeight =
+
+    rocket.offsetHeight || 90;
+
+  /*
+
+    Конечная точка:
+
+    практически правый верхний угол.
+
+  */
+
+  const startX =
+
+    box.clientWidth * 0.04;
+
+  const startY =
+
+    box.clientHeight * 0.76;
+
+  const endX =
+
+    box.clientWidth -
+
+    rocketWidth * 0.78;
+
+  const endY =
+
+    rocketHeight * 0.20;
+
+  const x =
+
+    startX +
+
+    (endX-startX) *
+
+    eased;
+
+  /*
+
+    Немного кривой вверх,
+
+    чтобы ракета красиво
+
+    поднималась.
+
+  */
+
+  const curve =
+
+    Math.sin(
+
+      eased * Math.PI
+
+    ) *
+
+    box.clientHeight *
+
+    0.07;
+
+  const y =
+
+    startY +
+
+    (endY-startY) *
+
+    eased -
+
+    curve;
+
+  rocket.style.left =
+
+    x + "px";
+
+  rocket.style.bottom =
+
+    "auto";
+
+  rocket.style.top =
+
+    y + "px";
+
+  /*
+
+    След за ракетой.
+
+  */
+
+  const line =
+
+    $("flightPathLine");
+
+  line.style.opacity =
+
+    String(
+
       Math.min(
-        crashTarget,
-        maxMultiplier
-      );
 
-    crashMultiplier =
-      Math.max(
-        1,
-        crashMultiplier
-      );
+        .95,
 
-    $('crashMultiplier').textContent =
-      'x' +
-      crashMultiplier.toFixed(2);
+        .25 + progress
 
-    crashEnded();
+      )
+
+    );
+
+  crashFrame =
+
+    requestAnimationFrame(
+
+      t =>
+
+        animateCrash(
+
+          t,
+
+          id
+
+        )
+
+    );
+
+}
+
+/* =========================================================
+
+   EXPLOSION
+
+========================================================= */
+
+function explodeCrash(){
+
+  if(!isCrashRunning){
+
+    return;
 
   }
 
-}
+  isCrashRunning =
 
-/* =========================
-   CRASH END
-========================= */
-
-function crashEnded(){
-
-  clearInterval(
-    crashTimer
-  );
-
-  crashTimer =
-    null;
-
-  crashRunning =
     false;
 
-  $('crashScreen')
-    .classList.remove(
-      'running'
+  if(crashFrame){
+
+    cancelAnimationFrame(
+
+      crashFrame
+
     );
 
-  /*
-    Деньги уже были списаны
-    при старте раунда.
+    crashFrame =
 
-    Поэтому при падении
-    ничего не возвращаем.
-  */
+      null;
 
-  registerLoss(
-    crashStake
+  }
+
+  const rocket =
+
+    $("rocketContainer");
+
+  rocket.classList.remove(
+
+    "flying"
+
   );
 
-  user.crashHistory.push({
-    win:false,
-    text:'x' +
-      crashMultiplier.toFixed(2)
-  });
+  rocket.classList.add(
 
-  $('crashResult').className =
-    'result loss';
+    "crashed"
 
-  $('crashResult').textContent =
-    '💥 Ракета упала на x' +
-    crashMultiplier.toFixed(2) +
-    '. Ставка проиграна.';
+  );
 
-  $('crashStatus').textContent =
-    'Раунд завершён';
+  const explosion =
 
-  $('crashButton').textContent =
-    '🚀 ЗАПУСТИТЬ';
+    $("explosion");
 
-  $('crashButton').onclick =
-    startCrash;
+  explosion.classList.remove(
 
-  saveUser();
+    "active"
+
+  );
+
+  void explosion.offsetWidth;
+
+  explosion.classList.add(
+
+    "active"
+
+  );
+
+  $("crashMulti")
+
+    .textContent =
+
+    "x" +
+
+    crashTarget.toFixed(2);
+
+  $("crashMulti")
+
+    .style.color =
+
+    "#ff315c";
+
+  $("msgCrash").textContent =
+
+    "💥 Взрыв на x" +
+
+    crashTarget.toFixed(2) +
+
+    ". Ставка проиграна.";
+
+  $("msgCrash").className =
+
+    "result-msg lose";
+
+  $("cashoutBtn")
+
+    .classList.add(
+
+      "hidden"
+
+    );
+
+  $("flightPathLine")
+
+    .classList.remove(
+
+      "active"
+
+    );
+
+  if(navigator.vibrate){
+
+    navigator.vibrate([
+
+      100,
+
+      50,
+
+      160
+
+    ]);
+
+  }
+
+  db.saveUser(user);
+
   updateUI();
+
+  loadBoard();
+
+  setTimeout(
+
+    resetCrash,
+
+    1200
+
+  );
 
 }
 
-/* =========================
+/* =========================================================
+
    CASHOUT
-========================= */
+
+========================================================= */
 
 function cashout(){
 
-  if(!crashRunning){
+  if(!isCrashRunning){
 
     return;
 
   }
 
-  if(crashCashedOut){
+  isCrashRunning =
 
-    return;
-
-  }
-
-  crashCashedOut =
-    true;
-
-  clearInterval(
-    crashTimer
-  );
-
-  crashTimer =
-    null;
-
-  crashRunning =
     false;
 
-  $('crashScreen')
-    .classList.remove(
-      'running'
+  if(crashFrame){
+
+    cancelAnimationFrame(
+
+      crashFrame
+
     );
+
+    crashFrame =
+
+      null;
+
+  }
 
   const multiplier =
-    crashMultiplier;
 
-  const profit =
-    calculateCrashProfit(
-      crashStake,
+    Math.max(
+
+      1.05,
+
+      Math.min(
+
+        crashMulti,
+
+        crashTarget
+
+      )
+
+    );
+
+  const payout =
+
+    Math.floor(
+
+      crashStake *
+
       multiplier
+
     );
 
-  const totalReturn =
-    crashStake +
-    profit;
+  if(
 
-  user.balance +=
-    totalReturn;
+    !Number.isSafeInteger(
 
-  registerWin(
-    profit
-  );
+      payout
 
-  user.crashHistory.push({
-    win:true,
-    text:'+' +
-      formatMoney(profit)
-  });
+    )
 
-  $('crashResult').className =
-    'result win';
+  ){
 
-  $('crashResult').textContent =
-    '💰 Забрано на x' +
-    multiplier.toFixed(2) +
-    ': +' +
-    formatMoney(profit) +
-    ' ₽';
-
-  $('crashStatus').textContent =
-    'Вы забрали выигрыш';
-
-  $('crashButton').textContent =
-    '🚀 ЗАПУСТИТЬ';
-
-  $('crashButton').onclick =
-    startCrash;
-
-  saveUser();
-  updateUI();
-
-}
-
-/* =========================
-   MODAL
-========================= */
-
-function showModal(
-  title,
-  text
-){
-
-  $('modalTitle').textContent =
-    title;
-
-  $('modalText').textContent =
-    text;
-
-  $('modal')
-    .classList.add('show');
-
-}
-
-function closeModal(){
-
-  $('modal')
-    .classList.remove('show');
-
-}
-
-/* =========================
-   TOAST
-========================= */
-
-let toastTimer = null;
-
-function showToast(text){
-
-  const toast =
-    $('toast');
-
-  toast.textContent =
-    text;
-
-  toast.classList.add(
-    'show'
-  );
-
-  clearTimeout(
-    toastTimer
-  );
-
-  toastTimer =
-    setTimeout(() => {
-
-      toast.classList.remove(
-        'show'
-      );
-
-    },2200);
-
-}
-
-/* =========================
-   RESET
-========================= */
-
-function resetDemo(){
-
-  const confirmed =
-    confirm(
-      'Сбросить виртуальный баланс и статистику?'
-    );
-
-  if(!confirmed){
+    resetCrash();
 
     return;
 
   }
 
-  user = {
-    name:'Royal Player',
-    id:'DEMO PLAYER',
-    balance:100000,
+  user.balance +=
 
-    totalRounds:0,
-    totalWins:0,
-    totalLosses:0,
-    totalProfit:0,
+    payout;
 
-    slotsHistory:[],
-    crashHistory:[]
-  };
+  db.saveUser(user);
 
-  saveUser();
+  $("cashoutBtn")
+
+    .classList.add(
+
+      "hidden"
+
+    );
+
+  $("crashMulti")
+
+    .style.color =
+
+    "#00f5a0";
+
+  $("crashMulti")
+
+    .classList.remove(
+
+      "hot"
+
+    );
+
+  $("msgCrash").textContent =
+
+    "✅ Успешный вывод! " +
+
+    "Коэффициент x" +
+
+    multiplier.toFixed(2) +
+
+    ". Выигрыш: +" +
+
+    fmt(payout) +
+
+    " ₽";
+
+  $("msgCrash").className =
+
+    "result-msg win";
+
+  $("flightPathLine")
+
+    .classList.remove(
+
+      "active"
+
+    );
+
+  if(navigator.vibrate){
+
+    navigator.vibrate(70);
+
+  }
+
   updateUI();
 
-  showToast(
-    'Демо сброшено'
+  loadBoard();
+
+  setTimeout(
+
+    resetCrash,
+
+    1100
+
   );
 
 }
 
-/* =========================
-   INPUTS
-========================= */
+/* =========================================================
 
-setupStakeInput(
-  $('slotsStake')
-);
+   RESET ROCKET
 
-setupStakeInput(
-  $('crashStake')
-);
+========================================================= */
 
-/* =========================
-   LOAD
-========================= */
+function resetCrash(){
 
-loadUser();
-updateUI();
+  if(crashFrame){
 
-/* =========================
-   PROFILE TAB
-   Добавляем отдельную кнопку
-   в навигацию через JS.
-========================= */
+    cancelAnimationFrame(
 
-const profileButton =
-  document.createElement('button');
+      crashFrame
 
-profileButton.className =
-  'nav-btn';
-
-profileButton.textContent =
-  '👑 ПРОФИЛЬ';
-
-profileButton.onclick =
-  function(){
-
-    document
-      .querySelectorAll('.nav-btn')
-      .forEach(btn => {
-
-        btn.classList.remove(
-          'active'
-        );
-
-      });
-
-    profileButton.classList.add(
-      'active'
     );
 
-    document
-      .querySelectorAll('.section')
-      .forEach(section => {
+    crashFrame =
 
-        section.classList.remove(
-          'active'
+      null;
+
+  }
+
+  isCrashRunning =
+
+    false;
+
+  const rocket =
+
+    $("rocketContainer");
+
+  rocket.classList.remove(
+
+    "crashed",
+
+    "flying"
+
+  );
+
+  rocket.style.opacity =
+
+    "1";
+
+  rocket.style.left =
+
+    "5%";
+
+  rocket.style.top =
+
+    "auto";
+
+  rocket.style.bottom =
+
+    "8%";
+
+  rocket.style.transform =
+
+    "translate(0,0)";
+
+  $("flightPathLine")
+
+    .classList.remove(
+
+      "active"
+
+    );
+
+  $("explosion")
+
+    .classList.remove(
+
+      "active"
+
+    );
+
+  $("cashoutBtn")
+
+    .classList.add(
+
+      "hidden"
+
+    );
+
+  $("playCrashBtn")
+
+    .classList.remove(
+
+      "hidden"
+
+    );
+
+  $("crashMulti")
+
+    .textContent =
+
+    "x1.00";
+
+  $("crashMulti")
+
+    .style.color =
+
+    "#fff";
+
+  $("crashMulti")
+
+    .classList.remove(
+
+      "hot"
+
+    );
+
+  updateUI();
+
+}
+
+/* =========================================================
+
+   LEADERBOARD
+
+========================================================= */
+
+function loadBoard(){
+
+  const board =
+
+    $("leaderboard");
+
+  const list =
+
+    db.getBoard();
+
+  if(!list.length){
+
+    board.innerHTML =
+
+      "<li>Пока нет игроков.</li>";
+
+    return;
+
+  }
+
+  board.innerHTML =
+
+    "";
+
+  list.forEach(
+
+    (x,i)=>{
+
+      const li =
+
+        document.createElement(
+
+          "li"
+
         );
 
-      });
+      const left =
 
-    $('profileSection')
-      .classList.add('active');
+        document.createElement(
 
-  };
+          "span"
 
-document
-  .querySelector('.nav')
-  .appendChild(
-    profileButton
-  );
+        );
 
-/* =========================
-   CLOSE MODAL
-========================= */
+      const right =
 
-$('modal')
-  .addEventListener(
-    'click',
-    function(event){
+        document.createElement(
 
-      if(
-        event.target ===
-        $('modal')
-      ){
+          "span"
 
-        closeModal();
+        );
 
-      }
+      const rank =
+
+        document.createElement(
+
+          "span"
+
+        );
+
+      rank.className =
+
+        "rank";
+
+      rank.textContent =
+
+        "#" + (i+1);
+
+      left.appendChild(
+
+        rank
+
+      );
+
+      left.appendChild(
+
+        document.createTextNode(
+
+          x.username
+
+        )
+
+      );
+
+      right.className =
+
+        "score";
+
+      right.textContent =
+
+        fmt(x.balance) +
+
+        " ₽";
+
+      li.append(
+
+        left,
+
+        right
+
+      );
+
+      board.appendChild(
+
+        li
+
+      );
 
     }
+
   );
 
-/* =========================
-   ESC
-========================= */
+}
 
-document
-  .addEventListener(
-    'keydown',
-    function(event){
+/* =========================================================
 
-      if(
-        event.key === 'Escape'
-      ){
+   INIT
 
-        closeModal();
+========================================================= */
 
-      }
-
-    }
-  );
+showUser(null);
 
 </script>
 
 </body>
+
 </html>
